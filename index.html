@@ -8,23 +8,24 @@
 
   <style>
     :root{
-      --aps-teal: #11b7b1;
-      --aps-green:#2ecc71;
+      --accent: #65D2AA;
+      --dark: #0A0A22;
+      --marketplace-bg-subtle: linear-gradient(160deg, #0A0A22 0%, #10102e 58%, #0A0A22 100%);
+      --marketplace-bg-strong: linear-gradient(160deg, #0e0e2a 0%, #141438 58%, #0A0A22 100%);
 
-      --bg: #f6f7f9;
+      --bg: #f8f9fb;
       --paper: #ffffff;
-      --ink: #111827;
-      --muted:#6b7280;
-      --line: #e5e7eb;
+      --ink: var(--dark);
+      --muted: #6b7280;
+      --line: #eaeced;
       --soft: #f3f4f6;
 
-      --radius: 14px;
-      --radius2: 18px;
-      --shadow: 0 18px 45px rgba(17,24,39,.08);
-      --shadow2: 0 10px 25px rgba(17,24,39,.06);
+      --radius: 10px;
+      --radius2: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,.04), 0 6px 16px rgba(0,0,0,.04);
+      --shadow2: 0 1px 2px rgba(0,0,0,.03);
 
       --max: 1120px;
-      --bg-alt: #fbfbfc;
     }
 
     *{ box-sizing:border-box }
@@ -100,22 +101,22 @@
       white-space: nowrap;
     }
     .btn:hover{
-      background: rgba(10,8,35,.03);
-      border-color: rgba(10,8,35,.16);
+      background: rgba(10,10,34,.03);
+      border-color: rgba(10,10,34,.12);
     }
     .btn:active{ transform: translateY(1px); }
 
     .btn-primary{
-      border: 1px solid rgba(33,213,168,.28);
-      background: linear-gradient(180deg, rgba(33,213,168,1), rgba(33,213,168,.92));
-      color: #071a16;
-      box-shadow: 0 12px 26px rgba(33,213,168,.22);
+      border: 1px solid rgba(101,210,170,.35);
+      background: var(--accent);
+      color: var(--dark);
+      box-shadow: 0 1px 3px rgba(101,210,170,.2);
     }
-    .btn-primary:hover{ filter: brightness(1.01); border-color: rgba(33,213,168,.38); }
+    .btn-primary:hover{ filter: brightness(1.03); border-color: rgba(101,210,170,.5); }
     .btn-lg{ padding: 14px 28px; font-size: 15px; }
 
     /* ===== Hero ===== */
-    header.hero{ padding: 56px 0 36px; }
+    header.hero{ padding: 64px 0 48px; }
     .hero-grid{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
@@ -135,8 +136,8 @@
     .badge .dot{
       width: 9px; height: 9px;
       border-radius: 999px;
-      background: var(--aps-green);
-      box-shadow: 0 0 0 4px rgba(46,204,113,.14);
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(101,210,170,.14);
     }
 
     h1{
@@ -183,7 +184,7 @@
     }
 
     /* ===== Benefits strip ===== */
-    .strip-section{ padding: 0 0 32px; }
+    .strip-section{ padding: 0 0 48px; }
     .strip-grid{
       display:grid;
       grid-template-columns: repeat(4, 1fr);
@@ -202,9 +203,9 @@
       width: 18px; height: 18px;
       border-radius: 7px;
       display:inline-flex; align-items:center; justify-content:center;
-      background: rgba(46,204,113,.14);
-      border: 1px solid rgba(46,204,113,.22);
-      color: var(--aps-green);
+      background: rgba(101,210,170,.12);
+      border: 1px solid rgba(101,210,170,.2);
+      color: var(--accent);
       font-weight: 900;
       flex: 0 0 auto;
       margin-top: 1px;
@@ -213,7 +214,7 @@
     /* ===== Modal popup ===== */
     .modal-overlay{
       position: fixed; inset: 0; z-index: 100;
-      background: rgba(17,24,39,.4);
+      background: rgba(10,10,34,.4);
       backdrop-filter: blur(4px);
       display: flex; align-items: center; justify-content: center;
       padding: 20px;
@@ -226,7 +227,7 @@
     .modal-box{
       background: var(--paper);
       border-radius: var(--radius2);
-      box-shadow: 0 24px 60px rgba(17,24,39,.2);
+      box-shadow: 0 24px 60px rgba(10,10,34,.12);
       max-width: 480px; width: 100%;
       max-height: calc(100vh - 40px);
       overflow-y: auto;
@@ -285,7 +286,7 @@
       color: var(--muted);
     }
     .dots{ display:flex; gap:6px; }
-    .dots span{ width:9px; height:9px; border-radius:999px; background:#e5e7eb; display:block; }
+    .dots span{ width:9px; height:9px; border-radius:999px; background: var(--line); display:block; }
     .chip{
       font-size: 12px;
       color: var(--muted);
@@ -327,19 +328,19 @@
       color: var(--ink);
     }
     input:focus, select:focus, textarea:focus{
-      border-color: rgba(17,183,177,.45);
-      box-shadow: 0 0 0 4px rgba(17,183,177,.10);
+      border-color: rgba(101,210,170,.45);
+      box-shadow: 0 0 0 4px rgba(101,210,170,.1);
     }
     .hint{ font-size: 12px; color: var(--muted); margin-top: 4px; }
 
     /* ===== Sections (alternance de fonds) ===== */
-    section{ padding: 26px 0; }
+    section{ padding: 56px 0; }
     header.hero,
     section.strip-section,
     section#offre,
     section#impact,
     section.final-cta{
-      background: var(--bg-alt);
+      background: #ffffff;
     }
     section#roi,
     section#comment,
@@ -350,7 +351,7 @@
       background: var(--bg);
     }
     section#testimonials{
-      background: var(--bg-alt);
+      background: #ffffff;
     }
 
     /* ===== Testimonials ===== */
@@ -386,12 +387,12 @@
       backdrop-filter: blur(6px);
       border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 8px 24px rgba(17,24,39,.16);
+      box-shadow: 0 8px 24px rgba(10,10,34,.12);
       transition: transform .15s ease, box-shadow .15s ease;
     }
     .play-btn:hover{
       transform: scale(1.08);
-      box-shadow: 0 12px 32px rgba(17,24,39,.22);
+      box-shadow: 0 12px 32px rgba(10,10,34,.18);
     }
     .play-btn svg{
       width: 24px; height: 24px;
@@ -399,18 +400,26 @@
       fill: var(--ink);
     }
     .section-title{
-      font-size: 22px;
+      font-size: 24px;
       letter-spacing: -.3px;
+      margin: 0 0 12px;
+    }
+    .section-kicker{
       margin: 0 0 8px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+      color: var(--accent);
     }
     .section-sub{
-      margin: 0 0 16px;
+      margin: 0 0 24px;
       color: var(--muted);
       max-width: 82ch;
-      font-size: 14px;
+      font-size: 15px;
     }
-    .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .grid-2{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-2{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 
     .box{
       background: #fff;
@@ -441,8 +450,8 @@
     .roi-total{
       margin-top: 12px;
       border-radius: var(--radius);
-      border: 1px solid rgba(17,183,177,.22);
-      background: linear-gradient(180deg, rgba(17,183,177,.08), #fff);
+      border: 1px solid rgba(101,210,170,.22);
+      background: linear-gradient(180deg, rgba(101,210,170,.08), #fff);
       padding: 12px;
     }
     .roi-total .row{
@@ -474,16 +483,16 @@
       margin-top: 14px;
       border-radius: var(--radius);
       overflow: hidden;
-      border: 1px solid rgba(17,183,177,.25);
-      background: linear-gradient(135deg, rgba(17,183,177,.08) 0%, rgba(17,183,177,.03) 100%);
+      border: 1px solid rgba(101,210,170,.25);
+      background: linear-gradient(135deg, rgba(101,210,170,.08) 0%, rgba(101,210,170,.03) 100%);
     }
     .bonus-header{
       display: flex;
       align-items: center;
       gap: 10px;
       padding: 12px 16px;
-      background: rgba(17,183,177,.12);
-      border-bottom: 1px solid rgba(17,183,177,.18);
+      background: rgba(101,210,170,.12);
+      border-bottom: 1px solid rgba(101,210,170,.18);
       font-weight: 900;
       font-size: 14px;
       color: var(--ink);
@@ -492,7 +501,7 @@
       margin-left: auto;
       font-size: 12px;
       font-weight: 700;
-      color: var(--aps-teal);
+      color: var(--accent);
       background: rgba(255,255,255,.9);
       padding: 4px 10px;
       border-radius: 999px;
@@ -507,7 +516,7 @@
       gap: 12px;
       align-items: flex-start;
       padding: 12px 16px;
-      border-bottom: 1px solid rgba(17,183,177,.1);
+      border-bottom: 1px solid rgba(101,210,170,.1);
       font-size: 13px;
       color: var(--ink);
     }
@@ -521,7 +530,7 @@
     .bonus-item .desc{ color: var(--muted); font-size: 12px; }
     .bonus-item .value-tag{
       font-size: 11px;
-      color: var(--aps-teal);
+      color: var(--accent);
       font-weight: 700;
       white-space: nowrap;
     }
@@ -534,7 +543,7 @@
       min-height: 100px;
       border: 1px solid var(--line);
       background: #fff;
-      border-radius: 12px;
+      border-radius: var(--radius);
     }
     .logo-card img{
       display: block;
@@ -585,8 +594,8 @@
       margin: 0 0 4px;
     }
     .aar-label.is-before{ color: var(--muted); }
-    .aar-label.is-after{ color: var(--aps-teal); }
-    .aar-label.is-result{ color: var(--aps-green); }
+    .aar-label.is-after{ color: var(--accent); }
+    .aar-label.is-result{ color: var(--accent); }
     .aar-value{
       margin: 0;
       color: var(--ink);
@@ -594,15 +603,19 @@
       line-height: 1.45;
     }
     .aar-step.is-result{
-      border-color: rgba(46,204,113,.32);
-      background: linear-gradient(180deg, rgba(46,204,113,.08), #fff);
+      border-color: rgba(101,210,170,.32);
+      background: linear-gradient(180deg, rgba(101,210,170,.08), #fff);
     }
 
     /* ===== Marketplace ===== */
     #marketplace{
-      background: linear-gradient(160deg, #0f2723 0%, #0d3330 60%, #0a2825 100%);
+      background: var(--marketplace-bg-subtle);
       padding: 48px 0;
     }
+    #marketplace.is-strong{
+      background: var(--marketplace-bg-strong);
+    }
+    #marketplace .section-kicker{ color: rgba(255,255,255,.68); }
     #marketplace .section-title{ color: #fff; margin-bottom: 8px; }
     #marketplace .section-sub{ color: rgba(255,255,255,.6); max-width: 54ch; }
     .marketplace-grid{
@@ -617,26 +630,43 @@
       gap: 8px;
       padding: 6px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(17,183,177,.4);
-      background: rgba(17,183,177,.15);
+      border: 1px solid rgba(101,210,170,.4);
+      background: rgba(101,210,170,.15);
       font-size: 12px;
       font-weight: 700;
-      color: var(--aps-teal);
+      color: var(--accent);
       letter-spacing: .3px;
       margin-bottom: 16px;
       text-transform: uppercase;
     }
-    .marketplace-list{ display: flex; flex-direction: column; gap: 12px; margin: 20px 0 28px; }
+    .marketplace-list{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0 28px;
+      padding: 0;
+      list-style: none;
+    }
     .marketplace-item{
       display: flex;
       gap: 12px;
       align-items: flex-start;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    }
+    .marketplace-item:hover{
+      transform: translateY(-1px);
+      border-color: rgba(101,210,170,.34);
+      background: rgba(101,210,170,.08);
     }
     .marketplace-icon{
       width: 34px; height: 34px;
       border-radius: 10px;
-      background: rgba(17,183,177,.18);
-      border: 1px solid rgba(17,183,177,.25);
+      background: rgba(101,210,170,.18);
+      border: 1px solid rgba(101,210,170,.25);
       display: flex; align-items: center; justify-content: center;
       font-size: 16px;
       flex-shrink: 0;
@@ -659,14 +689,14 @@
       gap: 6px;
       padding: 12px 16px;
       border-radius: var(--radius);
-      border: 1px solid rgba(46,204,113,.3);
-      background: rgba(46,204,113,.1);
+      border: 1px solid rgba(101,210,170,.3);
+      background: rgba(101,210,170,.1);
       margin-top: 4px;
     }
     .marketplace-value .val{
       font-size: 22px;
       font-weight: 950;
-      color: var(--aps-green);
+      color: var(--accent);
       letter-spacing: -.4px;
     }
     .marketplace-value .lbl{
@@ -702,9 +732,147 @@
       width: 100%;
       display: block;
     }
+    .section-actions{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .section-actions.is-centered{
+      justify-content: center;
+    }
     @media (max-width: 980px){
       .marketplace-grid{ grid-template-columns: 1fr; }
+      .reliquats-grid{ grid-template-columns: 1fr; }
     }
+
+    /* ===== Reliquats ===== */
+    #reliquats{
+      padding: 48px 0 56px;
+      background: linear-gradient(180deg, rgba(101,210,170,.04) 0%, rgba(101,210,170,.02) 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    #offre{
+      padding-top: 40px;
+      background: #ffffff;
+    }
+    .reliquats-image-wrap img{
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .reliquats-grid{
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    #reliquats .section-kicker{ margin-bottom: 6px; }
+    #reliquats .section-sub{ max-width: 58ch; }
+    #reliquats .marketplace-badge{
+      color: var(--accent);
+      border-color: rgba(101,210,170,.3);
+      background: rgba(101,210,170,.08);
+    }
+    #reliquats .marketplace-item{
+      background: #fff;
+      border-color: var(--line);
+    }
+    #reliquats .marketplace-item:hover{
+      background: rgba(101,210,170,.04);
+      border-color: rgba(101,210,170,.26);
+    }
+    #reliquats .marketplace-item-content .item-title{ color: var(--ink); }
+    #reliquats .marketplace-item-content .item-desc{ color: var(--muted); }
+    #reliquats .marketplace-value{
+      border-color: rgba(101,210,170,.3);
+      background: rgba(101,210,170,.08);
+    }
+    #reliquats .marketplace-value .val{ color: var(--accent); }
+    #reliquats .marketplace-value .lbl{ color: var(--muted); }
+    .reliquats-mockup{
+      border-radius: var(--radius2);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      background: var(--dark);
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    }
+    .reliquats-mockup-top{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(20,20,50,.95);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .reliquats-mockup-top .dots{ flex-shrink: 0; }
+    .reliquats-mockup-top .dots span{ background: rgba(255,255,255,.15); }
+    .reliquats-mockup-title{
+      font-size: 11px;
+      color: #8b949e;
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    }
+    .reliquats-run-badge{
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(101,210,170,.15);
+      border: 1px solid rgba(101,210,170,.3);
+      color: var(--accent);
+    }
+    .reliquats-log{
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .log-line{
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .log-time{ color: #8b949e; flex-shrink: 0; min-width: 46px; }
+    .log-tag{
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      letter-spacing: .3px;
+    }
+    .log-tag.found{
+      background: rgba(101,210,170,.18);
+      color: var(--accent);
+    }
+    .log-tag.scan{
+      background: rgba(101,210,170,.15);
+      color: var(--accent);
+    }
+    .log-tag.info{
+      background: rgba(139,148,158,.12);
+      color: #8b949e;
+    }
+    .log-msg{ color: #e6edf3; }
+    .log-msg .ref{ color: #79c0ff; font-weight: 700; }
+    .log-msg .sup{ color: #d2a8ff; }
+    .log-msg .price{ color: var(--accent); font-weight: 700; }
+    .reliquats-summary{
+      margin: 6px 14px 14px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(101,210,170,.08);
+      border: 1px solid rgba(101,210,170,.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .reliquats-summary .s-label{ font-size: 11px; color: #8b949e; }
+    .reliquats-summary .s-val{ font-size: 14px; font-weight: 900; color: var(--accent); }
 
     /* ===== Comment ca marche ===== */
     #comment .section-sub{
@@ -723,6 +891,11 @@
       border-radius: var(--radius2);
       padding: 16px 16px 16px 56px;
       box-shadow: var(--shadow2);
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    .how-step:hover{
+      transform: translateY(-1px);
+      border-color: rgba(101,210,170,.3);
     }
     .how-step::before{
       counter-increment: how-step;
@@ -737,9 +910,9 @@
       place-items: center;
       font-size: 12px;
       font-weight: 900;
-      color: #0f766e;
-      border: 1px solid rgba(17,183,177,.35);
-      background: rgba(17,183,177,.12);
+      color: var(--accent);
+      border: 1px solid rgba(101,210,170,.35);
+      background: rgba(101,210,170,.12);
     }
     .how-step h3{
       margin: 0 0 6px;
@@ -773,7 +946,7 @@
     #faq details p{ margin: 10px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
 
     /* ===== Footer ===== */
-    .final-cta{ padding: 18px 0 40px; }
+    .final-cta{ padding: 48px 0 56px; }
     footer{
       border-top: 1px solid var(--line);
       padding: 16px 0 30px;
@@ -837,6 +1010,7 @@
         <nav class="nav" aria-label="Navigation">
           <a href="#roi">Rentabilité</a>
           <a href="#marketplace">Marketplace</a>
+          <a href="#reliquats">Reliquats</a>
           <a href="#offre">Offre</a>
           <a href="#faq">FAQ</a>
         </nav>
@@ -858,7 +1032,7 @@
 
           <h1>
             Toutes vos pi&#232;ces chez tous vos fournisseurs,
-            <span style="color:var(--aps-teal)">en 1 recherche</span>.
+            <span style="color:var(--accent)">en 1 recherche</span>.
           </h1>
 
           <p class="sublead">
@@ -1053,7 +1227,7 @@
         <p class="section-sub" style="margin:0 0 16px;">
           Démo + estimation de ce que vous gagnez sur 1 dossier réel + essai 1 mois si vous voulez.
         </p>
-        <div id="modal-roi-estimate" class="box" style="display:none; margin-bottom:16px; border-color:rgba(17,183,177,.22); background:rgba(17,183,177,.06);">
+        <div id="modal-roi-estimate" class="box" style="display:none; margin-bottom:16px; border-color:rgba(101,210,170,.22); background:rgba(101,210,170,.06);">
           <h3 style="margin:0 0 4px;">Votre estimation actuelle</h3>
           <p id="modal-roi-text" style="margin:0; font-weight:700; color:var(--ink);">—</p>
         </div>
@@ -1233,6 +1407,7 @@
   <!-- ===== Comment &#231;a marche ===== -->
   <section id="comment">
     <div class="container">
+      <p class="section-kicker">Parcours en 4 étapes</p>
       <h2 class="section-title">Comment &#231;a marche</h2>
       <p class="section-sub">
         Vous gardez votre fa&#231;on de travailler. APS se connecte à vos comptes fournisseurs et met tout au même endroit.
@@ -1257,14 +1432,31 @@
         </article>
       </div>
 
+      <div class="marketplace-shot" style="max-width: 900px; margin: 28px auto 0;">
+        <div class="marketplace-shot-top">
+          <div class="dots" aria-hidden="true">
+            <span style="background:#ff5f57;"></span>
+            <span style="background:#ffbd2e;"></span>
+            <span style="background:#28ca41;"></span>
+          </div>
+          <div class="url-bar">autopartselect.fr &mdash; R&#233;sultat de recherche</div>
+        </div>
+        <img src="assets/img/exemple_resultat_recherche.png" alt="Exemple de r&#233;sultat de recherche APS" loading="lazy" />
+      </div>
+      <div class="section-actions is-centered">
+        <a class="btn btn-primary open-demo" href="#">Démo 15 min</a>
+        <a class="btn" href="#offre">Voir l'offre</a>
+      </div>
+
     </div>
   </section>
 
   <!-- ===== Marketplace ===== -->
-  <section id="marketplace">
+  <section id="marketplace" class="is-strong">
     <div class="container">
       <div class="marketplace-grid">
         <div>
+          <p class="section-kicker">Marketplace APS</p>
           <div class="marketplace-badge">&#10022; Inclus dans votre abonnement &mdash; valeur 55&nbsp;&#8364;/mois</div>
           <h2 class="section-title">Votre stock dormant devient du cash</h2>
           <p class="section-sub">
@@ -1272,33 +1464,37 @@
             La Marketplace APS crée ce marché entre professionnels.
           </p>
 
-          <div class="marketplace-list">
-            <div class="marketplace-item">
-              <div class="marketplace-icon">&#128722;</div>
+          <ul class="marketplace-list">
+            <li class="marketplace-item">
+              <div class="marketplace-icon" aria-hidden="true">&#128722;</div>
               <div class="marketplace-item-content">
                 <p class="item-title">Publiez vos reliquats en quelques clics</p>
                 <p class="item-desc">Photo, référence, prix, état : votre stock visible par toute la communauté APS en moins de 2 minutes.</p>
               </div>
-            </div>
-            <div class="marketplace-item">
-              <div class="marketplace-icon">&#128269;</div>
+            </li>
+            <li class="marketplace-item">
+              <div class="marketplace-icon" aria-hidden="true">&#128269;</div>
               <div class="marketplace-item-content">
                 <p class="item-title">Trouvez la pièce rare introuvable ailleurs</p>
                 <p class="item-desc">Accédez au stock des autres carrossiers quand vos fournisseurs sont à sec ou trop lents.</p>
               </div>
-            </div>
-            <div class="marketplace-item">
-              <div class="marketplace-icon">&#129309;</div>
+            </li>
+            <li class="marketplace-item">
+              <div class="marketplace-icon" aria-hidden="true">&#129309;</div>
               <div class="marketplace-item-content">
                 <p class="item-title">Un réseau de confiance entre professionnels</p>
                 <p class="item-desc">Uniquement entre carrossiers abonnés APS &mdash; des pairs qui connaissent la qualité attendue.</p>
               </div>
-            </div>
-          </div>
+            </li>
+          </ul>
 
           <div class="marketplace-value">
             <span class="val">55&nbsp;&#8364;/mois</span>
             <span class="lbl">offerts avec votre abonnement</span>
+          </div>
+          <div class="section-actions">
+            <a class="btn btn-primary open-demo" href="#">Réserver une démo</a>
+            <a class="btn" href="#offre">Voir l'offre</a>
           </div>
         </div>
 
@@ -1313,6 +1509,61 @@
           </div>
           <img src="assets/img/markeplace.png" alt="Interface Marketplace AutoPartSelect" loading="lazy" />
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Reliquats ===== -->
+  <section id="reliquats">
+    <div class="container">
+      <div class="reliquats-grid">
+
+        <div class="reliquats-image-wrap">
+          <img src="assets/img/recherche_reliquat.png" alt="Pièce auto recherchée par APS" loading="lazy" />
+        </div>
+
+        <div>
+          <p class="section-kicker">Recherche reliquats</p>
+          <div class="marketplace-badge">&#10022; Inclus dans votre abonnement &mdash; valeur 25&nbsp;&#8364;/mois</div>
+          <h2 class="section-title">Vos pi&#232;ces introuvables, cherch&#233;es chaque nuit</h2>
+          <p class="section-sub">
+            Certaines pi&#232;ces sont rares. Plut&#244;t que de relancer manuellement vos fournisseurs, APS le fait pendant que vous dormez &mdash; et vous pr&#233;vient d&#232;s que c'est trouv&#233;.
+          </p>
+
+          <ul class="marketplace-list">
+            <li class="marketplace-item">
+              <div class="marketplace-icon" aria-hidden="true">&#128197;</div>
+              <div class="marketplace-item-content">
+                <p class="item-title">Mise en file d'attente en 1 clic</p>
+                <p class="item-desc">Une pièce indisponible ? Vous la mettez de côté. APS interroge 26 fournisseurs chaque nuit jusqu'à ce qu'elle réapparaisse.</p>
+              </div>
+            </li>
+            <li class="marketplace-item">
+              <div class="marketplace-icon" aria-hidden="true">&#128276;</div>
+              <div class="marketplace-item-content">
+                <p class="item-title">Notification dès que c'est disponible</p>
+                <p class="item-desc">Vous recevez un rapport le matin avec les pièces trouvées, leur prix et leur source. Plus besoin de vérifier manuellement.</p>
+              </div>
+            </li>
+            <li class="marketplace-item">
+              <div class="marketplace-icon" aria-hidden="true">&#128336;</div>
+              <div class="marketplace-item-content">
+                <p class="item-title">Z&#233;ro temps perdu sur les cas complexes</p>
+                <p class="item-desc">Les dossiers bloqués sur une pièce rare avancent sans que vous ayez à y penser.</p>
+              </div>
+            </li>
+          </ul>
+
+          <div class="marketplace-value">
+            <span class="val">25&nbsp;&#8364;/mois</span>
+            <span class="lbl">offerts avec votre abonnement</span>
+          </div>
+          <div class="section-actions">
+            <a class="btn btn-primary open-demo" href="#">Réserver une démo</a>
+            <a class="btn" href="#offre">Voir l'offre</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1381,7 +1632,7 @@
             <div style="font-weight:900;">Essai sans risque</div>
             <div class="hint">Vous payez l'installation, puis l'abonnement ne d&#233;marre qu'au bout d'un mois si la valeur est au rendez-vous.</div>
 
-            <div class="box" style="margin-top:10px; border-color: rgba(17,183,177,.22); background: rgba(17,183,177,.06);">
+            <div class="box" style="margin-top:10px; border-color: rgba(101,210,170,.22); background: rgba(101,210,170,.06);">
               <h3 style="margin:0 0 6px;">&#127873; 1 mois d'essai (abonnement offert)</h3>
               <p style="margin:0;">0&#8364; d'abonnement le premier mois. Vous continuez uniquement si APS vous apporte un gain concret.</p>
             </div>
