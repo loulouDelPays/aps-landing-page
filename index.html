@@ -598,6 +598,114 @@
       background: linear-gradient(180deg, rgba(46,204,113,.08), #fff);
     }
 
+    /* ===== Marketplace ===== */
+    #marketplace{
+      background: linear-gradient(160deg, #0f2723 0%, #0d3330 60%, #0a2825 100%);
+      padding: 48px 0;
+    }
+    #marketplace .section-title{ color: #fff; margin-bottom: 8px; }
+    #marketplace .section-sub{ color: rgba(255,255,255,.6); max-width: 54ch; }
+    .marketplace-grid{
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .marketplace-badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(17,183,177,.4);
+      background: rgba(17,183,177,.15);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--aps-teal);
+      letter-spacing: .3px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .marketplace-list{ display: flex; flex-direction: column; gap: 12px; margin: 20px 0 28px; }
+    .marketplace-item{
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .marketplace-icon{
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      background: rgba(17,183,177,.18);
+      border: 1px solid rgba(17,183,177,.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .marketplace-item-content .item-title{
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 3px;
+    }
+    .marketplace-item-content .item-desc{
+      font-size: 13px;
+      color: rgba(255,255,255,.55);
+      margin: 0;
+      line-height: 1.45;
+    }
+    .marketplace-value{
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(46,204,113,.3);
+      background: rgba(46,204,113,.1);
+      margin-top: 4px;
+    }
+    .marketplace-value .val{
+      font-size: 22px;
+      font-weight: 950;
+      color: var(--aps-green);
+      letter-spacing: -.4px;
+    }
+    .marketplace-value .lbl{
+      font-size: 13px;
+      color: rgba(255,255,255,.6);
+    }
+    .marketplace-shot{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 32px 64px rgba(0,0,0,.5);
+      overflow: hidden;
+      background: #fff;
+    }
+    .marketplace-shot-top{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+    }
+    .marketplace-shot-top .dots{ flex-shrink: 0; }
+    .marketplace-shot-top .url-bar{
+      flex: 1;
+      background: #fff;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 11px;
+      color: #6c757d;
+    }
+    .marketplace-shot img{
+      width: 100%;
+      display: block;
+    }
+    @media (max-width: 980px){
+      .marketplace-grid{ grid-template-columns: 1fr; }
+    }
+
     /* ===== Comment ca marche ===== */
     #comment .section-sub{
       max-width: 72ch;
@@ -728,6 +836,7 @@
 
         <nav class="nav" aria-label="Navigation">
           <a href="#roi">Rentabilité</a>
+          <a href="#marketplace">Marketplace</a>
           <a href="#offre">Offre</a>
           <a href="#faq">FAQ</a>
         </nav>
@@ -761,7 +870,7 @@
             <span class="touch-pill"><b>Produit</b> comparateur stock/prix/délai sur 1 écran</span>
             <span class="touch-pill"><b>Prix</b> 120€ HT/mois (abonnement 12 mois)</span>
             <span class="touch-pill"><b>Essai</b> abonnement offert 1 mois</span>
-            <span class="touch-pill"><b>Installation</b> forfait unique (à partir de 400€)</span>
+            <span class="touch-pill"><b>Installation</b> forfait unique 850€</span>
           </div>
 
 
@@ -1021,7 +1130,7 @@
               </div>
               <div class="field">
                 <label for="install">Installation (forfait unique, &#8364;)</label>
-                <input id="install" type="number" min="0" step="1" value="400" />
+                <input id="install" type="number" min="0" step="1" value="850" />
               </div>
             </div>
 
@@ -1148,6 +1257,63 @@
         </article>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ===== Marketplace ===== -->
+  <section id="marketplace">
+    <div class="container">
+      <div class="marketplace-grid">
+        <div>
+          <div class="marketplace-badge">&#10022; Inclus dans votre abonnement &mdash; valeur 55&nbsp;&#8364;/mois</div>
+          <h2 class="section-title">Votre stock dormant devient du cash</h2>
+          <p class="section-sub">
+            Les pièces qui prennent la poussière dans votre atelier intéressent d'autres carrossiers &mdash; et inversement.
+            La Marketplace APS crée ce marché entre professionnels.
+          </p>
+
+          <div class="marketplace-list">
+            <div class="marketplace-item">
+              <div class="marketplace-icon">&#128722;</div>
+              <div class="marketplace-item-content">
+                <p class="item-title">Publiez vos reliquats en quelques clics</p>
+                <p class="item-desc">Photo, référence, prix, état : votre stock visible par toute la communauté APS en moins de 2 minutes.</p>
+              </div>
+            </div>
+            <div class="marketplace-item">
+              <div class="marketplace-icon">&#128269;</div>
+              <div class="marketplace-item-content">
+                <p class="item-title">Trouvez la pièce rare introuvable ailleurs</p>
+                <p class="item-desc">Accédez au stock des autres carrossiers quand vos fournisseurs sont à sec ou trop lents.</p>
+              </div>
+            </div>
+            <div class="marketplace-item">
+              <div class="marketplace-icon">&#129309;</div>
+              <div class="marketplace-item-content">
+                <p class="item-title">Un réseau de confiance entre professionnels</p>
+                <p class="item-desc">Uniquement entre carrossiers abonnés APS &mdash; des pairs qui connaissent la qualité attendue.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="marketplace-value">
+            <span class="val">55&nbsp;&#8364;/mois</span>
+            <span class="lbl">offerts avec votre abonnement</span>
+          </div>
+        </div>
+
+        <div class="marketplace-shot">
+          <div class="marketplace-shot-top">
+            <div class="dots" aria-hidden="true">
+              <span style="background:#ff5f57;"></span>
+              <span style="background:#ffbd2e;"></span>
+              <span style="background:#28ca41;"></span>
+            </div>
+            <div class="url-bar">autopartselect.fr &mdash; Marketplace</div>
+          </div>
+          <img src="assets/img/markeplace.png" alt="Interface Marketplace AutoPartSelect" loading="lazy" />
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1374,7 +1540,7 @@
       document.getElementById('tauxHoraire').value = 35;
       document.getElementById('margeParDossier').value = 5;
       document.getElementById('abo').value = 120;
-      document.getElementById('install').value = 400;
+      document.getElementById('install').value = 850;
       recalc();
     }
 
