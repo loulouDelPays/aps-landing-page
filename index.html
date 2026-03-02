@@ -153,6 +153,31 @@
       max-width: 50ch;
       line-height: 1.55;
     }
+    .hero-metrics{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 560px;
+      margin: 0 0 18px;
+    }
+    .hero-metric{
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 10px 12px;
+    }
+    .hero-metric .v{
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -.4px;
+      color: var(--dark);
+      line-height: 1.1;
+    }
+    .hero-metric .l{
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+    }
 
     .touchstone{
       margin: 10px 0 18px;
@@ -368,6 +393,9 @@
     .testimonial-video video{
       width: 100%; display: block;
     }
+    .testimonial-cases{
+      margin-top: 18px;
+    }
     .hero-video .poster-overlay,
     .testimonial-video .poster-overlay{
       position: absolute; inset: 0;
@@ -477,6 +505,39 @@
     .list{ display:flex; flex-direction:column; gap: 9px; margin-top: 12px; }
     .li{ display:flex; gap:10px; align-items:flex-start; font-size: 13px; color: var(--muted); }
     .li .check{ margin-top: 1px; }
+    .price-clarity{
+      margin-top: 12px;
+      border: 1px solid rgba(101,210,170,.25);
+      background: rgba(101,210,170,.06);
+      border-radius: var(--radius);
+      padding: 12px;
+    }
+    .price-clarity-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .price-clarity-item{
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+    }
+    .price-clarity-item .k{
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .price-clarity-item .v{
+      margin-top: 4px;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -.3px;
+    }
+    .price-clarity-item .s{
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+    }
 
     /* ===== Bonus section (pricing) ===== */
     .bonus-block{
@@ -884,6 +945,9 @@
       gap: 12px;
       counter-reset: how-step;
     }
+    .how-steps-3{
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
     .how-step{
       position: relative;
       background: #fff;
@@ -974,6 +1038,8 @@
       .roi-grid{ grid-template-columns: 1fr; }
       .logos{ grid-template-columns: repeat(2, 1fr); }
       .aar-grid{ grid-template-columns: 1fr; }
+      .hero-metrics{ grid-template-columns: 1fr; }
+      .price-clarity-grid{ grid-template-columns: 1fr; }
     }
     @media (max-width: 480px){
       .bonus-item{ flex-wrap: wrap; }
@@ -1017,7 +1083,7 @@
 
         <div class="header-actions" style="display:flex; gap:10px; align-items:center;">
           <a class="btn" href="#roi">Calculer ma rentabilité</a>
-          <a class="btn btn-primary open-demo" href="#">Démo 15 min</a>
+          <a class="btn btn-primary open-demo" href="#">Réserver une démo 15 min</a>
         </div>
       </div>
     </div>
@@ -1038,6 +1104,16 @@
           <p class="sublead">
             Con&#231;u pour les carrossiers : retrouvez stocks, prix et d&#233;lais de vos fournisseurs sur un seul &#233;cran. Comparez en quelques secondes et d&#233;cidez avec confiance.
           </p>
+          <div class="hero-metrics" aria-label="Chiffres clés APS">
+            <div class="hero-metric">
+              <div class="v">+15&nbsp;000/mois</div>
+              <div class="l">références recherchées</div>
+            </div>
+            <div class="hero-metric">
+              <div class="v">+3&nbsp;000/mois</div>
+              <div class="l">dossiers traités</div>
+            </div>
+          </div>
 
 
           <div class="touchstone" aria-label="Offre en bref">
@@ -1050,7 +1126,7 @@
 
 
           <div class="cta-row">
-            <a class="btn btn-primary btn-lg open-demo" href="#">Démo 15 min</a>
+            <a class="btn btn-primary btn-lg open-demo" href="#">Réserver une démo 15 min</a>
             <a class="btn btn-lg" href="#roi">Calculer ma rentabilité</a>
           </div>
 
@@ -1111,6 +1187,16 @@
       <p class="section-sub">
         Une promesse simple : vous gardez vos fournisseurs et vos remises, et vous décidez plus vite grâce à la comparaison stock/prix/délai sur un seul écran.
       </p>
+      <div class="grid-2" style="margin-bottom:14px;">
+        <div class="box">
+          <h3 style="margin:0;">+15 000 références recherchées / mois</h3>
+          <p style="margin-top:4px;">Volume réel de recherches sur la plateforme APS.</p>
+        </div>
+        <div class="box">
+          <h3 style="margin:0;">+3 000 dossiers / mois</h3>
+          <p style="margin-top:4px;">Utilisation terrain continue dans les ateliers clients.</p>
+        </div>
+      </div>
 
       <div class="card">
         <div class="pad">
@@ -1255,7 +1341,7 @@
             </div>
           </div>
 
-          <button id="modal-submit-btn" class="btn btn-primary" type="submit" style="width:100%;">Réserver une démo</button>
+          <button id="modal-submit-btn" class="btn btn-primary" type="submit" style="width:100%;">Réserver une démo 15 min</button>
           <p class="hint" style="text-align:center;">On vous rappelle rapidement. Sans engagement.</p>
         </form>
       </div>
@@ -1366,7 +1452,7 @@
             </div>
 
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
-              <a id="roi-cta-demo" class="btn btn-primary open-demo" href="#">Réserver une démo</a>
+              <a id="roi-cta-demo" class="btn btn-primary open-demo" href="#">Réserver une démo 15 min</a>
               <a class="btn" href="#offre">Voir l'offre</a>
             </div>
           </div>
@@ -1407,28 +1493,24 @@
   <!-- ===== Comment &#231;a marche ===== -->
   <section id="comment">
     <div class="container">
-      <p class="section-kicker">Parcours en 4 étapes</p>
+      <p class="section-kicker">Parcours en 3 étapes</p>
       <h2 class="section-title">Comment &#231;a marche</h2>
       <p class="section-sub">
         Vous gardez votre fa&#231;on de travailler. APS se connecte à vos comptes fournisseurs et met tout au même endroit.
       </p>
 
-      <div class="how-steps">
+      <div class="how-steps how-steps-3">
         <article class="how-step">
-          <h3>Vous cherchez une pi&#232;ce</h3>
-          <p>R&#233;f&#233;rence, d&#233;signation ou import chiffrage : une seule action.</p>
+          <h3>1) Vous lancez une recherche</h3>
+          <p>Référence ou désignation en une action. <b>Bénéfice :</b> démarrage immédiat sans perte de temps.</p>
         </article>
         <article class="how-step">
-          <h3>APS interroge vos fournisseurs</h3>
-          <p>Y compris sur leurs sites r&#233;serv&#233;s aux professionnels (avec vos codes d'acc&#232;s).</p>
+          <h3>2) APS centralise vos fournisseurs</h3>
+          <p>Stock, prix et délai remontent automatiquement. <b>Bénéfice :</b> moins d'allers-retours et moins d'erreurs.</p>
         </article>
         <article class="how-step">
-          <h3>Vous comparez sur un &#233;cran</h3>
-          <p>Stock, prix, d&#233;lai, &#233;tat (neuf/occasion) : tout en un coup d'œil.</p>
-        </article>
-        <article class="how-step">
-          <h3>Vous d&#233;cidez plus vite</h3>
-          <p>Moins d'aller-retours &#8594; des dossiers qui avancent.</p>
+          <h3>3) Vous choisissez la meilleure option</h3>
+          <p>Décision rapide et délégable à l'équipe. <b>Bénéfice :</b> dossiers débloqués plus vite.</p>
         </article>
       </div>
 
@@ -1444,7 +1526,7 @@
         <img src="assets/img/exemple_resultat_recherche.png" alt="Exemple de r&#233;sultat de recherche APS" loading="lazy" />
       </div>
       <div class="section-actions is-centered">
-        <a class="btn btn-primary open-demo" href="#">Démo 15 min</a>
+        <a class="btn btn-primary open-demo" href="#">Réserver une démo 15 min</a>
         <a class="btn" href="#offre">Voir l'offre</a>
       </div>
 
@@ -1460,8 +1542,7 @@
           <div class="marketplace-badge">&#10022; Inclus dans votre abonnement &mdash; valeur 55&nbsp;&#8364;/mois</div>
           <h2 class="section-title">Votre stock dormant devient du cash</h2>
           <p class="section-sub">
-            Les pièces qui prennent la poussière dans votre atelier intéressent d'autres carrossiers &mdash; et inversement.
-            La Marketplace APS crée ce marché entre professionnels.
+            <b>Pour qui :</b> ateliers avec stock dormant ; <b>quand :</b> dès qu'une pièce ne tourne plus ; <b>pourquoi :</b> la revendre vite à d'autres carrossiers pour récupérer du cash.
           </p>
 
           <ul class="marketplace-list">
@@ -1493,7 +1574,7 @@
             <span class="lbl">offerts avec votre abonnement</span>
           </div>
           <div class="section-actions">
-            <a class="btn btn-primary open-demo" href="#">Réserver une démo</a>
+            <a class="btn btn-primary open-demo" href="#">Réserver une démo 15 min</a>
             <a class="btn" href="#offre">Voir l'offre</a>
           </div>
         </div>
@@ -1527,7 +1608,7 @@
           <div class="marketplace-badge">&#10022; Inclus dans votre abonnement &mdash; valeur 25&nbsp;&#8364;/mois</div>
           <h2 class="section-title">Vos pi&#232;ces introuvables, cherch&#233;es chaque nuit</h2>
           <p class="section-sub">
-            Certaines pi&#232;ces sont rares. Plut&#244;t que de relancer manuellement vos fournisseurs, APS le fait pendant que vous dormez &mdash; et vous pr&#233;vient d&#232;s que c'est trouv&#233;.
+            <b>Pour qui :</b> ateliers bloqués sur des pièces rares ; <b>quand :</b> dès qu'une référence manque ; <b>pourquoi :</b> automatiser les relances et être alerté dès qu'une solution apparaît.
           </p>
 
           <ul class="marketplace-list">
@@ -1559,7 +1640,7 @@
             <span class="lbl">offerts avec votre abonnement</span>
           </div>
           <div class="section-actions">
-            <a class="btn btn-primary open-demo" href="#">Réserver une démo</a>
+            <a class="btn btn-primary open-demo" href="#">Réserver une démo 15 min</a>
             <a class="btn" href="#offre">Voir l'offre</a>
           </div>
         </div>
@@ -1621,7 +1702,7 @@
             </div>
 
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
-              <a class="btn btn-primary open-demo" href="#">Démo 15 min</a>
+              <a class="btn btn-primary open-demo" href="#">Réserver une démo 15 min</a>
               <a class="btn" href="#roi">Calculer ma rentabilité</a>
             </div>
           </div>
@@ -1652,7 +1733,7 @@
             </div>
 
             <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
-              <a class="btn btn-primary open-demo" href="#">Démo 15 min</a>
+              <a class="btn btn-primary open-demo" href="#">Réserver une démo 15 min</a>
               <a class="btn" href="#faq">Voir la FAQ</a>
             </div>
           </div>
@@ -1716,7 +1797,7 @@
             <div class="hint">Démo + estimation rentabilité + vos questions.</div>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn btn-primary open-demo" href="#">Démo 15 min</a>
+            <a class="btn btn-primary open-demo" href="#">Réserver une démo 15 min</a>
             <a class="btn" href="#roi">Calculer ma rentabilité</a>
           </div>
         </div>
@@ -1815,12 +1896,8 @@
       const roiCta = document.getElementById('roi-cta-demo');
       const kNetEl = document.getElementById('kNet');
       if (!kNetEl) return;
-      const net = kNetEl.dataset.value;
-      if (roiCta && net !== undefined && Number(net) > 0){
-        const fmt = Number(net).toLocaleString('fr-FR', { maximumFractionDigits:0 });
-        roiCta.textContent = 'R\u00e9server une d\u00e9mo \u2014 estimation : +' + fmt + '\u20ac/mois';
-      } else if (roiCta){
-        roiCta.textContent = 'R\u00e9server une d\u00e9mo';
+      if (roiCta){
+        roiCta.textContent = 'R\u00e9server une d\u00e9mo 15 min';
       }
     }
 
