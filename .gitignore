@@ -1,0 +1,5 @@
+# Vidéos volumineuses (limite GitHub 100 MB)
+assets/videos/*.mp4
+
+# macOS
+.DS_Store
