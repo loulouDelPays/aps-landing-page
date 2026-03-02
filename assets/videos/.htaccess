@@ -1,0 +1,10 @@
+# Autoriser l'accès aux vidéos (évite 403 si config parente restrictive)
+<IfModule mod_authz_core.c>
+  Require all granted
+</IfModule>
+# Type MIME correct pour .mp4
+<FilesMatch "\.mp4$">
+  <IfModule mod_headers.c>
+    Header set Content-Type "video/mp4"
+  </IfModule>
+</FilesMatch>

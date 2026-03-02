@@ -1682,13 +1682,23 @@
       const video = wrap.querySelector('video');
       const poster = wrap.querySelector('.poster-overlay');
       if (!poster) return;
-      poster.addEventListener('click', function(){
+
+      function startPlay() {
         poster.classList.add('is-hidden');
-        video.play();
-      });
-      video.addEventListener('click', function(){
-        if (video.paused) { video.play(); }
-        else { video.pause(); }
+        const p = video.play();
+        if (p && typeof p.then === 'function') {
+          p.catch(function() {
+            poster.classList.remove('is-hidden');
+          });
+        }
+      }
+
+      wrap.addEventListener('click', function() {
+        if (poster.classList.contains('is-hidden')) {
+          video.paused ? startPlay() : video.pause();
+        } else {
+          startPlay();
+        }
       });
       video.addEventListener('ended', function(){
         poster.classList.remove('is-hidden');
