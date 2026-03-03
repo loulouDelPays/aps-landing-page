@@ -237,6 +237,19 @@
       border-radius: 999px;
       white-space: nowrap;
     }
+    .tag-row{
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
+    }
+    .tag-pill{
+      display: inline-flex; align-items: center;
+      font-size: 12px; font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .tag-pill:nth-child(1){ background: rgba(59,130,246,.15); color: #1d4ed8; }
+    .tag-pill:nth-child(2){ background: rgba(234,179,8,.15); color: #a16207; }
+    .tag-pill:nth-child(3){ background: rgba(236,72,153,.15); color: #be185d; }
     .shot-img{ width: 100%; display:block; background:#fff; }
     .hero-video{
       position: relative;
@@ -854,6 +867,12 @@
           <p class="sublead">
             Con&#231;u pour les carrossiers : retrouvez stocks, prix et d&#233;lais de vos fournisseurs sur un seul &#233;cran. Comparez en quelques secondes et d&#233;cidez avec confiance.
           </p>
+
+          <div class="tag-row">
+            <span class="tag-pill">Pi&#232;ces d'origine</span>
+            <span class="tag-pill">Qualit&#233; &#233;quivalente</span>
+            <span class="tag-pill">R&#233;emploi</span>
+          </div>
 
           <div class="cta-row">
             <a class="btn btn-primary btn-lg open-demo" href="#">Réserver une démo 15 min</a>
