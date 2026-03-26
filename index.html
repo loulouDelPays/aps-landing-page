@@ -1343,23 +1343,19 @@
           <div class="roi-inputs">
             <div class="field">
               <label for="dossiers">Combien de dossiers traitez-vous par mois ?</label>
-              <input id="dossiers" type="number" min="0" step="1" value="120" />
+              <input id="dossiers" type="number" min="0" step="1" value="80" />
             </div>
 
             <div style="margin-top:12px;">
               <label style="display:block; margin-bottom:8px;">Quel scénario correspond à votre atelier ?</label>
               <div class="roi-presets">
-                <button class="btn roi-preset" type="button" data-min="5" data-marge="5">
+                <button class="btn roi-preset" type="button" data-min="7" data-marge="20">
                   <strong>Prudent</strong>
-                  <span>5 min et 5&#8364; / dossier</span>
+                  <span>7 min et 20&#8364; / dossier</span>
                 </button>
-                <button class="btn roi-preset active" type="button" data-min="7" data-marge="10">
+                <button class="btn roi-preset active" type="button" data-min="10" data-marge="30">
                   <strong>R&#233;aliste</strong>
-                  <span>7 min et 10&#8364; / dossier</span>
-                </button>
-                <button class="btn roi-preset" type="button" data-min="10" data-marge="15">
-                  <strong>Optimiste</strong>
-                  <span>10 min et 15&#8364; / dossier</span>
+                  <span>10 min et 30&#8364; / dossier</span>
                 </button>
               </div>
             </div>
@@ -1369,11 +1365,11 @@
               <div class="form-2" style="margin-top:10px;">
                 <div class="field">
                   <label for="minParDossier">Minutes gagn&#233;es / dossier</label>
-                  <input id="minParDossier" type="number" min="0" step="0.5" value="7" />
+                  <input id="minParDossier" type="number" min="0" step="0.5" value="10" />
                 </div>
                 <div class="field">
                   <label for="margeParDossier">Marge gagn&#233;e / dossier (&#8364;)</label>
-                  <input id="margeParDossier" type="number" min="0" step="0.5" value="10" />
+                  <input id="margeParDossier" type="number" min="0" step="0.5" value="30" />
                 </div>
               </div>
               <div class="form-2" style="margin-top:10px;">
@@ -1636,14 +1632,14 @@
     }
 
     function resetDefaults(){
-      document.getElementById('dossiers').value = 120;
-      document.getElementById('minParDossier').value = 7;
+      document.getElementById('dossiers').value = 80;
+      document.getElementById('minParDossier').value = 10;
       document.getElementById('tauxHoraire').value = 35;
-      document.getElementById('margeParDossier').value = 10;
+      document.getElementById('margeParDossier').value = 30;
       document.getElementById('abo').value = 150;
       document.getElementById('install').value = 850;
       document.querySelectorAll('.roi-preset').forEach(b => b.classList.remove('active'));
-      document.querySelector('.roi-preset[data-min="7"]').classList.add('active');
+      document.querySelector('.roi-preset[data-min="10"]').classList.add('active');
       recalc();
     }
 
