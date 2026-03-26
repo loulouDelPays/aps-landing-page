@@ -384,35 +384,69 @@
     .box p{ margin:0; color: var(--muted); font-size: 13px; }
 
     /* ===== ROI ===== */
-    .roi-grid{ display:grid; grid-template-columns: .95fr 1.05fr; gap: 12px; align-items: stretch; }
-    .kpis{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-    .kpi{
-      border: 1px solid var(--line);
-      background: #fff;
-      border-radius: var(--radius);
-      padding: 12px;
+    .roi-card > .pad{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
     }
-    .kpi .t{ font-size: 12px; color: var(--muted); }
-    .kpi .v{ font-size: 20px; font-weight: 900; margin-top: 6px; letter-spacing: -.3px; }
-    .kpi .s{ font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .roi-presets{
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .roi-presets .btn{
+      flex: 1; min-width: 120px;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 10px 12px;
+      border: 2px solid var(--line);
+      transition: border-color .15s, background .15s;
+    }
+    .roi-presets .btn span{ font-size: 12px; color: var(--muted); font-weight: 400; }
+    .roi-presets .btn.active{
+      border-color: var(--accent);
+      background: rgba(101,210,170,.06);
+    }
+    .roi-advanced{
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+    }
+    .roi-advanced summary{
+      cursor: pointer; font-weight: 700; font-size: 13px; color: var(--muted);
+      list-style: none;
+    }
+    .roi-advanced summary::-webkit-details-marker{ display:none; }
+    .roi-advanced summary::before{
+      content: '▸'; display: inline-block; margin-right: 6px;
+      transition: transform .15s;
+    }
+    .roi-advanced[open] summary::before{ transform: rotate(90deg); }
 
-    .roi-total{
-      margin-top: 12px;
+    .roi-hero{
+      text-align: center;
+      padding: 24px 16px;
       border-radius: var(--radius);
       border: 1px solid rgba(101,210,170,.22);
       background: linear-gradient(180deg, rgba(101,210,170,.08), #fff);
+    }
+    .roi-hero-label{ font-size: 14px; color: var(--muted); font-weight: 600; }
+    .roi-hero-value{
+      font-size: 38px; font-weight: 950; letter-spacing: -.8px; margin-top: 6px;
+    }
+    .roi-hero-detail{ font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+    .roi-secondary{
+      display: flex; gap: 12px; margin-top: 14px;
+    }
+    .roi-metric{
+      flex: 1;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       padding: 12px;
+      display: flex; flex-direction: column; gap: 4px;
     }
-    .roi-total .row{
-      display:flex; align-items:baseline; justify-content:space-between;
-      gap: 10px; flex-wrap:wrap;
-    }
-    .roi-total .big{
-      font-size: 26px;
-      font-weight: 950;
-      letter-spacing: -.6px;
-      margin-top: 6px;
-    }
+    .roi-metric-label{ font-size: 12px; color: var(--muted); }
+    .roi-metric-value{ font-size: 18px; font-weight: 900; letter-spacing: -.3px; }
 
     /* ===== Pricing ===== */
     .pricing{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -797,7 +831,7 @@
       .grid-2{ grid-template-columns: 1fr; }
       .how-steps{ grid-template-columns: 1fr; }
       .pricing{ grid-template-columns: 1fr; }
-      .roi-grid{ grid-template-columns: 1fr; }
+      .roi-card > .pad{ grid-template-columns: 1fr; }
       .logos{ grid-template-columns: repeat(2, 1fr); }
       .aar-grid{ grid-template-columns: 1fr; }
 
@@ -1304,109 +1338,86 @@
         Le temps gagn&#233; sur chaque dossier + la marge r&#233;cup&#233;r&#233;e sur vos achats couvrent largement l'abonnement. Faites le calcul avec vos chiffres.
       </p>
 
-      <div class="roi-grid">
-        <div class="card">
-          <div class="pad">
-            <div style="font-weight:900; margin-bottom:10px;">Vos param&#232;tres</div>
-
-            <div class="form-2">
-              <div class="field">
-                <label for="dossiers">Dossiers / mois</label>
-                <input id="dossiers" type="number" min="0" step="1" value="120" />
-              </div>
-              <div class="field">
-                <label for="minParDossier">Minutes gagn&#233;es / dossier</label>
-                <input id="minParDossier" type="number" min="0" step="0.5" value="6" />
-              </div>
+      <div class="roi-card card">
+        <div class="pad">
+          <div class="roi-inputs">
+            <div class="field">
+              <label for="dossiers">Combien de dossiers traitez-vous par mois ?</label>
+              <input id="dossiers" type="number" min="0" step="1" value="120" />
             </div>
 
-            <div class="form-2" style="margin-top:10px;">
-              <div class="field">
-                <label for="tauxHoraire">Coût d'une heure de travail (€)</label>
-                <input id="tauxHoraire" type="number" min="0" step="1" value="35" />
-              </div>
-              <div class="field">
-                <label for="margeParDossier">Marge gagn&#233;e / dossier (&#8364;)</label>
-                <input id="margeParDossier" type="number" min="0" step="0.5" value="5" />
-              </div>
-            </div>
-
-            <div class="form-2" style="margin-top:10px;">
-              <div class="field">
-                <label for="abo">Abonnement APS (&#8364;/mois)</label>
-                <input id="abo" type="number" min="0" step="1" value="150" />
-              </div>
-              <div class="field">
-                <label for="install">Installation (forfait unique, &#8364;)</label>
-                <input id="install" type="number" min="0" step="1" value="850" />
+            <div style="margin-top:12px;">
+              <label style="display:block; margin-bottom:8px;">Quel scénario correspond à votre atelier ?</label>
+              <div class="roi-presets">
+                <button class="btn roi-preset" type="button" data-min="5" data-marge="5">
+                  <strong>Prudent</strong>
+                  <span>5 min et 5&#8364; / dossier</span>
+                </button>
+                <button class="btn roi-preset active" type="button" data-min="7" data-marge="10">
+                  <strong>R&#233;aliste</strong>
+                  <span>7 min et 10&#8364; / dossier</span>
+                </button>
+                <button class="btn roi-preset" type="button" data-min="10" data-marge="15">
+                  <strong>Optimiste</strong>
+                  <span>10 min et 15&#8364; / dossier</span>
+                </button>
               </div>
             </div>
 
-            <div class="hint" style="margin-top:8px;">
-              Exemples : choisissez une hypothèse puis ajustez selon votre atelier.
-            </div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;">
-              <button class="btn roi-preset" type="button" data-min="5" data-marge="5">Prudent (5 min, 5&#8364;)</button>
-              <button class="btn roi-preset" type="button" data-min="7" data-marge="10">R&#233;aliste (7 min, 10&#8364;)</button>
-              <button class="btn roi-preset" type="button" data-min="10" data-marge="15">Optimiste (10 min, 15&#8364;)</button>
-            </div>
-
-            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
-              <button class="btn btn-primary" type="button" id="btnRecalc">Mettre &#224; jour</button>
-              <button class="btn" type="button" id="btnReset">R&#233;initialiser</button>
-            </div>
+            <details class="roi-advanced">
+              <summary>Ajuster les paramètres</summary>
+              <div class="form-2" style="margin-top:10px;">
+                <div class="field">
+                  <label for="minParDossier">Minutes gagn&#233;es / dossier</label>
+                  <input id="minParDossier" type="number" min="0" step="0.5" value="7" />
+                </div>
+                <div class="field">
+                  <label for="margeParDossier">Marge gagn&#233;e / dossier (&#8364;)</label>
+                  <input id="margeParDossier" type="number" min="0" step="0.5" value="10" />
+                </div>
+              </div>
+              <div class="form-2" style="margin-top:10px;">
+                <div class="field">
+                  <label for="tauxHoraire">Coût horaire (€)</label>
+                  <input id="tauxHoraire" type="number" min="0" step="1" value="35" />
+                </div>
+                <div class="field">
+                  <label for="abo">Abonnement APS (&#8364;/mois)</label>
+                  <input id="abo" type="number" min="0" step="1" value="150" />
+                </div>
+              </div>
+              <div class="form-2" style="margin-top:10px;">
+                <div class="field">
+                  <label for="install">Installation (forfait unique, &#8364;)</label>
+                  <input id="install" type="number" min="0" step="1" value="850" />
+                </div>
+                <div class="field"></div>
+              </div>
+              <div style="margin-top:10px;">
+                <button class="btn" type="button" id="btnReset">R&#233;initialiser</button>
+              </div>
+            </details>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="pad">
-            <div style="font-weight:900;">R&#233;sultats estim&#233;s (mensuel)</div>
+          <div class="roi-result">
+            <div class="roi-hero">
+              <div class="roi-hero-label">Gain net estimé / mois</div>
+              <div class="roi-hero-value" id="kNet">&#8212;</div>
+              <div class="roi-hero-detail" id="kNetSub">&#8212;</div>
+            </div>
 
-            <div class="kpis">
-              <div class="kpi">
-                <div class="t">Temps gagn&#233;</div>
-                <div class="v" id="kTime">&#8212;</div>
-                <div class="s" id="kTimeSub">&#8212;</div>
+            <div class="roi-secondary">
+              <div class="roi-metric">
+                <span class="roi-metric-label">Gain net / an</span>
+                <span class="roi-metric-value" id="kNetAnnual">&#8212;</span>
               </div>
-              <div class="kpi">
-                <div class="t">Valeur du temps</div>
-                <div class="v" id="kTimeValue">&#8212;</div>
-                <div class="s" id="kTimeValueSub">&#8212;</div>
-              </div>
-              <div class="kpi">
-                <div class="t">Marge gagn&#233;e</div>
-                <div class="v" id="kMargin">&#8212;</div>
-                <div class="s" id="kMarginSub">&#8212;</div>
-              </div>
-              <div class="kpi">
-                <div class="t">Gain net (après abonnement)</div>
-                <div class="v" id="kNet">&#8212;</div>
-                <div class="s" id="kNetSub">&#8212;</div>
+              <div class="roi-metric">
+                <span class="roi-metric-label">Amortissement installation</span>
+                <span class="roi-metric-value" id="kPayback">&#8212;</span>
               </div>
             </div>
 
-            <div class="roi-total">
-              <div class="row">
-                <b>Valeur totale / mois</b>
-                <span style="color:var(--muted)">(temps + marge)</span>
-              </div>
-              <div class="big" id="kTotal">&#8212;</div>
-
-              <div class="row" style="margin-top:10px;">
-                <b>Gain net annuel</b>
-                <span style="color:var(--muted)">(après abonnement)</span>
-              </div>
-              <div class="big" id="kNetAnnual">&#8212;</div>
-              <div style="font-size:13px; color:var(--muted); margin-top:4px;" id="kNetAnnualSub">&#8212;</div>
-
-              <div class="row" style="margin-top:10px;">
-                <b>Amortissement de l'installation</b>
-                <span style="color:var(--muted)">(si gain net &gt; 0)</span>
-              </div>
-              <div style="font-weight:900; font-size:16px; margin-top:6px;" id="kPayback">&#8212;</div>
-            </div>
-
-            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
               <a id="roi-cta-demo" class="btn btn-primary open-demo" href="#">Réserver une démo 30 min</a>
               <a class="btn" href="#offre">Voir l'offre</a>
             </div>
@@ -1598,62 +1609,49 @@
       const abo = Number(document.getElementById('abo').value || 0);
       const install = Number(document.getElementById('install').value || 0);
 
-      const totalMin = dossiers * minParDossier;
-      const hoursSaved = totalMin / 60;
+      const hoursSaved = (dossiers * minParDossier) / 60;
       const timeValue = hoursSaved * tauxHoraire;
       const marginValue = dossiers * margeParDossier;
-
       const totalValue = timeValue + marginValue;
       const net = totalValue - abo;
       const netAnnual = net * 12;
-
       const paybackMonths = (install > 0 && net > 0) ? (install / net) : null;
-
-      document.getElementById('kTime').textContent = fmtH(hoursSaved);
-      document.getElementById('kTimeSub').textContent = `${dossiers} dossiers \u00d7 ${minParDossier} min`;
-
-      document.getElementById('kTimeValue').textContent = fmtEUR(timeValue);
-      document.getElementById('kTimeValueSub').textContent = `${fmtH(hoursSaved)} \u00d7 ${tauxHoraire.toLocaleString('fr-FR')} \u20ac/h`;
-
-      document.getElementById('kMargin').textContent = fmtEUR(marginValue);
-      document.getElementById('kMarginSub').textContent = `${dossiers} dossiers \u00d7 ${margeParDossier.toLocaleString('fr-FR')} \u20ac`;
-
-      document.getElementById('kTotal').textContent = fmtEUR(totalValue);
 
       document.getElementById('kNet').textContent = fmtEUR(net);
       document.getElementById('kNet').dataset.value = net;
-      document.getElementById('kNetSub').textContent = `Valeur ${fmtEUR(totalValue)} \u2013 abo ${fmtEUR(abo)}`;
+      document.getElementById('kNetSub').textContent =
+        `${fmtH(hoursSaved)} gagnées + ${fmtEUR(marginValue)} de marge − ${fmtEUR(abo)} d'abo`;
 
       document.getElementById('kNetAnnual').textContent = fmtEUR(netAnnual);
-      document.getElementById('kNetAnnualSub').textContent = `12 \u00d7 ${fmtEUR(net)} / mois`;
 
       const paybackEl = document.getElementById('kPayback');
       if (paybackMonths === null){
-        paybackEl.textContent =
-          (install <= 0) ? "\u2014 (installation non renseign\u00e9e)" :
-          (net <= 0) ? "\u2014 (gain net \u2264 0 dans ce cas)" : "\u2014";
+        paybackEl.textContent = '\u2014';
       } else {
         paybackEl.textContent = (paybackMonths < 1)
-          ? `\u2248 ${Math.round(paybackMonths * 30)} jours`
-          : `\u2248 ${paybackMonths.toLocaleString('fr-FR', { maximumFractionDigits:1 })} mois`;
+          ? `≈ ${Math.round(paybackMonths * 30)} jours`
+          : `≈ ${paybackMonths.toLocaleString('fr-FR', { maximumFractionDigits:1 })} mois`;
       }
       if (typeof updateRoiCta === 'function') updateRoiCta();
     }
 
     function resetDefaults(){
       document.getElementById('dossiers').value = 120;
-      document.getElementById('minParDossier').value = 6;
+      document.getElementById('minParDossier').value = 7;
       document.getElementById('tauxHoraire').value = 35;
-      document.getElementById('margeParDossier').value = 5;
+      document.getElementById('margeParDossier').value = 10;
       document.getElementById('abo').value = 150;
       document.getElementById('install').value = 850;
+      document.querySelectorAll('.roi-preset').forEach(b => b.classList.remove('active'));
+      document.querySelector('.roi-preset[data-min="7"]').classList.add('active');
       recalc();
     }
 
-    document.getElementById('btnRecalc').addEventListener('click', recalc);
     document.getElementById('btnReset').addEventListener('click', resetDefaults);
     document.querySelectorAll('.roi-preset').forEach(btn => {
       btn.addEventListener('click', function(){
+        document.querySelectorAll('.roi-preset').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
         document.getElementById('minParDossier').value = this.dataset.min;
         document.getElementById('margeParDossier').value = this.dataset.marge;
         recalc();
