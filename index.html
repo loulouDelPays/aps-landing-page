@@ -286,6 +286,32 @@
       box-shadow: 0 0 0 4px rgba(101,210,170,.1);
     }
     .hint{ font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .form-feedback{
+      display: none;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.45;
+      margin-bottom: 2px;
+    }
+    .form-feedback:not([hidden]){
+      display: block;
+    }
+    .form-feedback.is-success{
+      border: 1px solid rgba(101,210,170,.4);
+      background: rgba(101,210,170,.12);
+      color: var(--ink);
+    }
+    .form-feedback.is-error{
+      border: 1px solid rgba(239,68,68,.35);
+      background: rgba(239,68,68,.08);
+      color: #991b1b;
+    }
+    .btn.is-loading{
+      opacity: .75;
+      pointer-events: none;
+      cursor: wait;
+    }
 
     /* ===== Sections (alternance de fonds) ===== */
     section{ padding: 56px 0; }
@@ -1300,6 +1326,7 @@
         </div>
 
         <form class="form" method="post" action="#" id="demo-form">
+          <div id="demo-form-feedback" class="form-feedback" role="alert" aria-live="polite" hidden></div>
           <div class="form-2">
             <div class="field">
               <label for="prenom">Pr&#233;nom</label>
@@ -1676,7 +1703,60 @@
       modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
+    const DEMO_REQUEST_URL = 'https://supplier.lead-dev.com/api/demo-request';
+
+    function clearDemoFormFeedback(){
+      const fb = document.getElementById('demo-form-feedback');
+      if (!fb) return;
+      fb.hidden = true;
+      fb.textContent = '';
+      fb.classList.remove('is-success', 'is-error');
+    }
+    function showDemoFormFeedback(kind, message){
+      const fb = document.getElementById('demo-form-feedback');
+      if (!fb) return;
+      fb.classList.remove('is-success', 'is-error');
+      fb.classList.add(kind === 'success' ? 'is-success' : 'is-error');
+      fb.textContent = message;
+      fb.hidden = false;
+    }
+    function collectRoiSnapshot(){
+      const ids = ['dossiers', 'minParDossier', 'margeParDossier', 'tauxHoraire', 'abo', 'install'];
+      const snap = {};
+      for (let i = 0; i < ids.length; i++){
+        const el = document.getElementById(ids[i]);
+        if (!el) return null;
+        const n = Number(el.value);
+        snap[ids[i]] = Number.isFinite(n) ? n : 0;
+      }
+      return snap;
+    }
+    async function parseDemoRequestErrorMessage(res, bodyText){
+      try {
+        const j = JSON.parse(bodyText);
+        if (typeof j.message === 'string' && j.message.trim()) return j.message.trim();
+        if (typeof j.error === 'string' && j.error.trim()) return j.error.trim();
+        if (Array.isArray(j.errors) && j.errors.length){
+          return j.errors.map(function(e){
+            if (typeof e === 'string') return e;
+            if (e && typeof e.message === 'string') return e.message;
+            if (e && e.field && e.message) return e.field + ' : ' + e.message;
+            return JSON.stringify(e);
+          }).join(' ');
+        }
+        if (j.details){
+          if (typeof j.details === 'string') return j.details;
+          if (typeof j.details === 'object') return JSON.stringify(j.details);
+        }
+      } catch (err) { /* ignore */ }
+      if (res.status === 400) return 'Donn\u00e9es invalides. V\u00e9rifiez les champs du formulaire.';
+      if (res.status === 429) return 'Trop de demandes. R\u00e9essayez dans quelques minutes.';
+      if (res.status >= 500) return 'Le service est temporairement indisponible. R\u00e9essayez plus tard.';
+      return 'Une erreur est survenue. R\u00e9essayez plus tard.';
+    }
+
     function openDemoModal(){
+      clearDemoFormFeedback();
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -1703,7 +1783,50 @@
     modal.querySelector('[data-close-modal]').addEventListener('click', closeDemoModal);
     document.getElementById('demo-form').addEventListener('submit', function(e){
       e.preventDefault();
-      closeDemoModal();
+      const form = e.target;
+      const btn = document.getElementById('modal-submit-btn');
+      const defaultBtnLabel = 'R\u00e9server une d\u00e9mo 30 min';
+      clearDemoFormFeedback();
+
+      const payload = {
+        prenom: (document.getElementById('prenom').value || '').trim(),
+        societe: (document.getElementById('societe').value || '').trim(),
+        email: (document.getElementById('email').value || '').trim(),
+        tel: (document.getElementById('tel').value || '').trim(),
+        pageContext: { pageUrl: window.location.href }
+      };
+      const roiSnap = collectRoiSnapshot();
+      if (roiSnap) payload.roiSnapshot = roiSnap;
+
+      btn.classList.add('is-loading');
+      btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
+      btn.textContent = 'Envoi en cours\u2026';
+
+      fetch(DEMO_REQUEST_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(async function(res){
+        const text = await res.text();
+        if (res.ok){
+          showDemoFormFeedback('success',
+            'Merci ! Votre demande a bien \u00e9t\u00e9 envoy\u00e9e. Nous vous recontactons tr\u00e8s vite.');
+          form.reset();
+          setTimeout(function(){ closeDemoModal(); }, 2800);
+          return;
+        }
+        const msg = await parseDemoRequestErrorMessage(res, text);
+        showDemoFormFeedback('error', msg);
+      }).catch(function(){
+        showDemoFormFeedback('error',
+          'Impossible de joindre le serveur. V\u00e9rifiez votre connexion ou r\u00e9essayez plus tard.');
+      }).finally(function(){
+        btn.classList.remove('is-loading');
+        btn.disabled = false;
+        btn.removeAttribute('aria-busy');
+        btn.textContent = defaultBtnLabel;
+      });
     });
     modal.addEventListener('click', e => { if (e.target === modal) closeDemoModal(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('is-open')) closeDemoModal(); });
