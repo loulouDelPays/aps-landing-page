@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="AutoPartSelect aide les carrossiers &#224; trouver et comparer leurs pi&#232;ces en 1 recherche : stocks, prix et d&#233;lais de tous vos fournisseurs sur un seul &#233;cran. Essai gratuit 1 mois. 150&#8364; HT/mois, abonnement 12 mois." />
   <title>AutoPartSelect — Toutes vos pièces chez tous vos fournisseurs, en 1 recherche</title>
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" type="image/png" href="assets/apple-touch-icon.png" />
 
   <style>
     :root{
@@ -1820,7 +1822,9 @@
         showDemoFormFeedback('error', msg);
       }).catch(function(){
         showDemoFormFeedback('error',
-          'Impossible de joindre le serveur. V\u00e9rifiez votre connexion ou r\u00e9essayez plus tard.');
+          'Envoi impossible depuis cette page (connexion ou s\u00e9curit\u00e9 du navigateur). ' +
+          'En test : servez la page via un site (pas un fichier ouvert en local) et demandez \u00e0 l\u2019\u00e9quipe API ' +
+          'd\u2019autoriser ce domaine pour les requ\u00eates crois\u00e9es (en-t\u00eate CORS Access-Control-Allow-Origin).');
       }).finally(function(){
         btn.classList.remove('is-loading');
         btn.disabled = false;
