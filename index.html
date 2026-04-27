@@ -1351,6 +1351,17 @@
             </div>
           </div>
 
+          <div class="form-2">
+            <div class="field">
+              <label for="codePostal">Code postal</label>
+              <input id="codePostal" name="codePostal" type="text" inputmode="text" autocomplete="postal-code" maxlength="20" placeholder="Ex : 75001" />
+            </div>
+            <div class="field">
+              <label for="ville">Ville</label>
+              <input id="ville" name="ville" type="text" autocomplete="address-level2" maxlength="100" placeholder="Ex : Paris" />
+            </div>
+          </div>
+
           <button id="modal-submit-btn" class="btn btn-primary" type="submit" style="width:100%;">Réserver une démo 30 min</button>
           <p class="hint" style="text-align:center;">On vous rappelle rapidement. Sans engagement.</p>
         </form>
@@ -1790,11 +1801,32 @@
       const defaultBtnLabel = 'R\u00e9server une d\u00e9mo 30 min';
       clearDemoFormFeedback();
 
+      const codePostal = (document.getElementById('codePostal').value || '').trim();
+      const ville = (document.getElementById('ville').value || '').trim();
+      if (!codePostal) {
+        showDemoFormFeedback('error', 'Le code postal est obligatoire.');
+        return;
+      }
+      if (!ville) {
+        showDemoFormFeedback('error', 'La ville est obligatoire.');
+        return;
+      }
+      if (codePostal.length > 20) {
+        showDemoFormFeedback('error', 'Le code postal ne peut pas d\u00e9passer 20 caract\u00e8res.');
+        return;
+      }
+      if (ville.length > 100) {
+        showDemoFormFeedback('error', 'La ville ne peut pas d\u00e9passer 100 caract\u00e8res.');
+        return;
+      }
+
       const payload = {
         prenom: (document.getElementById('prenom').value || '').trim(),
         societe: (document.getElementById('societe').value || '').trim(),
         email: (document.getElementById('email').value || '').trim(),
         tel: (document.getElementById('tel').value || '').trim(),
+        codePostal: codePostal,
+        ville: ville,
         pageContext: { pageUrl: window.location.href }
       };
       const roiSnap = collectRoiSnapshot();
