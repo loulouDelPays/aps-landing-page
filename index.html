@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="AutoPartSelect aide les carrossiers à trouver toutes les pièces d'un dossier en moins d'une minute, au meilleur prix : stocks, prix et délais de tous vos fournisseurs sur un seul écran. Essai 1 mois offert. 150€ HT/mois + 850€ d'installation." />
+  <meta name="description" content="Déposez votre chiffrage en PDF : AutoPartSelect le lit et trouve toutes les pièces du dossier chez vos 25+ fournisseurs en moins d'une minute, au meilleur prix. Stocks, prix et délais sur un seul écran. Essai 1 mois offert. 150€ HT/mois + 850€ d'installation." />
   <title>AutoPartSelect — Trouvez vos pièces carrosserie plus vite, au meilleur prix</title>
   <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.png" />
   <link rel="apple-touch-icon" type="image/png" href="assets/apple-touch-icon.png" />
@@ -169,12 +169,30 @@
     .tag-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
     .tag-pill {
       display: inline-flex; align-items: center;
-      font-size: var(--text-xs); font-weight: 600;
-      padding: var(--sp-1) var(--sp-3); border-radius: var(--radius-sm);
+      font-size: var(--text-xs); font-weight: 700;
+      padding: .34rem .72rem; border-radius: var(--radius-full);
+      border: 1px solid transparent;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
     }
-    .tag-pill:nth-child(1) { background: rgba(59,130,246,.12); color: #1d4ed8; }
-    .tag-pill:nth-child(2) { background: rgba(242,194,48,.15); color: #92680a; }
-    .tag-pill:nth-child(3) { background: rgba(101,210,170,.15); color: var(--accent-700); }
+    .tag-pill--oem {
+      background: linear-gradient(135deg, rgba(88,141,255,.62), rgba(59,130,246,.62));
+      border-color: rgba(160,194,255,.52);
+      color: #eaf2ff;
+      box-shadow: 0 2px 8px rgba(59,130,246,.2);
+    }
+    .tag-pill--eq {
+      background: linear-gradient(135deg, rgba(255,219,108,.96), rgba(236,177,42,.96));
+      border-color: rgba(255,229,146,.95);
+      color: #2d2105;
+      box-shadow: 0 6px 16px rgba(242,194,48,.42);
+    }
+    .tag-pill--reuse {
+      background: linear-gradient(135deg, rgba(129,239,201,.96), rgba(82,206,164,.96));
+      border-color: rgba(170,246,221,.92);
+      color: #063226;
+      box-shadow: 0 6px 16px rgba(82,206,164,.42);
+    }
+    .tag-pill--eq, .tag-pill--reuse { font-weight: 780; transform: translateY(-1px); }
 
     .card {
       background: var(--paper);
@@ -514,7 +532,9 @@
     .mobile-nav a:hover { background: rgba(255,255,255,.06); color: #fff; }
 
     .hero {
-      position: relative; padding: calc(var(--header-h) + var(--sp-12)) 0 var(--sp-10);
+      position: relative; display: flex; align-items: center;
+      min-height: 100svh;
+      padding: calc(var(--header-h) + var(--sp-8)) 0 var(--sp-8);
       background: var(--ink-950); color: #fff; overflow: hidden;
     }
     .hero__bg { position: absolute; inset: 0; z-index: 0; }
@@ -523,11 +543,31 @@
       position: absolute; inset: 0; z-index: 1;
       background: linear-gradient(135deg, rgba(6,6,26,.92) 0%, rgba(10,10,34,.78) 50%, rgba(10,10,34,.65) 100%);
     }
-    .hero__content { position: relative; z-index: 2; }
+    .hero__content { position: relative; z-index: 2; width: 100%; }
     .hero__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--sp-10); align-items: center; }
-    .hero h1 { margin: var(--sp-5) 0 var(--sp-4); }
-    .hero h1 .accent { color: var(--accent-500); }
-    .hero__lead { color: rgba(255,255,255,.75); font-size: var(--text-lg); max-width: 52ch; margin-bottom: var(--sp-5); }
+    /* Taille pilotée par la largeur ET la hauteur de fenêtre : le titre doit tenir dans un écran sans scroll. */
+    .hero h1 {
+      font-size: clamp(1.95rem, 1.02rem + 1.05vw + 1.45vh, 3.15rem);
+      line-height: 1.08;
+      letter-spacing: -0.022em;
+      margin: var(--sp-3) 0;
+      max-width: 19ch;
+      text-wrap: balance;
+    }
+    .hero-title-line { display: block; }
+    .hero-title-line--sub {
+      margin-top: .2rem;
+      color: var(--accent-500);
+      font-size: .92em;
+      font-weight: 700;
+    }
+    .hero__lead {
+      color: rgba(255,255,255,.75);
+      font-size: clamp(1rem, .95rem + .22vw, 1.1rem);
+      line-height: 1.45;
+      max-width: 62ch;
+      margin-bottom: var(--sp-4);
+    }
     .hero__cta { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
     .hero__hint { margin-top: var(--sp-3); }
     .hero__hint a { text-decoration: underline; color: #fff; font-weight: 650; }
@@ -640,6 +680,10 @@
       .bottom-cta { display: flex; }
       body { padding-bottom: 72px; }
       #demarrage .how-steps { grid-template-columns: 1fr !important; }
+      .hero h1 {
+        font-size: clamp(1.8rem, 1.2rem + 1.9vw, 2.6rem);
+        max-width: 20ch;
+      }
     }
     @media (max-width: 480px) {
       .container { padding: 0 var(--sp-4); }
@@ -647,6 +691,8 @@
       .trust-band__logos { gap: var(--sp-4); }
       .trust-band__logos img { width: 100px; height: 52px; }
       .bonus-item { flex-wrap: wrap; }
+      .hero h1 { max-width: 100%; line-height: 1.1; }
+      .hero-title-line--sub { font-size: .9em; }
     }
   </style>
 </head>
@@ -687,7 +733,7 @@
         </nav>
         <div class="header-actions">
           <a class="btn btn--ghost" href="#roi">Calculer ma rentabilité</a>
-          <a class="btn btn--primary header-actions__cta open-demo" href="#">Réserver une démo 30 min</a>
+          <a class="btn btn--primary header-actions__cta open-demo" href="#">Tester sur un dossier</a>
           <button type="button" class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
             <span></span><span></span><span></span>
           </button>
@@ -703,7 +749,7 @@
     <a href="#roi">Rentabilité</a>
     <a href="#offre">Offre</a>
     <a href="#faq">FAQ</a>
-    <a class="btn btn--primary open-demo u-mt-3" href="#">Réserver une démo 30 min</a>
+    <a class="btn btn--primary open-demo u-mt-3" href="#">Tester APS sur un de mes dossiers</a>
   </nav>
 
   <!-- HERO -->
@@ -719,19 +765,22 @@
     <div class="container hero__content">
       <div class="hero__grid u-reveal">
         <div>
-          <div class="badge"><span class="badge__dot"></span> Pour carrossiers · 25+ fournisseurs en 1 recherche</div>
-          <h1>Toutes les pièces d'un dossier trouvées en moins d'une minute, <span class="accent">au meilleur prix disponible</span>.</h1>
-          <p class="hero__lead">APS interroge vos 25+ fournisseurs en une seule recherche et affiche stock, prix et délai sur le même écran. Le reste de la journée, vous gérez votre atelier.</p>
+          <div class="badge"><span class="badge__dot"></span> Pour carrossiers · Vos fournisseurs, vos remises, zéro ressaisie</div>
+          <h1>
+            <span class="hero-title-line">Passez moins de temps à chercher vos pièces.</span>
+            <span class="hero-title-line hero-title-line--sub">Plus de temps à gérer votre atelier.</span>
+          </h1>
+          <p class="hero__lead">À partir de votre chiffrage, APS compare les prix, les stocks et les délais de vos fournisseurs habituels, avec vos remises. Vous choisissez les pièces adaptées à chaque dossier, sans multiplier les recherches.</p>
           <div class="tag-row u-mb-4">
-            <span class="tag-pill">Pièces d'origine</span>
-            <span class="tag-pill">Qualité équivalente</span>
-            <span class="tag-pill">Réemploi</span>
+            <span class="tag-pill tag-pill--oem">Pièces d'origine</span>
+            <span class="tag-pill tag-pill--eq">Qualité équivalente</span>
+            <span class="tag-pill tag-pill--reuse">Réemploi</span>
           </div>
           <div class="hero__cta">
-            <a class="btn btn--primary btn--lg open-demo" href="#">Réserver une démo 30 min</a>
+            <a class="btn btn--primary btn--lg open-demo" href="#">Tester APS sur un de mes dossiers</a>
             <a class="btn btn--ghost btn--lg" href="#roi">Calculer ma rentabilité</a>
           </div>
-          <p class="hint hero__hint">Pas prêt à parler ? <a href="#hero-player" class="play-hero-demo">Voir la démo en 2 min</a></p>
+          <p class="hint hero__hint">Pas prêt à parler ? <a href="#hero-player" class="play-hero-demo">Voir une recherche APS en 2 min</a></p>
         </div>
         <div>
           <div class="device-frame">
@@ -749,11 +798,11 @@
                   <source type="image/webp" srcset="assets/img/screenshot_search-640.webp 640w, assets/img/screenshot_search-960.webp 960w, assets/img/screenshot_search-1280.webp 1280w" sizes="(max-width:640px) 640px, 960px" />
                   <img src="assets/img/screenshot_search-960.webp" alt="Capture d'écran AutoPartSelect" width="960" height="600" />
                 </picture>
-                <button type="button" class="play-btn" aria-label="Voir la démo en 2 min">
+                <button type="button" class="play-btn" aria-label="Voir une recherche APS en 2 min">
                   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
                 </button>
               </div>
-              <span class="play-label">Voir la démo en 2 min</span>
+              <span class="play-label">Voir une recherche APS en 2 min</span>
             </div>
           </div>
         </div>
@@ -832,7 +881,7 @@
               <div class="card__body">
                 <svg class="icon u-text-accent-dark u-mb-3" aria-hidden="true"><use href="#icon-search"/></svg>
                 <h3>Temps de recherche réduit</h3>
-                <p class="u-text-muted u-mt-2">Une recherche remplace les appels, mails et onglets multiples sur chaque dossier.</p>
+                <p class="u-text-muted u-mt-2">Une seule recherche remplace les appels, mails et onglets multiples sur chaque dossier.</p>
               </div>
             </article>
             <article class="card card--flat u-reveal">
@@ -852,7 +901,7 @@
           </div>
           <div class="u-gap-actions u-mt-5">
             <a class="btn" href="#preuve">Voir les preuves terrain</a>
-            <a class="btn btn--primary open-demo" href="#">Réserver une démo 30 min</a>
+            <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
           </div>
         </div>
         <div class="guide-photo u-reveal">
@@ -873,21 +922,22 @@
       <h2 class="section-title u-reveal">Accédez directement aux stocks de vos fournisseurs, en temps réel</h2>
       <p class="section-sub u-reveal">Plus de téléphone, plus d'emails, plus de navigation site par site. APS se connecte à vos comptes fournisseurs et centralise tout sur un seul écran.</p>
       <h3 class="u-fw-900 u-mb-3 u-reveal">En 3 étapes</h3>
-      <p class="section-sub u-reveal">De la recherche à la décision, sur une base claire et à jour.</p>
+      <p class="section-sub u-reveal">Du dépôt du chiffrage à la décision, sans aucune ressaisie.</p>
       <div class="grid grid--3 how-steps u-mb-6">
         <article class="card card--raised how-step u-reveal">
-          <h3>Vous tapez une référence</h3>
-          <p>Une seule recherche au lieu de 8 sites, 3 appels et 2 emails. Gain immédiat dès le premier dossier.</p>
+          <h3>Vous déposez votre chiffrage en PDF</h3>
+          <p>APS le lit et identifie les pièces à approvisionner. Rien à ressaisir, aucune référence à retrouver à la main.</p>
         </article>
         <article class="card card--raised how-step u-reveal">
           <h3>APS interroge tous vos fournisseurs</h3>
-          <p>Stocks, prix et délais remontent en temps réel sur un seul écran. Fini le copier-coller d'un site à l'autre.</p>
+          <p>Sur l'ensemble des pièces du dossier, en une fois. Stocks, prix et délais remontent en temps réel sur un seul écran.</p>
         </article>
         <article class="card card--raised how-step u-reveal">
           <h3>Vous choisissez en toute confiance</h3>
           <p>Vous voyez tout, vous décidez vite. Le processus est assez simple pour être délégué à l'équipe.</p>
         </article>
       </div>
+      <p class="hint u-mb-6 u-reveal">Besoin d'une pièce hors dossier ? La recherche manuelle par référence reste disponible à tout moment.</p>
       <div class="browser-shot u-max-900 u-reveal">
         <div class="browser-shot__top">
           <div class="device-frame__dots" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -910,7 +960,7 @@
         <article class="card card--flat u-reveal"><div class="card__body"><h3>Dossiers débloqués, véhicules libérés plus vite</h3><p class="u-text-muted u-mt-2">Moins de reliquats subis, moins d'immobilisation. Vous répondez plus vite à l'expert et au client.</p></div></article>
       </div>
       <div class="u-gap-actions u-gap-actions--center u-mt-6">
-        <a class="btn btn--primary open-demo" href="#">Réserver une démo 30 min</a>
+        <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
         <a class="btn" href="#roi">Calculer ma rentabilité</a>
       </div>
     </div>
@@ -923,7 +973,7 @@
       <h2 class="section-title u-reveal">Déjà adopté sur le terrain</h2>
       <p class="section-sub u-reveal">Des carrossiers qui l'utilisent au quotidien, des chiffres réels, des transformations concrètes.</p>
       <div class="grid grid--3 u-mb-4">
-        <article class="card card--raised u-reveal"><div class="card__body"><h3 class="stat-value">Jusqu'à <span class="counter" data-target="20">20</span> min gagnées / dossier</h3><p class="u-text-muted u-mt-2">Hypothèse réaliste du calculateur : 30 min aujourd'hui, ~10 min avec APS pour chercher et décider. Validez sur vos dossiers en démo.</p></div></article>
+        <article class="card card--raised u-reveal"><div class="card__body"><h3 class="stat-value">Jusqu'à <span class="counter" data-target="20">20</span> min gagnées / dossier</h3><p class="u-text-muted u-mt-2">Hypothèse réaliste du calculateur : 30 min aujourd'hui, ~10 min avec APS pour chercher et décider. Validez sur vos dossiers en diagnostic.</p></div></article>
         <article class="card card--raised u-reveal"><div class="card__body"><h3 class="stat-value">+<span class="counter" data-target="3000">3&nbsp;000</span> dossiers / mois</h3><p class="u-text-muted u-mt-2">Utilisation terrain continue dans les carrosseries abonnées APS.</p></div></article>
         <article class="card card--raised u-reveal"><div class="card__body"><h3 class="stat-value">+<span class="counter" data-target="15000">15&nbsp;000</span> références / mois</h3><p class="u-text-muted u-mt-2">Volume de recherches sur la plateforme APS.</p></div></article>
       </div>
@@ -997,11 +1047,11 @@
   <!-- DÉMARRAGE -->
   <section id="demarrage" class="section section--light">
     <div class="container">
-      <p class="section-kicker u-reveal">Comment on démarre</p>
+      <p class="section-kicker u-reveal">Comment ça marche</p>
       <h2 class="section-title u-reveal">Concrètement, comment ça se passe ?</h2>
-      <p class="section-sub u-reveal">De la démo à la première utilisation, voici la suite — sans surprise.</p>
+      <p class="section-sub u-reveal">Du diagnostic à la première utilisation, voici la suite — sans surprise.</p>
       <div class="grid grid--4 how-steps u-reveal">
-        <article class="card card--raised how-step"><h3>Démo 30 min</h3><p>On prend un dossier que vous avez en cours et on le refait devant vous, avec vos fournisseurs.</p></article>
+        <article class="card card--raised how-step"><h3>Diagnostic 30 min</h3><p>On prend un dossier que vous avez en cours et on regarde comment APS peut vous aider concrètement, avec vos fournisseurs.</p></article>
         <article class="card card--raised how-step"><h3>Installation</h3><p>On connecte vos comptes fournisseurs avec vous et on valide sur un cas réel. Comptez quelques jours.</p></article>
         <article class="card card--raised how-step"><h3>Premier mois offert</h3><p>Vous utilisez APS sur vos vrais dossiers, 0 € d'abonnement le premier mois.</p></article>
         <article class="card card--raised how-step"><h3>Vous décidez</h3><p>L'abonnement démarre seulement si le gain est là. Sinon, on s'arrête.</p></article>
@@ -1010,10 +1060,10 @@
         <span class="commitment-chip">Vos fournisseurs et remises restent les vôtres</span>
         <span class="commitment-chip">Vos codes servent uniquement à consulter vos comptes</span>
         <span class="commitment-chip">Aucun abonnement facturé le premier mois</span>
-        <span class="commitment-chip">Le coût d'installation annoncé avant la démo</span>
+        <span class="commitment-chip">Le coût d'installation annoncé avant le diagnostic</span>
       </div>
       <div class="u-gap-actions u-gap-actions--center u-mt-6">
-        <a class="btn btn--primary open-demo" href="#">Réserver une démo 30 min</a>
+        <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
         <a class="btn" href="#offre">Voir l'offre</a>
       </div>
     </div>
@@ -1023,11 +1073,11 @@
   <div id="demo-modal" class="modal-overlay" aria-hidden="true">
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
       <div class="modal-header">
-        <h2 id="modal-title" class="section-title u-mb-0">Démo 30 min</h2>
+        <h2 id="modal-title" class="section-title u-mb-0">Testons APS sur un de vos dossiers</h2>
         <button type="button" class="modal-close" aria-label="Fermer" data-close-modal>&times;</button>
       </div>
       <div class="card__body">
-        <p class="section-sub u-mb-4">Démo + estimation de ce que vous gagnez sur 1 dossier réel + essai 1 mois si vous voulez.</p>
+        <p class="section-sub u-mb-4">30 min : on prend un dossier que vous avez en cours et on regarde comment APS peut vous aider, avec vos fournisseurs. Estimation de votre gain incluse, essai 1 mois si vous voulez.</p>
         <div id="modal-roi-estimate" class="card card--accent u-hidden u-mb-4">
           <div class="card__body">
             <h3 class="u-mb-3">Votre estimation actuelle</h3>
@@ -1048,7 +1098,7 @@
             <div class="field"><label for="codePostal">Code postal</label><input id="codePostal" name="codePostal" type="text" inputmode="text" autocomplete="postal-code" maxlength="20" placeholder="Ex : 75001" /></div>
             <div class="field"><label for="ville">Ville</label><input id="ville" name="ville" type="text" autocomplete="address-level2" maxlength="100" placeholder="Ex : Paris" /></div>
           </div>
-          <button id="modal-submit-btn" class="btn btn--primary btn--block" type="submit">Réserver une démo 30 min</button>
+          <button id="modal-submit-btn" class="btn btn--primary btn--block" type="submit">Tester APS sur un de mes dossiers</button>
           <p class="hint u-text-center">On vous rappelle rapidement. Sans engagement.</p>
         </form>
       </div>
@@ -1131,16 +1181,16 @@
               <div class="roi-metric"><span class="roi-metric-label">Amortissement installation</span><span class="roi-metric-value" id="kPayback">—</span></div>
             </div>
             <div class="roi-capture">
-              <label for="roi-email" class="u-fw-700 u-mb-3">Continuer vers la démo avec mon estimation</label>
+              <label for="roi-email" class="u-fw-700 u-mb-3">Continuer vers le diagnostic avec mon estimation</label>
               <div id="roi-email-feedback" class="form-feedback is-error u-mb-3" role="alert" aria-live="polite" hidden></div>
               <div class="roi-capture-row">
                 <input id="roi-email" type="email" placeholder="vous@carrosserie.fr" autocomplete="email" aria-describedby="roi-email-feedback" />
-                <button type="button" class="btn btn--primary" id="roi-email-btn">Voir ma démo et mon estimation</button>
+                <button type="button" class="btn btn--primary" id="roi-email-btn">Voir mon diagnostic et mon estimation</button>
               </div>
-              <p class="hint u-text-light">On préremplit votre email et votre estimation dans le formulaire de démo — sans engagement.</p>
+              <p class="hint u-text-light">On préremplit votre email et votre estimation dans le formulaire de diagnostic — sans engagement.</p>
             </div>
             <div class="u-gap-actions u-mt-4">
-              <a id="roi-cta-demo" class="btn btn--primary open-demo" href="#">Réserver une démo 30 min</a>
+              <a id="roi-cta-demo" class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
               <a class="btn btn--ghost" href="#offre">Voir l'offre</a>
             </div>
           </div>
@@ -1168,6 +1218,7 @@
               </div>
             </div>
             <div class="list">
+              <div class="list__item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Lecture automatique de vos chiffrages en PDF</div></div>
               <div class="list__item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Recherche multi-fournisseurs (stock/prix/délai)</div></div>
               <div class="list__item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Connexion à vos comptes fournisseurs existants</div></div>
               <div class="list__item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Comparaison et décision plus rapide sur chaque dossier</div></div>
@@ -1179,7 +1230,7 @@
               <div class="bonus-item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="name">Recherche web globale</div><div class="desc">En plus de vos fournisseurs pour les cas complexes</div></div></div>
             </div>
             <div class="u-gap-actions u-mt-4">
-              <a class="btn btn--primary open-demo" href="#">Réserver une démo 30 min</a>
+              <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
               <a class="btn" href="#roi">Calculer ma rentabilité</a>
             </div>
           </div>
@@ -1206,7 +1257,7 @@
               </div>
             </div>
             <div class="u-gap-actions u-mt-4">
-              <a class="btn btn--primary open-demo" href="#">Réserver une démo 30 min</a>
+              <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
               <a class="btn" href="#faq">Voir la FAQ</a>
             </div>
           </div>
@@ -1299,10 +1350,10 @@
           <div>
             <div class="transformation-line">De « je cours après les infos » à « je pilote mes achats »</div>
             <div class="u-fw-900">Toutes les pièces d'un dossier trouvées en moins d'une minute, vos véhicules dehors plus vite.</div>
-            <p class="hint u-text-light u-mt-2">Démo sur vos dossiers réels + estimation de votre rentabilité + essai 1 mois offert.</p>
+            <p class="hint u-text-light u-mt-2">Diagnostic sur vos dossiers réels + estimation de votre rentabilité + essai 1 mois offert.</p>
           </div>
           <div class="u-gap-actions">
-            <a class="btn btn--primary open-demo" href="#">Réserver une démo 30 min</a>
+            <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
             <a class="btn btn--ghost" href="#roi">Calculer ma rentabilité</a>
           </div>
         </div>
@@ -1324,7 +1375,7 @@
   <!-- MOBILE BOTTOM CTA -->
   <div class="bottom-cta" aria-label="Actions rapides">
     <a class="btn btn--ghost" href="#roi">Rentabilité</a>
-    <a class="btn btn--primary open-demo" href="#">Démo 30 min</a>
+    <a class="btn btn--primary open-demo" href="#">Tester sur un dossier</a>
   </div>
 
   <script>
@@ -1416,7 +1467,7 @@
 
     function updateRoiCta(){
       const roiCta = document.getElementById('roi-cta-demo');
-      if (roiCta) roiCta.textContent = 'R\u00e9server une d\u00e9mo 30 min';
+      if (roiCta) roiCta.textContent = 'Tester APS sur un de mes dossiers';
     }
 
     /* Modal */
@@ -1545,7 +1596,7 @@
       e.preventDefault();
       const form = e.target;
       const btn = document.getElementById('modal-submit-btn');
-      const defaultBtnLabel = 'R\u00e9server une d\u00e9mo 30 min';
+      const defaultBtnLabel = 'Tester APS sur un de mes dossiers';
       clearDemoFormFeedback();
 
       const codePostal = (document.getElementById('codePostal').value || '').trim();
