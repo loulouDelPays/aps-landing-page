@@ -1,0 +1,38 @@
+[
+  {
+    "question": "APS est-il une centrale d'achat ?",
+    "answer": "Non. Vous conservez vos fournisseurs, vos remises et vos habitudes. APS centralise l'information (stock/prix/délai) pour comparer et décider plus vite."
+  },
+  {
+    "question": "Comment accédez-vous aux sites fournisseurs protégés ?",
+    "answer": "APS se connecte à vos comptes fournisseurs existants. Lors de l'installation, on configure vos codes d'accès et on vérifie que tout fonctionne avec vous."
+  },
+  {
+    "question": "Que se passe-t-il pendant l'essai ?",
+    "answer": "Vous payez l'installation, mais l'abonnement n'est pas facturé pendant le premier mois. Au bout d'un mois, vous continuez uniquement si vous souhaitez garder l'outil. L'abonnement est alors sur 12 mois."
+  },
+  {
+    "question": "Pourquoi un engagement de 12 mois ?",
+    "answer": "L'engagement annuel nous permet de maintenir un service de qualité et des prix stables. Après l'essai d'un mois, vous souscrivez pour 12 mois, renouvelable tacitement."
+  },
+  {
+    "question": "Que comprend l'installation ?",
+    "answer": "Le paramétrage initial, la connexion à vos comptes fournisseurs et la validation sur un cas réel avec vous. L'objectif : que vous puissiez comparer efficacement dès les premiers dossiers."
+  },
+  {
+    "question": "Confidentialité : que faites-vous de mes codes fournisseurs ?",
+    "answer": "APS utilise vos accès uniquement pour consulter les sites de vos fournisseurs dans le cadre du service. Lors de l'installation, on configure les connexions ensemble et on répond à toutes vos questions."
+  },
+  {
+    "question": "À qui APS n'est pas adapté ?",
+    "answer": "Si vous travaillez avec un fournisseur unique ou un volume très faible, l'intérêt est moindre. APS devient très rentable dès que vous comparez plusieurs fournisseurs."
+  },
+  {
+    "question": "Le fournisseur doit-il créer un compte pour mettre à jour une commande ?",
+    "answer": "Non. Il peut agir depuis son espace APS ou depuis le lien reçu par email, sans compte obligatoire. Côté garage, pour une commande email, vous voyez si le lien a été envoyé, consulté ou pris en compte, et vous pouvez relancer d'un clic."
+  },
+  {
+    "question": "Comment le suivi RFA prend-il en compte les achats hors APS ?",
+    "answer": "Les commandes passées dans APS alimentent automatiquement le tableau de bord. Pour le volume déjà réalisé avant l'outil ou en dehors du logiciel, vous pouvez poser une déclaration à date : APS enregistre le montant et ne compte ensuite que les achats postérieurs à cette date, sans double comptage. L'historique des déclarations reste consultable. L'accès à la Gestion RFA est réservé aux administrateurs et aux utilisateurs garage habilités."
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "name": "aps-logiciel-landing",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/write-videos-data.js && eleventy && node scripts/minify-css.js && node scripts/minify-js.js && node scripts/align-video-schema.js",
+    "build:pages": "bash scripts/prepare-pages-artifact.sh",
+    "serve": "node scripts/write-videos-data.js && eleventy --serve --port=8080",
+    "check": "node scripts/check-build.js"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "clean-css": "^5.3.3",
+    "esbuild": "^0.25.0"
+  }
+}

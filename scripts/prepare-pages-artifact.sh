@@ -1,27 +1,20 @@
 #!/usr/bin/env bash
-# Build a clean GitHub Pages artifact (HTML + assets only).
+# Build Eleventy site + optional video assets for GitHub Pages.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="${ROOT}/_site"
 
-rm -rf "${OUT}"
-mkdir -p "${OUT}/assets/videos"
-
-cp "${ROOT}/index.html" "${OUT}/"
-for page in mentions-legales.html politique-confidentialite.html; do
-  if [[ -f "${ROOT}/${page}" ]]; then
-    cp "${ROOT}/${page}" "${OUT}/"
-  fi
-done
-touch "${OUT}/.nojekyll"
-
-if [[ -d "${ROOT}/assets" ]]; then
-  rsync -a \
-    --exclude '.DS_Store' \
-    --exclude 'videos/*.mp4' \
-    "${ROOT}/assets/" "${OUT}/assets/"
+cd "${ROOT}"
+if [[ -f package-lock.json ]]; then
+  npm ci
+else
+  npm install
 fi
+node scripts/write-videos-data.js
+npm run build
+
+mkdir -p "${OUT}/assets/videos"
 
 copy_video() {
   local filename="$1"
@@ -44,8 +37,15 @@ copy_video() {
 copy_video "APS-demo.mp4" "APS_DEMO_VIDEO_URL"
 copy_video "testimonials.mp4" "APS_TESTIMONIAL_VIDEO_URL"
 
+bash "${ROOT}/scripts/optimize-videos.sh"
+
+node "${ROOT}/scripts/align-video-schema.js"
+
+node "${ROOT}/scripts/check-build.js"
+
 if [[ -f "${OUT}/assets/img/recherche_reliquat.jpg" ]]; then
   rm -f "${OUT}/assets/img/recherche_reliquat.jpg"
 fi
 
+touch "${OUT}/.nojekyll"
 echo "Pages artifact ready: ${OUT}"

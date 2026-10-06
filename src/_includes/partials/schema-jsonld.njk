@@ -1,0 +1,120 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "{{ site.name }}",
+      "legalName": "{{ site.legalName }}",
+      "url": "{{ site.url }}/",
+      "logo": "{{ site.logo | absoluteUrl(site) }}",
+      "email": "{{ site.email }}",
+      "telephone": "{{ site.phone }}",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "3 chemin de la Garrigue",
+        "postalCode": "11120",
+        "addressLocality": "Argeliers",
+        "addressCountry": "FR"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "name": "{{ site.name }}",
+      "url": "{{ site.url }}/",
+      "publisher": { "@type": "Organization", "name": "{{ site.legalName }}" }
+    }
+    {% if softwareSchema %}
+    ,{
+      "@type": "SoftwareApplication",
+      "name": "{{ site.name }}",
+      "url": "{{ (softwareAppUrl | default('/')) | absoluteUrl(site) }}",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Moteur de recherche de pièces carrosserie multi-fournisseurs pour carrossiers.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Essai — 1er mois d'abonnement offert",
+          "price": "0",
+          "priceCurrency": "{{ site.currency }}",
+          "description": "Abonnement non facturé le premier mois après l'installation."
+        },
+        {
+          "@type": "Offer",
+          "name": "Abonnement mensuel",
+          "price": "{{ site.subscriptionPrice }}",
+          "priceCurrency": "{{ site.currency }}",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "{{ site.subscriptionPrice }}",
+            "priceCurrency": "{{ site.currency }}",
+            "unitText": "MONTH"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Installation",
+          "price": "{{ site.installPrice }}",
+          "priceCurrency": "{{ site.currency }}"
+        }
+      ]
+    }
+    {% endif %}
+    {% if breadcrumbs and breadcrumbs.length %}
+    ,{
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {% for crumb in breadcrumbs %}
+        {
+          "@type": "ListItem",
+          "position": {{ loop.index }},
+          "name": {{ crumb.label | dump | safe }},
+          "item": {{ crumb.href | absoluteUrl(site) | dump | safe }}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+    {% endif %}
+    {% if faqSchema and faq and faq.length %}
+    ,{
+      "@type": "FAQPage",
+      "mainEntity": [
+        {% for item in faq %}
+        {
+          "@type": "Question",
+          "name": {{ item.question | dump | safe }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ item.answer | dump | safe }}
+          }
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+    {% endif %}
+    {% if videoSchemaDemo and videos.demoAvailable %}
+    ,{
+      "@type": "VideoObject",
+      "name": "Démonstration recherche AutoPartSelect",
+      "description": "Lecture d'un chiffrage PDF et comparaison multi-fournisseurs.",
+      "thumbnailUrl": "{{ '/assets/img/screenshot_search-960.webp' | absoluteUrl(site) }}",
+      "contentUrl": "{{ '/assets/videos/APS-demo.mp4' | absoluteUrl(site) }}",
+      "uploadDate": "{{ videos.demoUploadDate }}",
+      "duration": "{{ videos.demoDuration }}"
+    }
+    {% endif %}
+    {% if videoSchemaTestimonials and videos.testimonialsAvailable %}
+    ,{
+      "@type": "VideoObject",
+      "name": "Témoignages carrossiers AutoPartSelect",
+      "description": "Retours terrain de carrosseries abonnées.",
+      "thumbnailUrl": "{{ '/assets/img/testimonials_couverture-960.webp' | absoluteUrl(site) }}",
+      "contentUrl": "{{ '/assets/videos/testimonials.mp4' | absoluteUrl(site) }}",
+      "uploadDate": "{{ videos.testimonialsUploadDate }}",
+      "duration": "{{ videos.testimonialsDuration }}"
+    }
+    {% endif %}
+  ]
+}
+</script>

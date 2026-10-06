@@ -1,6 +1,21 @@
 # Vidéos volumineuses (limite GitHub 100 MB) — copiées dans l’artefact Pages en local/CI si présentes
 assets/videos/*.mp4
 _site/
+node_modules/
 
 # macOS
 .DS_Store
+
+# Rapports Lighthouse locaux
+*.report.html
+chromewebdata_*.report.html
+localhost_*.report.html
+
+# Apache (GitHub Pages n'utilise pas .htaccess)
+assets/videos/.htaccess
+
+# Généré par scripts/write-videos-data.js (voir videos.json.example)
+src/_data/videos.json
+
+# Config déploiement serveur (copier depuis .deploy.env.example)
+.deploy.env

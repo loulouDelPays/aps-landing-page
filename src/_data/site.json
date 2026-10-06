@@ -1,0 +1,20 @@
+{
+  "name": "AutoPartSelect",
+  "legalName": "LUNARIS INNOVATION",
+  "tagline": "Moteur de recherche de pièces carrosserie",
+  "url": "https://aps-logiciel.fr",
+  "email": "contact@aps-logiciel.fr",
+  "phone": "+33658816737",
+  "phoneDisplay": "06 58 81 67 37",
+  "locale": "fr_FR",
+  "demoUrl": "https://crm.aps-logiciel.fr/demo",
+  "ogImage": "/assets/img/atelier-hero-1440.webp",
+  "ogImageWidth": 1440,
+  "ogImageHeight": 810,
+  "ogImageAlt": "Atelier carrosserie — AutoPartSelect",
+  "logo": "/assets/apple-touch-icon.png",
+  "plausibleDomain": "aps-logiciel.fr",
+  "subscriptionPrice": 150,
+  "installPrice": 850,
+  "currency": "EUR"
+}

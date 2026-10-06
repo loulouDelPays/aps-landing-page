@@ -1,0 +1,76 @@
+  <section id="rentabilite" class="section section--dark">
+    <div class="container">
+      <div class="roi-intro">
+        <div class="roi-intro__photo u-reveal">
+          <picture>
+            <source type="image/avif" srcset="/assets/img/piece-etiquetee-560.avif 560w, /assets/img/piece-etiquetee-840.avif 840w, /assets/img/piece-etiquetee-1122.avif 1122w" sizes="(max-width:980px) 100vw, 480px" />
+            <source type="image/webp" srcset="/assets/img/piece-etiquetee-560.webp 560w, /assets/img/piece-etiquetee-840.webp 840w, /assets/img/piece-etiquetee-1122.webp 1122w" sizes="(max-width:980px) 100vw, 480px" />
+            <img src="/assets/img/piece-etiquetee-840.webp" alt="Pièce carrosserie étiquetée en atelier" width="840" height="1050" loading="lazy" />
+          </picture>
+        </div>
+        <div class="u-reveal">
+          <p class="section-kicker section-kicker--light">Rentabilité</p>
+          <h2 class="section-title">Un outil rentable dès le premier mois</h2>
+          <p class="section-sub">Le temps gagné sur chaque dossier + la marge récupérée sur vos achats couvrent largement l'abonnement. Faites le calcul avec vos chiffres.</p>
+          <div class="stakes-consequences">
+            <svg class="icon u-text-warn" aria-hidden="true"><use href="#icon-alert"/></svg>
+            <span>Chaque semaine sans vue d'ensemble : des reliquats subis qui immobilisent un véhicule, des pièces payées plus cher par habitude, et une commande qui dépend toujours de la même personne.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card--dark card--raised roi-card u-reveal">
+        <div class="card__body card__body--lg">
+          <div class="roi-inputs">
+            <div class="field">
+              <label for="dossiers">Combien de dossiers traitez-vous par mois ?</label>
+              <input id="dossiers" type="number" min="0" step="1" value="80" />
+            </div>
+            <fieldset class="roi-presets-group u-mt-3">
+              <legend class="u-fw-700 u-mb-3">Quel scénario correspond à votre atelier ?</legend>
+              <div class="roi-presets">
+                <button class="btn roi-preset" type="button" data-avant="20" data-marge="20"><strong>Prudent</strong><span>20 min aujourd'hui, 20€ de marge / dossier</span></button>
+                <button class="btn roi-preset active" type="button" data-avant="30" data-marge="30"><strong>Réaliste</strong><span>30 min aujourd'hui, 30€ de marge / dossier</span></button>
+              </div>
+            </fieldset>
+            <details class="roi-advanced">
+              <summary>Ajuster les paramètres</summary>
+              <div class="form--2 u-mt-3">
+                <div class="field"><label for="minAvant">Minutes de recherche / dossier aujourd'hui</label><input id="minAvant" type="number" min="0" step="0.5" value="30" /></div>
+                <div class="field"><label for="minApres">Minutes / dossier avec APS (recherche + décision)</label><input id="minApres" type="number" min="0" step="0.5" value="10" /></div>
+              </div>
+              <p class="hint u-text-light" id="minGagneesHint">—</p>
+              <div class="form--2 u-mt-3">
+                <div class="field"><label for="margeParDossier">Marge gagnée / dossier (€)</label><input id="margeParDossier" type="number" min="0" step="0.5" value="30" /></div>
+                <div class="field"></div>
+              </div>
+              <div class="form--2 u-mt-3">
+                <div class="field"><label for="tauxHoraire">Coût horaire (€)</label><input id="tauxHoraire" type="number" min="0" step="1" value="35" /></div>
+                <div class="field"><label for="abo">Abonnement APS (€/mois)</label><input id="abo" type="number" min="0" step="1" value="150" /></div>
+              </div>
+              <div class="form--2 u-mt-3">
+                <div class="field"><label for="install">Installation (forfait unique, €)</label><input id="install" type="number" min="0" step="1" value="850" /></div>
+                <div class="field"></div>
+              </div>
+              <div class="u-mt-3"><button class="btn" type="button" id="btnReset">Réinitialiser</button></div>
+            </details>
+          </div>
+          <div class="roi-result">
+            <div class="roi-hero">
+              <div class="roi-hero-label">Gain net estimé / mois</div>
+              <div class="roi-hero-value u-text-accent" id="kNet">—</div>
+              <div class="roi-hero-detail" id="kNetSub">—</div>
+            </div>
+            <div class="roi-secondary">
+              <div class="roi-metric"><span class="roi-metric-label">Gain net / an</span><span class="roi-metric-value" id="kNetAnnual">—</span></div>
+              <div class="roi-metric"><span class="roi-metric-label">Amortissement installation</span><span class="roi-metric-value" id="kPayback">—</span></div>
+            </div>
+            <div class="u-gap-actions u-mt-4">
+              <a id="roi-cta-demo" class="btn btn--primary" href="https://crm.aps-logiciel.fr/demo" rel="noopener noreferrer">Tester APS sur un de mes dossiers</a>
+              <a class="btn btn--ghost" href="/#tarifs">Voir l'offre</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

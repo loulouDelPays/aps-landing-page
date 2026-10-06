@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+---
+<main id="main" class="page-main">
+  <section class="section section--light page-hero">
+    <div class="container">
+      {% include "partials/breadcrumbs.njk" %}
+      <p class="section-kicker">{{ kicker | default("AutoPartSelect") }}</p>
+      <h1 class="section-title">{{ h1 | default(title) }}</h1>
+      {% if lead %}<p class="section-sub page-hero__lead">{{ lead }}</p>{% endif %}
+      {% if heroActions %}
+      <div class="u-gap-actions u-mt-4">
+        {% for action in heroActions %}
+        <a class="btn {{ action.class | default('btn--primary') }}" href="{{ action.href }}"{% if action.external %} rel="noopener noreferrer"{% endif %}>{{ action.label }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </section>
+  <div class="page-content">
+    {{ content | safe }}
+  </div>
+  {% if pageCta %}
+  <section class="section section--muted">
+    <div class="container u-max-900">
+      <div class="card card--raised">
+        <div class="card__body card__body--lg">
+          <h2 class="section-title u-mb-3">{{ pageCta.title }}</h2>
+          <p class="section-sub">{{ pageCta.text }}</p>
+          <div class="u-gap-actions u-mt-4">
+            <a class="btn btn--primary" href="{{ site.demoUrl }}" rel="noopener noreferrer">{{ pageCta.primaryLabel | default("Tester sur un dossier") }}</a>
+            {% if pageCta.secondaryHref %}
+            <a class="btn" href="{{ pageCta.secondaryHref }}">{{ pageCta.secondaryLabel }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+</main>

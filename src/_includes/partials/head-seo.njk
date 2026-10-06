@@ -1,0 +1,34 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+{% if noindex %}
+<meta name="robots" content="noindex, follow" />
+{% endif %}
+<title>{{ title | default(site.name) }}</title>
+<meta name="description" content="{{ description }}" />
+{% if not noindex %}
+<link rel="canonical" href="{{ canonical | default(page.url | absoluteUrl(site)) }}" />
+{% endif %}
+<meta property="og:title" content="{{ ogTitle | default(title) }}" />
+<meta property="og:description" content="{{ ogDescription | default(description) }}" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="{{ site.locale }}" />
+<meta property="og:url" content="{{ canonical | default(page.url | absoluteUrl(site)) }}" />
+<meta property="og:image" content="{{ (ogImage | default(site.ogImage)) | absoluteUrl(site) }}" />
+<meta property="og:image:width" content="{{ ogImageWidth | default(site.ogImageWidth) }}" />
+<meta property="og:image:height" content="{{ ogImageHeight | default(site.ogImageHeight) }}" />
+<meta property="og:image:alt" content="{{ ogImageAlt | default(site.ogImageAlt) }}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ ogTitle | default(title) }}" />
+<meta name="twitter:description" content="{{ ogDescription | default(description) }}" />
+<meta name="twitter:image" content="{{ (ogImage | default(site.ogImage)) | absoluteUrl(site) }}" />
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.png" />
+<link rel="apple-touch-icon" type="image/png" href="/assets/apple-touch-icon.png" />
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+{% if preloadHero %}
+<link rel="preload" href="/assets/img/atelier-hero-1440.avif" as="image" type="image/avif" />
+<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
+{% endif %}
+<link rel="stylesheet" href="/css/main.css" />
+<script>document.documentElement.classList.add('js');</script>
+{% include "partials/analytics.njk" %}
+{% include "partials/schema-jsonld.njk" %}

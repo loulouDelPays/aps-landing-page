@@ -1,0 +1,10 @@
+{
+  "primary": [
+    { "label": "Fonctionnalités", "href": "/#fonctionnalites" },
+    { "label": "Témoignages", "href": "/#temoignages" },
+    { "label": "Rentabilité", "href": "/#rentabilite" },
+    { "label": "Tarifs", "href": "/#tarifs" },
+    { "label": "FAQ", "href": "/#faq" },
+    { "label": "Démo", "href": "https://crm.aps-logiciel.fr/demo", "external": true }
+  ]
+}

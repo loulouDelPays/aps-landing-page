@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  {% include "partials/head-seo.njk" %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu principal</a>
+  {% include "partials/svg-sprite.njk" %}
+  {% include "partials/header.njk" %}
+  {{ content | safe }}
+  {% include "partials/footer.njk" %}
+  {% if showBottomCta %}
+  {% set ghostCtaHref = bottomCtaGhostHref | default('/#rentabilite') %}
+  {% set ghostCtaLabel = bottomCtaGhostLabel | default('Rentabilité') %}
+  <div class="bottom-cta" aria-label="Actions rapides">
+    <a class="btn btn--ghost" href="{{ ghostCtaHref }}">{{ ghostCtaLabel }}</a>
+    <a class="btn btn--primary" href="{{ site.demoUrl }}" rel="noopener noreferrer">Tester sur un dossier</a>
+  </div>
+  {% endif %}
+  <script src="/js/main.js" defer></script>
+</body>
+</html>
