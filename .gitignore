@@ -1,5 +1,6 @@
-# Vidéos volumineuses (limite GitHub 100 MB)
+# Vidéos volumineuses (limite GitHub 100 MB) — copiées dans l’artefact Pages en local/CI si présentes
 assets/videos/*.mp4
+_site/
 
 # macOS
 .DS_Store

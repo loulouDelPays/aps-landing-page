@@ -24,6 +24,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare Pages artifact
+        env:
+          APS_DEMO_VIDEO_URL: ${{ secrets.APS_DEMO_VIDEO_URL }}
+          APS_TESTIMONIAL_VIDEO_URL: ${{ secrets.APS_TESTIMONIAL_VIDEO_URL }}
+        run: bash scripts/prepare-pages-artifact.sh
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
@@ -32,7 +38,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment

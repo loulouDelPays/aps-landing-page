@@ -29,7 +29,9 @@ convert_image "$IMG/screenshot_search.png" "screenshot_search" 640 960 1280
 convert_image "$IMG/exemple_resultat_recherche.png" "exemple_resultat_recherche" 640 900 1280
 convert_image "$IMG/testimonials_couverture.png" "testimonials_couverture" 640 960 1280
 convert_image "$IMG/markeplace.png" "markeplace" 640 960 1280
-convert_image "$IMG/recherche_reliquat.png" "recherche_reliquat" 640 960 1280
+convert_image "$IMG/recherche_reliquat.jpg" "recherche_reliquat" 640 960 1280
+convert_image "$IMG/suivi_achats.png" "suivi_achats" 640 960 1280
+convert_image "$IMG/suivi_rfa.png" "suivi_rfa" 640 960 1280
 
 echo "== Cleanup source PNGs =="
 rm -f \
@@ -40,7 +42,9 @@ rm -f \
   "$IMG/exemple_resultat_recherche.png" \
   "$IMG/testimonials_couverture.png" \
   "$IMG/markeplace.png" \
-  "$IMG/recherche_reliquat.png"
+  "$IMG/recherche_reliquat.jpg" \
+  "$IMG/suivi_achats.png" \
+  "$IMG/suivi_rfa.png"
 
 echo "== Done =="
 du -sh "$IMG"

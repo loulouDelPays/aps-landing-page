@@ -5,10 +5,50 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Déposez votre chiffrage en PDF : AutoPartSelect le lit et trouve toutes les pièces du dossier chez vos 25+ fournisseurs en moins d'une minute, au meilleur prix. Stocks, prix et délais sur un seul écran. Essai 1 mois offert. 150€ HT/mois + 850€ d'installation." />
   <title>AutoPartSelect — Trouvez vos pièces carrosserie plus vite, au meilleur prix</title>
+  <meta property="og:title" content="AutoPartSelect — Pièces carrosserie, plus vite et au meilleur prix" />
+  <meta property="og:description" content="Comparez stocks, prix et délais de vos fournisseurs sur un seul écran. Essai 1 mois offert." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <link rel="canonical" href="https://www.autopartselect.fr/" />
+  <meta property="og:url" content="https://www.autopartselect.fr/" />
+  <meta property="og:image" content="https://www.autopartselect.fr/assets/img/atelier-hero-1440.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.autopartselect.fr/assets/img/atelier-hero-1440.webp" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "APS Logiciel",
+        "url": "https://www.autopartselect.fr/",
+        "logo": "https://www.autopartselect.fr/assets/img/logo_aps.avif"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "AutoPartSelect",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "Moteur de recherche de pièces carrosserie multi-fournisseurs pour carrossiers.",
+        "offers": {
+          "@type": "Offer",
+          "price": "150",
+          "priceCurrency": "EUR",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "150",
+            "priceCurrency": "EUR",
+            "unitText": "MONTH"
+          }
+        }
+      }
+    ]
+  }
+  </script>
   <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.png" />
   <link rel="apple-touch-icon" type="image/png" href="assets/apple-touch-icon.png" />
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/img/atelier-hero-1440.avif" as="image" type="image/avif" />
   <script>document.documentElement.classList.add('js');</script>
 
   <style>
@@ -22,6 +62,7 @@
       --surface: #F6F7F5;
       --line: #E4E7E4;
       --warn: #F2C230;
+      --warn-ink: #92680a;
       --danger: #D64545;
       --paper: #ffffff;
       --muted: #6b7280;
@@ -44,10 +85,10 @@
       --radius-xl: 24px;
       --radius-full: 999px;
 
-      --shadow-sm: 0 1px 2px rgba(6,6,26,.04);
-      --shadow-md: 0 4px 16px rgba(6,6,26,.08);
-      --shadow-lg: 0 12px 40px rgba(6,6,26,.14);
-      --shadow-xl: 0 24px 60px rgba(6,6,26,.18);
+      --shadow-sm: 0 1px 2px rgba(6,6,26,.05), 0 8px 20px rgba(6,6,26,.03);
+      --shadow-md: 0 8px 24px rgba(6,6,26,.08), 0 2px 6px rgba(6,6,26,.04);
+      --shadow-lg: 0 18px 48px rgba(6,6,26,.14), 0 6px 14px rgba(6,6,26,.06);
+      --shadow-xl: 0 30px 72px rgba(6,6,26,.18), 0 10px 24px rgba(6,6,26,.08);
 
       --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
       --font-display: "Archivo", var(--font-body);
@@ -63,6 +104,8 @@
 
       --max: 1140px;
       --header-h: 64px;
+      --bottom-cta-h: 4.25rem;
+      --section-scroll-margin: calc(var(--header-h) + var(--sp-4));
       --focus-ring: 0 0 0 3px rgba(101,210,170,.35);
     }
 
@@ -90,7 +133,7 @@
       font-family: var(--font-body);
       font-size: var(--text-base);
       color: var(--ink);
-      background: var(--surface);
+      background: linear-gradient(180deg, var(--surface) 0%, #eef0ed 100%);
       line-height: 1.55;
       -webkit-font-smoothing: antialiased;
     }
@@ -124,18 +167,20 @@
       gap: var(--sp-2); padding: 0.65rem 1.1rem;
       border-radius: var(--radius-md); border: 1px solid var(--line);
       background: var(--paper); color: var(--ink);
-      font-weight: 650; font-size: var(--text-sm);
+      font-weight: 600; font-size: var(--text-sm);
       cursor: pointer; white-space: nowrap;
-      transition: transform .06s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+      position: relative; overflow: hidden;
+      transition: transform .12s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
     }
-    .btn:hover { background: rgba(10,10,34,.03); border-color: rgba(10,10,34,.12); }
+    .btn:hover { background: rgba(10,10,34,.03); border-color: rgba(10,10,34,.12); box-shadow: 0 8px 18px rgba(10,10,34,.07); }
     .btn:active { transform: translateY(1px); }
     .btn--primary {
       border-color: rgba(101,210,170,.4);
-      background: var(--accent-500); color: var(--ink-900);
-      box-shadow: 0 2px 8px rgba(101,210,170,.25);
+      background: linear-gradient(135deg, #7be0bc, #65d2aa 55%, #58c79e);
+      color: var(--ink-900);
+      box-shadow: 0 8px 22px rgba(101,210,170,.28), inset 0 1px 0 rgba(255,255,255,.28);
     }
-    .btn--primary:hover { filter: brightness(1.04); border-color: rgba(101,210,170,.55); }
+    .btn--primary:hover { filter: brightness(1.03); border-color: rgba(101,210,170,.55); }
     .btn--ghost { background: transparent; border-color: rgba(255,255,255,.2); color: #fff; }
     .btn--ghost:hover { background: rgba(255,255,255,.08); }
     .btn--lg { padding: 0.85rem 1.75rem; font-size: var(--text-base); }
@@ -171,34 +216,40 @@
       display: inline-flex; align-items: center;
       font-size: var(--text-xs); font-weight: 700;
       padding: .34rem .72rem; border-radius: var(--radius-full);
-      border: 1px solid transparent;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
     }
     .tag-pill--oem {
-      background: linear-gradient(135deg, rgba(88,141,255,.62), rgba(59,130,246,.62));
-      border-color: rgba(160,194,255,.52);
-      color: #eaf2ff;
-      box-shadow: 0 2px 8px rgba(59,130,246,.2);
+      border-color: rgba(101,210,170,.35);
+      background: rgba(101,210,170,.12);
+      color: #c8f3e3;
     }
     .tag-pill--eq {
-      background: linear-gradient(135deg, rgba(255,219,108,.96), rgba(236,177,42,.96));
-      border-color: rgba(255,229,146,.95);
-      color: #2d2105;
-      box-shadow: 0 6px 16px rgba(242,194,48,.42);
+      border-color: rgba(242,194,48,.38);
+      background: rgba(242,194,48,.12);
+      color: #ffe9a8;
     }
     .tag-pill--reuse {
-      background: linear-gradient(135deg, rgba(129,239,201,.96), rgba(82,206,164,.96));
-      border-color: rgba(170,246,221,.92);
-      color: #063226;
-      box-shadow: 0 6px 16px rgba(82,206,164,.42);
+      border-color: rgba(101,210,170,.45);
+      background: rgba(101,210,170,.16);
+      color: #b8efd9;
     }
-    .tag-pill--eq, .tag-pill--reuse { font-weight: 780; transform: translateY(-1px); }
+    .hero .tag-pill {
+      box-shadow: none;
+      font-weight: 600;
+      backdrop-filter: blur(6px);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.14);
+    }
 
     .card {
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-sm);
+      transition: transform .18s ease, box-shadow .2s ease, border-color .2s ease;
     }
     .card--flat { box-shadow: none; }
     .card--raised { box-shadow: var(--shadow-md); }
@@ -228,7 +279,7 @@
       color: var(--accent-700);
     }
     .section-kicker--light { color: var(--accent-500); }
-    .section-title { margin: 0 0 var(--sp-3); }
+    .section-title { margin: 0 0 var(--sp-3); letter-spacing: -0.024em; text-wrap: balance; }
     .section-sub {
       margin: 0 0 var(--sp-6); color: var(--muted);
       max-width: 68ch; font-size: var(--text-base);
@@ -240,11 +291,19 @@
       width: 2.25rem; height: 2.25rem; border-radius: var(--radius-md);
       background: rgba(101,210,170,.12); color: var(--accent-700);
     }
-    .icon-wrap--warn { background: rgba(242,194,48,.15); color: #92680a; }
+    .icon-wrap--warn { background: rgba(242,194,48,.15); color: var(--warn-ink); }
 
-    .check { color: var(--accent-700); font-weight: 700; }
+    .check { color: var(--accent-700); font-weight: 700; flex-shrink: 0; }
+    .check--circle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 1.75rem; height: 1.75rem; border-radius: 50%;
+      background: rgba(101,210,170,.14); border: 1px solid rgba(101,210,170,.35);
+      margin-top: 1px;
+    }
+    .check--circle .icon { width: 1em; height: 1em; }
     .list { display: flex; flex-direction: column; gap: var(--sp-2); margin-top: var(--sp-3); }
     .list__item { display: flex; gap: var(--sp-3); align-items: flex-start; font-size: var(--text-sm); color: var(--muted); }
+    .list__item .check--circle { margin-top: 0; }
 
     .form { display: grid; gap: var(--sp-3); margin-top: var(--sp-4); }
     .form--2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
@@ -270,8 +329,10 @@
       display: flex; align-items: center; justify-content: center;
       padding: var(--sp-5);
       opacity: 0; visibility: hidden;
+      pointer-events: none;
       transition: opacity .2s ease, visibility .2s ease;
     }
+    .modal-overlay.is-open { pointer-events: auto; }
     .modal-overlay.is-open { opacity: 1; visibility: visible; }
     .modal-box {
       background: var(--paper); border-radius: var(--radius-lg);
@@ -313,16 +374,18 @@
 
     .browser-shot {
       border-radius: var(--radius-lg); border: 1px solid var(--line);
-      box-shadow: var(--shadow-md); overflow: hidden; background: var(--paper);
+      box-shadow: var(--shadow-md); overflow: hidden; background: linear-gradient(180deg, #ffffff, #f9faf9);
+      transition: transform .2s ease, box-shadow .2s ease;
     }
     .browser-shot__top {
       display: flex; align-items: center; gap: var(--sp-3);
-      padding: var(--sp-3); background: var(--surface); border-bottom: 1px solid var(--line);
+      padding: var(--sp-3); background: linear-gradient(180deg, #f8f9f8, #f3f5f3); border-bottom: 1px solid var(--line);
     }
     .browser-shot__url {
       flex: 1; background: var(--paper); border: 1px solid var(--line);
       border-radius: var(--radius-sm); padding: 0.35rem 0.65rem;
       font-size: var(--text-xs); color: var(--muted);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
     }
 
     .video-player { position: relative; cursor: pointer; aspect-ratio: 16/10; background: var(--ink-950); }
@@ -380,10 +443,38 @@
     .roi-presets-group { border: 0; padding: 0; margin: 0; min-width: 0; }
     .roi-presets-group legend { padding: 0; font-size: var(--text-sm); color: inherit; }
     .section--dark .roi-presets-group legend { color: rgba(255,255,255,.85); }
-    .roi-presets { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
-    .roi-presets .btn { flex: 1; min-width: 120px; flex-direction: column; gap: 2px; padding: var(--sp-3); border-width: 2px; }
-    .roi-presets .btn span { font-size: var(--text-xs); color: var(--muted); font-weight: 400; }
-    .roi-presets .btn.active { border-color: var(--accent-500); background: rgba(101,210,170,.06); }
+    .roi-presets {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--sp-2);
+    }
+    .roi-presets .btn {
+      white-space: normal;
+      min-width: 0;
+      width: 100%;
+      height: auto;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      gap: var(--sp-2);
+      padding: var(--sp-3) var(--sp-4);
+      border-width: 2px;
+      line-height: 1.35;
+    }
+    .roi-presets .btn strong { display: block; font-size: var(--text-sm); }
+    .roi-presets .btn span {
+      display: block;
+      font-size: var(--text-xs);
+      color: var(--muted);
+      font-weight: 400;
+      line-height: 1.45;
+      white-space: normal;
+    }
+    .roi-presets .btn.active {
+      border-color: var(--accent-500);
+      background: rgba(101,210,170,.06);
+      box-shadow: inset 0 0 0 1px rgba(101,210,170,.15);
+    }
     .roi-advanced { margin-top: var(--sp-4); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--sp-3); }
     .roi-advanced summary { cursor: pointer; font-weight: 700; font-size: var(--text-sm); color: var(--muted); list-style: none; }
     .roi-advanced summary::-webkit-details-marker { display: none; }
@@ -392,10 +483,10 @@
     .roi-dual { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); margin-bottom: var(--sp-4); }
     .roi-hero, .roi-cost { text-align: center; padding: var(--sp-6) var(--sp-4); border-radius: var(--radius-md); }
     .roi-cost { border: 1px solid rgba(242,194,48,.35); background: rgba(242,194,48,.08); }
-    .roi-cost .roi-hero-value { color: #92680a; }
+    .roi-cost .roi-hero-value { color: var(--warn-ink); }
     .roi-hero { border: 1px solid rgba(101,210,170,.25); background: linear-gradient(180deg, rgba(101,210,170,.1), rgba(255,255,255,.02)); }
     .roi-hero-label { font-size: var(--text-sm); color: var(--muted); font-weight: 600; }
-    .roi-hero-value { font-size: var(--text-3xl); font-weight: 950; letter-spacing: -.03em; margin-top: var(--sp-2); }
+    .roi-hero-value { font-size: var(--text-3xl); font-weight: 800; letter-spacing: -.03em; margin-top: var(--sp-2); }
     .roi-hero-detail { font-size: var(--text-xs); color: var(--muted); margin-top: var(--sp-2); }
     .roi-secondary { display: flex; gap: var(--sp-3); margin-top: var(--sp-4); }
     .roi-metric { flex: 1; border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-md); padding: var(--sp-3); }
@@ -421,12 +512,16 @@
     .section--dark .roi-advanced label { color: rgba(255,255,255,.7); }
     .section--dark .roi-advanced { border-color: rgba(255,255,255,.1); }
     .section--dark .roi-presets .btn { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); color: #fff; }
-    .section--dark .roi-presets .btn span { color: rgba(255,255,255,.55); }
-    .section--dark .roi-presets .btn.active { border-color: var(--accent-500); background: rgba(101,210,170,.1); }
+    .section--dark .roi-presets .btn span { color: rgba(255,255,255,.68); }
+    .section--dark .roi-presets .btn.active {
+      border-color: var(--accent-500);
+      background: rgba(101,210,170,.12);
+      box-shadow: inset 0 0 0 1px rgba(101,210,170,.2);
+    }
     #testimonial-player { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--line); }
 
     .pricing { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
-    .price { font-size: var(--text-4xl); font-weight: 950; letter-spacing: -.03em; margin: var(--sp-2) 0 0; }
+    .price { font-size: var(--text-4xl); font-weight: 800; letter-spacing: -.03em; margin: var(--sp-2) 0 0; }
     .price small { font-size: var(--text-sm); font-weight: 700; color: var(--muted); }
     .price-clarity { margin-top: var(--sp-3); border: 1px solid rgba(101,210,170,.25); background: rgba(101,210,170,.06); border-radius: var(--radius-md); padding: var(--sp-3); }
     .price-clarity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
@@ -446,38 +541,166 @@
     .card--logo img { max-width: 100%; max-height: 48px; width: auto; object-fit: contain; }
     .card--logo .logo-name { font-size: var(--text-xs); color: var(--muted); font-weight: 600; text-align: center; }
 
-    .aar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); }
+    .aar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-4); }
     .aar-step { border-radius: var(--radius-md); padding: var(--sp-3); border: 1px solid var(--line); }
     .aar-step--before { border-color: rgba(242,194,48,.35); background: rgba(242,194,48,.08); }
     .aar-step--after { border-color: var(--line); background: var(--paper); }
     .aar-step--result { border-color: rgba(101,210,170,.35); background: linear-gradient(180deg, rgba(101,210,170,.1), rgba(101,210,170,.02)); }
     .aar-label { font-size: var(--text-xs); font-weight: 800; text-transform: uppercase; letter-spacing: .06em; margin-bottom: var(--sp-1); }
-    .aar-label--before { color: #92680a; }
+    .aar-label--before { color: var(--warn-ink); }
     .aar-label--after { color: var(--muted); }
     .aar-label--result { color: var(--accent-700); }
     .aar-value { font-size: var(--text-sm); line-height: 1.45; }
     .aar-flow { display: grid; gap: var(--sp-3); }
     .aar-card-title { margin-bottom: var(--sp-4); font-size: var(--text-base); }
 
-    .bonus-zone { padding: var(--sp-16) 0; background: linear-gradient(180deg, rgba(101,210,170,.05), rgba(101,210,170,.1)); border-top: 1px solid rgba(101,210,170,.2); border-bottom: 1px solid rgba(101,210,170,.2); }
+    .bonus-zone {
+      padding: var(--sp-16) 0;
+      scroll-margin-top: var(--section-scroll-margin);
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(101,210,170,.14), transparent 55%),
+        linear-gradient(180deg, rgba(101,210,170,.04), rgba(101,210,170,.11));
+      border-top: 1px solid rgba(101,210,170,.22);
+      border-bottom: 1px solid rgba(101,210,170,.22);
+    }
+    .bonus-zone__intro {
+      text-align: center;
+      max-width: 42rem;
+      margin: 0 auto var(--sp-12);
+    }
+    .bonus-zone__intro .section-sub {
+      margin-left: auto;
+      margin-right: auto;
+      color: var(--muted);
+      font-size: var(--text-lg);
+      line-height: 1.6;
+    }
+    .bonus-stack { display: flex; flex-direction: column; gap: var(--sp-8); }
+    .bonus-panel {
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(10,10,34,.08);
+      background: linear-gradient(165deg, rgba(255,255,255,.98), rgba(255,255,255,.88));
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      scroll-margin-top: var(--section-scroll-margin);
+    }
+    .bonus-panel__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+      gap: 0;
+      align-items: stretch;
+    }
+    .bonus-panel--reverse .bonus-panel__grid { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); }
+    .bonus-panel__copy {
+      padding: clamp(var(--sp-5), 3vw, var(--sp-8));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .bonus-panel__head {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      flex-wrap: wrap;
+      margin-bottom: var(--sp-4);
+    }
+    .bonus-panel__index {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 800;
+      letter-spacing: .08em;
+      color: rgba(47,154,114,.55);
+      line-height: 1;
+    }
+    .bonus-panel__copy .section-kicker { margin-bottom: var(--sp-2); }
+    .bonus-panel__copy .section-title {
+      font-size: clamp(1.35rem, 1.1rem + 1vw, 1.85rem);
+      margin-bottom: var(--sp-3);
+    }
+    .bonus-panel__copy .section-sub {
+      margin-bottom: var(--sp-5);
+      max-width: 52ch;
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .bonus-panel__media {
+      padding: clamp(var(--sp-4), 2.5vw, var(--sp-6));
+      padding-left: 0;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(101,210,170,.06), rgba(101,210,170,.02));
+      border-left: 1px solid rgba(101,210,170,.12);
+    }
+    .bonus-panel--reverse .bonus-panel__media {
+      border-left: none;
+      border-right: 1px solid rgba(101,210,170,.12);
+      padding-left: clamp(var(--sp-4), 2.5vw, var(--sp-6));
+      padding-right: 0;
+    }
+    .bonus-panel__media .browser-shot { width: 100%; box-shadow: var(--shadow-lg); }
+    .bonus-panel__media .guide-photo {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(10,10,34,.08);
+    }
     .bonus-section-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: var(--sp-10); align-items: center; }
     .bonus-section-grid--reversed { grid-template-columns: 1.15fr 1fr; }
-    .bonus-tag { display: inline-flex; align-items: center; gap: var(--sp-2); padding: var(--sp-2) var(--sp-4); border-radius: var(--radius-full); border: 1px solid rgba(101,210,170,.35); background: rgba(101,210,170,.1); font-size: var(--text-xs); font-weight: 700; color: var(--accent-700); margin-bottom: var(--sp-3); }
     .bonus-features { display: flex; flex-direction: column; gap: var(--sp-3); }
-    .bonus-feature { display: flex; gap: var(--sp-3); font-size: var(--text-sm); }
-    .bonus-feature__title { font-weight: 700; }
-    .bonus-feature__desc { color: var(--muted); font-size: var(--text-xs); margin-top: 2px; }
-    .bonus-divider { border: none; border-top: 1px solid rgba(101,210,170,.2); margin: var(--sp-10) auto; max-width: 200px; }
+    .bonus-panel__copy .bonus-features { gap: var(--sp-4); }
+    .bonus-feature { display: flex; gap: var(--sp-3); font-size: var(--text-sm); align-items: flex-start; }
+    .bonus-panel__copy .bonus-feature { gap: var(--sp-4); }
+    .bonus-feature__title { font-weight: 700; letter-spacing: -.01em; color: var(--ink); }
+    .bonus-panel__copy .bonus-feature__title { font-size: var(--text-base); }
+    .bonus-feature__desc { color: var(--muted); font-size: var(--text-xs); margin-top: 4px; line-height: 1.5; }
+    .bonus-panel__copy .bonus-feature__desc { font-size: var(--text-sm); margin-top: 5px; }
+    .commandes-grid { grid-template-columns: .92fr 1.08fr; align-items: start; gap: var(--sp-8); }
+    .feature-panel {
+      padding: var(--sp-5);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--paper);
+      box-shadow: var(--shadow-sm);
+    }
+    .commandes-media .browser-shot { box-shadow: var(--shadow-lg); }
+    .commandes-media picture,
+    .commandes-media img { width: 100%; }
+    .status-pill {
+      font-weight: 600;
+      box-shadow: none;
+    }
+    .status-pill.status-pill--ok {
+      border-color: rgba(76,175,135,.46);
+      background: linear-gradient(180deg, rgba(129,239,201,.25), rgba(82,206,164,.16));
+      color: #0d4f3a;
+    }
+    .status-pill.status-pill--warn {
+      border-color: rgba(230,177,68,.5);
+      background: linear-gradient(180deg, rgba(255,219,108,.26), rgba(236,177,42,.18));
+      color: #6c4a00;
+    }
 
-    #faq details { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--sp-3); }
-    #faq summary { cursor: pointer; font-weight: 800; list-style: none; font-size: var(--text-sm); }
+    #faq details { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--sp-3); transition: border-color .2s ease, box-shadow .2s ease; }
+    #faq details[open] { border-color: rgba(101,210,170,.35); box-shadow: var(--shadow-sm); }
+    #faq summary { cursor: pointer; font-weight: 700; list-style: none; font-size: var(--text-sm); }
     #faq summary::-webkit-details-marker { display: none; }
-    #faq details p { margin-top: var(--sp-3); color: var(--muted); font-size: var(--text-sm); line-height: 1.5; }
+    #faq details p { margin-top: var(--sp-3); color: var(--muted); font-size: var(--text-sm); line-height: 1.55; max-width: 65ch; }
 
     .transformation-line { font-size: var(--text-base); font-weight: 700; color: var(--accent-500); margin-bottom: var(--sp-2); }
+    .final-cta .card__body { gap: var(--sp-6); }
+
+    .skip-link {
+      position: absolute; left: var(--sp-4); top: -100%;
+      z-index: 300; padding: var(--sp-2) var(--sp-4);
+      background: var(--paper); color: var(--ink);
+      border-radius: var(--radius-md); font-weight: 700; font-size: var(--text-sm);
+      box-shadow: var(--shadow-md);
+    }
+    .skip-link:focus { top: var(--sp-3); }
 
     /* ===== SECTIONS ===== */
-    .section { padding: var(--sp-16) 0; scroll-margin-top: calc(var(--header-h) + var(--sp-4)); }
+    .section { padding: var(--sp-16) 0; scroll-margin-top: var(--section-scroll-margin); }
     .section--light { background: var(--paper); color: var(--ink); }
     .section--muted { background: var(--surface); color: var(--ink); }
     .section--dark { background: var(--ink-900); color: #fff; }
@@ -487,9 +710,10 @@
     .topbar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       height: var(--header-h);
-      background: rgba(6,6,26,.82);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(9,9,30,.9), rgba(9,9,30,.76));
+      backdrop-filter: blur(14px) saturate(125%);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      box-shadow: 0 10px 30px rgba(6,6,26,.2);
     }
     .topbar__inner {
       display: flex; align-items: center; justify-content: space-between;
@@ -500,15 +724,16 @@
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
       background: var(--paper); border-radius: var(--radius-full);
       padding: var(--sp-2) var(--sp-4);
-      box-shadow: 0 1px 4px rgba(6,6,26,.14);
+      box-shadow: 0 8px 18px rgba(6,6,26,.16);
+      border: 1px solid rgba(6,6,26,.07);
     }
     .brand__mark img { height: 22px; width: auto; }
     .brand__text { display: flex; flex-direction: column; gap: 1px; line-height: 1.25; }
     .brand__name { font-weight: 800; font-size: var(--text-sm); color: #fff; letter-spacing: -.02em; white-space: nowrap; }
     .brand__tag { font-size: var(--text-xs); color: rgba(255,255,255,.55); white-space: nowrap; }
     .nav { display: flex; align-items: center; gap: var(--sp-1); font-size: var(--text-sm); color: rgba(255,255,255,.65); }
-    .nav a { padding: var(--sp-2) var(--sp-3); border-radius: var(--radius-full); transition: background .15s, color .15s; }
-    .nav a:hover { background: rgba(255,255,255,.08); color: #fff; }
+    .nav a { padding: var(--sp-2) var(--sp-3); border-radius: var(--radius-full); border: 1px solid transparent; transition: background .15s, color .15s, border-color .2s ease; }
+    .nav a:hover { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.12); }
     .header-actions { display: flex; gap: var(--sp-2); align-items: center; }
     .hamburger {
       display: none; width: 2.5rem; height: 2.5rem;
@@ -541,7 +766,19 @@
     .hero__bg picture, .hero__bg img { width: 100%; height: 100%; object-fit: cover; }
     .hero__overlay {
       position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(135deg, rgba(6,6,26,.92) 0%, rgba(10,10,34,.78) 50%, rgba(10,10,34,.65) 100%);
+      background:
+        radial-gradient(1100px 540px at 85% 0%, rgba(101,210,170,.18), transparent 55%),
+        linear-gradient(135deg, rgba(6,6,26,.92) 0%, rgba(10,10,34,.78) 50%, rgba(10,10,34,.65) 100%);
+    }
+    @media (hover: hover) {
+      .card--raised:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: rgba(10,10,34,.12); }
+      .bonus-panel:hover { box-shadow: var(--shadow-lg); border-color: rgba(101,210,170,.22); }
+      .browser-shot:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+      .bonus-panel .browser-shot:hover { transform: none; box-shadow: var(--shadow-lg); }
+      .bonus-panel:hover .bonus-panel__media .browser-shot { transform: translateY(-2px); box-shadow: var(--shadow-xl); }
+      #faq details:hover { border-color: rgba(10,10,34,.16); box-shadow: var(--shadow-sm); }
+      .btn:hover { transform: translateY(-1px); }
+      .status-pill:hover { transform: translateY(-1px); border-color: rgba(10,10,34,.22); }
     }
     .hero__content { position: relative; z-index: 2; width: 100%; }
     .hero__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--sp-10); align-items: center; }
@@ -570,7 +807,11 @@
     }
     .hero__cta { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
     .hero__hint { margin-top: var(--sp-3); }
-    .hero__hint a { text-decoration: underline; color: #fff; font-weight: 650; }
+    .hero__hint a { text-decoration: underline; color: #fff; font-weight: 600; }
+    .js .hero .u-reveal:not(.is-visible),
+    .js .hero .u-reveal { opacity: 1; transform: none; }
+
+    .video-player .play-btn:focus-visible { box-shadow: var(--focus-ring); outline: none; }
 
     .trust-band {
       position: relative; z-index: 2;
@@ -597,10 +838,99 @@
     }
     .trust-band__logos img:hover { opacity: 1; }
 
-    .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-10); align-items: center; }
     .guide-photo { border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); }
-    .guide-empathy { font-size: var(--text-lg); line-height: 1.55; max-width: 62ch; margin-bottom: var(--sp-6); }
-    .outcome-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); margin-top: var(--sp-5); }
+
+    #guide .guide-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: clamp(var(--sp-8), 4vw, var(--sp-12));
+      align-items: center;
+    }
+    #guide .guide-empathy {
+      font-size: var(--text-lg);
+      line-height: 1.6;
+      max-width: 58ch;
+      margin: 0;
+      color: var(--muted);
+    }
+    #guide .guide-intro__media.guide-photo {
+      border: 1px solid rgba(10,10,34,.08);
+      box-shadow: var(--shadow-xl);
+      background: linear-gradient(145deg, rgba(101,210,170,.08), rgba(255,255,255,.4));
+    }
+    #guide .guide-intro__media img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+    #guide .guide-outcomes {
+      margin-top: clamp(var(--sp-10), 5vw, var(--sp-16));
+      padding-top: clamp(var(--sp-8), 4vw, var(--sp-12));
+      border-top: 1px solid var(--line);
+    }
+    #guide .guide-outcomes__head {
+      max-width: 52ch;
+      margin-bottom: var(--sp-6);
+    }
+    #guide .guide-outcomes__title {
+      margin: 0 0 var(--sp-3);
+      font-size: var(--text-xl);
+      font-weight: 900;
+    }
+    #guide .guide-outcomes__sub {
+      margin: 0;
+      font-size: var(--text-base);
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    #guide .guide-outcomes__grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--sp-4);
+    }
+    #guide .guide-outcome-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+      min-height: 100%;
+      padding: clamp(var(--sp-5), 2.5vw, var(--sp-6));
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: var(--shadow-sm);
+      transition: transform .18s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    @media (hover: hover) {
+      #guide .guide-outcome-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(101,210,170,.35);
+        box-shadow: var(--shadow-md);
+      }
+    }
+    #guide .guide-outcome-card__icon {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    #guide .guide-outcome-card__title {
+      margin: 0;
+      font-size: var(--text-lg);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    #guide .guide-outcome-card__text {
+      margin: 0;
+      flex: 1;
+      font-size: var(--text-sm);
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    #guide .guide-outcomes__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--sp-3);
+      margin-top: var(--sp-8);
+    }
 
     .roi-intro { display: grid; grid-template-columns: 4fr 6fr; gap: var(--sp-10); align-items: center; margin-bottom: var(--sp-8); }
     .roi-intro__photo { border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); }
@@ -638,6 +968,7 @@
     .u-hidden { display: none !important; }
     .u-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
     .u-text-accent { color: var(--accent-500); }
+    .u-text-warn { color: var(--warn-ink); }
     .u-text-accent-dark { color: var(--accent-700); }
     .u-text-muted { color: var(--muted); }
     .u-text-light { color: rgba(255,255,255,.65); }
@@ -664,25 +995,50 @@
     .u-play-hidden { display: none; }
 
     /* ===== RESPONSIVE ===== */
+    @media (max-width: 1180px) {
+      .nav a[href="#demarrage"],
+      .nav a[href="#faq"] { display: none; }
+    }
     @media (max-width: 1080px) {
       .brand__tag { display: none; }
+    }
+    @media (max-width: 1080px) and (min-width: 981px) {
+      .grid--3 { grid-template-columns: repeat(2, 1fr); }
+      .grid--4 { grid-template-columns: repeat(2, 1fr); }
+      #guide .guide-outcomes__grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 980px) {
       .nav, .header-actions .btn:not(.header-actions__cta) { display: none; }
       .hamburger { display: flex; }
       .mobile-nav { display: flex; }
-      .hero__grid, .guide-grid, .roi-intro, .bonus-section-grid, .bonus-section-grid--reversed,
+      .hero__grid, #guide .guide-intro, #guide .guide-outcomes__grid, .roi-intro, .bonus-panel__grid, .bonus-section-grid, .bonus-section-grid--reversed,
       .roi-card > .card__body, .pricing, .grid--2, .grid--3, .grid--4,
-      .outcome-grid, .aar-grid, .logo-grid, .roi-dual, .form--2, .price-clarity-grid {
+      .aar-grid, .logo-grid, .roi-dual, .form--2, .price-clarity-grid {
         grid-template-columns: 1fr;
       }
+      #guide .guide-intro__media { order: -1; }
+      #guide .guide-outcomes__actions .btn { flex: 1 1 100%; }
       .section { padding: var(--sp-12) 0; }
       .bottom-cta { display: flex; }
-      body { padding-bottom: 72px; }
+      body { padding-bottom: calc(var(--bottom-cta-h) + env(safe-area-inset-bottom, 0px)); }
       #demarrage .how-steps { grid-template-columns: 1fr !important; }
       .hero h1 {
         font-size: clamp(1.8rem, 1.2rem + 1.9vw, 2.6rem);
         max-width: 20ch;
+      }
+      .roi-presets { grid-template-columns: 1fr; }
+      .commandes-grid { gap: var(--sp-5); }
+      .commandes-copy { padding: var(--sp-4); }
+      .bonus-zone__intro { margin-bottom: var(--sp-8); }
+      .bonus-stack { gap: var(--sp-6); }
+      .bonus-panel__copy { order: 1; }
+      .bonus-panel__media { order: 2; }
+      .bonus-panel__media,
+      .bonus-panel--reverse .bonus-panel__media {
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid rgba(101,210,170,.14);
+        padding: var(--sp-5);
       }
     }
     @media (max-width: 480px) {
@@ -693,10 +1049,12 @@
       .bonus-item { flex-wrap: wrap; }
       .hero h1 { max-width: 100%; line-height: 1.1; }
       .hero-title-line--sub { font-size: .9em; }
+      #guide .guide-outcome-card { padding: var(--sp-5); }
     }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Aller au contenu principal</a>
   <!-- SVG Sprite -->
   <svg xmlns="http://www.w3.org/2000/svg" class="u-sr-only" aria-hidden="true">
     <symbol id="icon-search" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></symbol>
@@ -713,7 +1071,7 @@
   <header class="topbar" id="topbar">
     <div class="container">
       <div class="topbar__inner">
-        <a class="brand" href="#">
+        <a class="brand" href="#main">
           <span class="brand__mark">
             <img src="assets/img/logo_aps.avif" alt="AutoPartSelect" width="120" height="28" />
           </span>
@@ -725,6 +1083,7 @@
         <nav class="nav" aria-label="Navigation principale">
           <a href="#probleme">Problème</a>
           <a href="#solution">Solution</a>
+          <a href="#commandes">Suivi</a>
           <a href="#preuve">Preuves</a>
           <a href="#demarrage">Démarrage</a>
           <a href="#roi">Rentabilité</a>
@@ -744,6 +1103,7 @@
   <nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile" aria-hidden="true">
     <a href="#probleme">Problème</a>
     <a href="#solution">Solution</a>
+    <a href="#commandes">Suivi</a>
     <a href="#preuve">Preuves</a>
     <a href="#demarrage">Démarrage</a>
     <a href="#roi">Rentabilité</a>
@@ -752,6 +1112,7 @@
     <a class="btn btn--primary open-demo u-mt-3" href="#">Tester APS sur un de mes dossiers</a>
   </nav>
 
+  <main id="main">
   <!-- HERO -->
   <section class="hero" aria-label="Introduction">
     <div class="hero__bg" aria-hidden="true">
@@ -770,7 +1131,7 @@
             <span class="hero-title-line">Passez moins de temps à chercher vos pièces.</span>
             <span class="hero-title-line hero-title-line--sub">Plus de temps à gérer votre atelier.</span>
           </h1>
-          <p class="hero__lead">À partir de votre chiffrage, APS compare les prix, les stocks et les délais de vos fournisseurs habituels, avec vos remises. Vous choisissez les pièces adaptées à chaque dossier, sans multiplier les recherches.</p>
+          <p class="hero__lead">Depuis votre chiffrage PDF, comparez prix, stocks et délais chez vos fournisseurs — avec vos remises — puis suivez chaque commande jusqu'à la livraison.</p>
           <div class="tag-row u-mb-4">
             <span class="tag-pill tag-pill--oem">Pièces d'origine</span>
             <span class="tag-pill tag-pill--eq">Qualité équivalente</span>
@@ -815,12 +1176,12 @@
     <div class="container">
       <p class="trust-band__label">Ils nous font confiance</p>
       <div class="trust-band__logos">
-        <img src="assets/img/logo-morel.jpg" alt="Carrosserie Morel" width="124" height="64" loading="lazy" />
-        <img src="assets/img/logo-buton.jpg" alt="Carrosserie Buton" width="124" height="64" loading="lazy" />
-        <img src="assets/img/PremiumPartners_logo_black_1c.png" alt="RM Partners" width="124" height="64" loading="lazy" />
-        <img src="assets/img/arenales.jpg" alt="Carrosserie ARENALES" width="124" height="64" loading="lazy" />
-        <img src="assets/img/gnani.jpg" alt="Gnani" width="124" height="64" loading="lazy" />
-        <img src="assets/img/turco.avif" alt="Turco" width="124" height="64" loading="lazy" />
+        <img src="assets/img/logo-morel.jpg" alt="Carrosserie Morel" width="124" height="64" decoding="async" />
+        <img src="assets/img/logo-buton.jpg" alt="Carrosserie Buton" width="124" height="64" decoding="async" />
+        <img src="assets/img/PremiumPartners_logo_black_1c.png" alt="RM Partners" width="124" height="64" decoding="async" />
+        <img src="assets/img/arenales.jpg" alt="Carrosserie ARENALES" width="124" height="64" decoding="async" />
+        <img src="assets/img/gnani.jpg" alt="Carrosserie Gnani" width="124" height="64" decoding="async" />
+        <img src="assets/img/Logo_Carrosserie_laronze_bouvet.png" alt="Carrosserie Laronze Bouvet" width="124" height="64" decoding="async" />
       </div>
     </div>
   </div>
@@ -867,56 +1228,54 @@
   </section>
 
   <!-- GUIDE -->
-  <section id="guide" class="section section--light">
+  <section id="guide" class="section section--light" aria-labelledby="guide-title">
     <div class="container">
-      <div class="guide-grid">
-        <div class="u-reveal">
+      <div class="guide-intro">
+        <div class="guide-intro__copy u-reveal">
           <p class="section-kicker">Votre guide</p>
-          <h2 class="section-title">On connaît le quotidien d'une carrosserie</h2>
-          <p class="guide-empathy">Le magasinier qui rappelle le même fournisseur trois fois dans la journée. Le dossier bloqué en attendant une réponse mail. La commande qui repose sur une seule personne expérimentée. APS est né pour simplifier ça — sans toucher à vos fournisseurs ni à vos remises.</p>
-          <h3 class="u-fw-900 u-mb-3">Ce que changent les ateliers</h3>
-          <p class="section-sub u-mb-0">Les trois gains les plus fréquents — mesurés et détaillés dans la section Preuves.</p>
-          <div class="outcome-grid">
-            <article class="card card--flat u-reveal">
-              <div class="card__body">
-                <svg class="icon u-text-accent-dark u-mb-3" aria-hidden="true"><use href="#icon-search"/></svg>
-                <h3>Temps de recherche réduit</h3>
-                <p class="u-text-muted u-mt-2">Une seule recherche remplace les appels, mails et onglets multiples sur chaque dossier.</p>
-              </div>
-            </article>
-            <article class="card card--flat u-reveal">
-              <div class="card__body">
-                <svg class="icon u-text-accent-dark u-mb-3" aria-hidden="true"><use href="#icon-euro"/></svg>
-                <h3>Marge mieux captée</h3>
-                <p class="u-text-muted u-mt-2">Vous comparez prix, dispo et délai sur la même base avant de commander.</p>
-              </div>
-            </article>
-            <article class="card card--flat u-reveal">
-              <div class="card__body">
-                <svg class="icon u-text-accent-dark u-mb-3" aria-hidden="true"><use href="#icon-workshop"/></svg>
-                <h3>Commande déléguable</h3>
-                <p class="u-text-muted u-mt-2">Le processus est assez simple pour être pris en charge par le magasin ou l'atelier.</p>
-              </div>
-            </article>
-          </div>
-          <div class="u-gap-actions u-mt-5">
-            <a class="btn" href="#preuve">Voir les preuves terrain</a>
-            <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
-          </div>
+          <h2 id="guide-title" class="section-title">On connaît le quotidien d'une carrosserie</h2>
+          <p class="guide-empathy">Relances fournisseur, dossiers en attente, commandes qui reposent sur une seule personne : APS simplifie le quotidien — sans toucher à vos fournisseurs ni à vos remises.</p>
         </div>
-        <div class="guide-photo u-reveal">
+        <div class="guide-intro__media guide-photo u-reveal">
           <picture>
-            <source type="image/avif" srcset="assets/img/atelier-equipe-640.avif 640w, assets/img/atelier-equipe-960.avif 960w, assets/img/atelier-equipe-1280.avif 1280w" sizes="(max-width:980px) 100vw, 540px" />
-            <source type="image/webp" srcset="assets/img/atelier-equipe-640.webp 640w, assets/img/atelier-equipe-960.webp 960w, assets/img/atelier-equipe-1280.webp 1280w" sizes="(max-width:980px) 100vw, 540px" />
+            <source type="image/avif" srcset="assets/img/atelier-equipe-640.avif 640w, assets/img/atelier-equipe-960.avif 960w, assets/img/atelier-equipe-1280.avif 1280w" sizes="(max-width:980px) 100vw, min(540px, 46vw)" />
+            <source type="image/webp" srcset="assets/img/atelier-equipe-640.webp 640w, assets/img/atelier-equipe-960.webp 960w, assets/img/atelier-equipe-1280.webp 1280w" sizes="(max-width:980px) 100vw, min(540px, 46vw)" />
             <img src="assets/img/atelier-equipe-960.webp" alt="Équipe carrosserie au travail" width="960" height="540" loading="lazy" />
           </picture>
+        </div>
+      </div>
+      <div class="guide-outcomes">
+        <header class="guide-outcomes__head u-reveal">
+          <h3 class="guide-outcomes__title">Ce que changent les ateliers</h3>
+          <p class="guide-outcomes__sub">Les trois gains les plus fréquents — mesurés et détaillés dans la section Preuves.</p>
+        </header>
+        <div class="guide-outcomes__grid">
+          <article class="guide-outcome-card u-reveal">
+            <span class="icon-wrap guide-outcome-card__icon" aria-hidden="true"><svg class="icon"><use href="#icon-search"/></svg></span>
+            <h3 class="guide-outcome-card__title">Temps de recherche réduit</h3>
+            <p class="guide-outcome-card__text">Une seule recherche remplace les appels, mails et onglets multiples sur chaque dossier.</p>
+          </article>
+          <article class="guide-outcome-card u-reveal">
+            <span class="icon-wrap guide-outcome-card__icon" aria-hidden="true"><svg class="icon"><use href="#icon-euro"/></svg></span>
+            <h3 class="guide-outcome-card__title">Marge mieux captée</h3>
+            <p class="guide-outcome-card__text">Vous comparez prix, dispo et délai sur la même base avant de commander.</p>
+          </article>
+          <article class="guide-outcome-card u-reveal">
+            <span class="icon-wrap guide-outcome-card__icon" aria-hidden="true"><svg class="icon"><use href="#icon-workshop"/></svg></span>
+            <h3 class="guide-outcome-card__title">Commande déléguable</h3>
+            <p class="guide-outcome-card__text">Le processus est assez simple pour être pris en charge par le magasin ou l'atelier, qui voit où en est chaque pièce sans rappeler le fournisseur.</p>
+          </article>
+        </div>
+        <div class="guide-outcomes__actions u-reveal">
+          <a class="btn btn--primary btn--lg open-demo" href="#">Tester APS sur un de mes dossiers</a>
+          <a class="btn btn--lg" href="#preuve">Voir les preuves terrain</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- SOLUTION -->
-  <section id="solution" class="section section--light">
+  <section id="solution" class="section section--muted">
     <div class="container">
       <p class="section-kicker u-reveal">La solution</p>
       <h2 class="section-title u-reveal">Accédez directement aux stocks de vos fournisseurs, en temps réel</h2>
@@ -937,7 +1296,7 @@
           <p>Vous voyez tout, vous décidez vite. Le processus est assez simple pour être délégué à l'équipe.</p>
         </article>
       </div>
-      <p class="hint u-mb-6 u-reveal">Besoin d'une pièce hors dossier ? La recherche manuelle par référence reste disponible à tout moment.</p>
+      <p class="hint u-mb-6 u-reveal">Une fois la pièce choisie, <a href="#commandes">le suivi se fait dans APS</a> — du dossier jusqu'à la livraison. Besoin d'une pièce hors dossier ? La recherche manuelle par référence reste disponible à tout moment.</p>
       <div class="browser-shot u-max-900 u-reveal">
         <div class="browser-shot__top">
           <div class="device-frame__dots" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -949,16 +1308,6 @@
           <img src="assets/img/exemple_resultat_recherche-900.webp" alt="Exemple de résultat de recherche APS" width="900" height="563" loading="lazy" />
         </picture>
       </div>
-      <div class="u-mt-6">
-        <h3 class="u-fw-900 u-mb-3 u-reveal">Ce que ça change concrètement</h3>
-        <p class="section-sub u-reveal">Moins de temps perdu, moins d'erreurs, plus de marge. L'outil est rentable dès les premiers jours.</p>
-      </div>
-      <div class="grid grid--2">
-        <article class="card card--flat u-reveal"><div class="card__body"><h3>Tout centralisé, moins d'allers-retours</h3><p class="u-text-muted u-mt-2">Fini les appels téléphoniques et les emails sans réponse. Une recherche, un écran, tous vos fournisseurs.</p></div></article>
-        <article class="card card--flat u-reveal"><div class="card__body"><h3>Moins d'erreurs, plus de rentabilité</h3><p class="u-text-muted u-mt-2">Vous comparez en temps réel : meilleur prix, bonne dispo, bon délai. Votre stratégie d'achat devient visible et optimisée.</p></div></article>
-        <article class="card card--flat u-reveal"><div class="card__body"><h3>Un processus fluide, facile à déléguer</h3><p class="u-text-muted u-mt-2">Plus besoin d'être expert pour commander au bon endroit. Le magasin ou l'atelier peut prendre le relais sans risque.</p></div></article>
-        <article class="card card--flat u-reveal"><div class="card__body"><h3>Dossiers débloqués, véhicules libérés plus vite</h3><p class="u-text-muted u-mt-2">Moins de reliquats subis, moins d'immobilisation. Vous répondez plus vite à l'expert et au client.</p></div></article>
-      </div>
       <div class="u-gap-actions u-gap-actions--center u-mt-6">
         <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
         <a class="btn" href="#roi">Calculer ma rentabilité</a>
@@ -966,16 +1315,103 @@
     </div>
   </section>
 
+  <!-- COMMANDES -->
+  <section id="commandes" class="section section--light">
+    <div class="container">
+      <p class="section-kicker u-reveal">Mes commandes</p>
+      <h2 class="section-title u-reveal">Suivez chaque pièce, du dossier jusqu'à la livraison</h2>
+      <p class="section-sub u-reveal">Toutes vos commandes — direct, email, panier ou saisie manuelle — au même endroit, par dossier. Fini les relances et l'historique éparpillé dans les mails.</p>
+      <div class="bonus-section-grid commandes-grid u-reveal">
+        <div class="feature-panel">
+          <div class="bonus-features">
+            <div class="bonus-feature"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Vue par dossier de réparation</div><div class="bonus-feature__desc">OR, client, montant et avancement regroupés ; alerte sur chaque mise à jour fournisseur non lue.</div></div></div>
+            <div class="bonus-feature"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-truck"/></svg></span><div><div class="bonus-feature__title">Mises à jour fournisseur simplifiées</div><div class="bonus-feature__desc">Via APS ou le lien email, sans compte obligatoire : statuts, tarifs et expédition. Relance en un clic.</div></div></div>
+            <div class="bonus-feature"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-euro"/></svg></span><div><div class="bonus-feature__title">Achats lisibles sans tableur</div><div class="bonus-feature__desc">Montants et volumes par période, fournisseur ou marque, remises comprises.</div></div></div>
+          </div>
+          <div class="tag-row u-mt-4" aria-label="Exemples de statuts pièce">
+            <span class="tag-pill status-pill">Commandée</span>
+            <span class="tag-pill status-pill">En préparation</span>
+            <span class="tag-pill status-pill">Expédiée</span>
+            <span class="tag-pill status-pill status-pill--ok">Livrée</span>
+            <span class="tag-pill status-pill status-pill--warn">Reliquat</span>
+            <span class="tag-pill status-pill">Retour / avoir</span>
+          </div>
+          <p class="hint u-mt-3">Les totaux intègrent les frais de livraison. Si le fournisseur corrige un tarif, la ligne l'indique clairement.</p>
+          <p class="u-text-muted u-mt-3">Moins de reliquats subis, moins d'immobilisation : vous répondez plus vite à l'expert et au client.</p>
+        </div>
+        <div class="commandes-media">
+          <div class="browser-shot">
+            <div class="browser-shot__top">
+              <div class="device-frame__dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="browser-shot__url">autopartselect.fr — Suivi des achats</div>
+            </div>
+            <picture>
+              <source type="image/avif" srcset="assets/img/suivi_achats-640.avif 640w, assets/img/suivi_achats-960.avif 960w, assets/img/suivi_achats-1280.avif 1280w" sizes="(max-width:640px) 100vw, 560px" />
+              <source type="image/webp" srcset="assets/img/suivi_achats-640.webp 640w, assets/img/suivi_achats-960.webp 960w, assets/img/suivi_achats-1280.webp 1280w" sizes="(max-width:640px) 100vw, 560px" />
+              <img src="assets/img/suivi_achats-960.webp" alt="Tableau de bord Suivi des achats : total, nombre de commandes, évolution et répartitions par fournisseur et par marque" width="960" height="530" loading="lazy" />
+            </picture>
+          </div>
+          <p class="hint u-mt-2">Capture : onglet Suivi des achats — lecture d'activité sur la période sélectionnée.</p>
+        </div>
+      </div>
+      <p class="hint u-mt-4 u-reveal">Les commandes enregistrées dans APS <a href="#rfa">alimentent aussi votre tableau de bord RFA</a> — paliers et remises de fin d'année par fournisseur.</p>
+    </div>
+  </section>
+
+  <!-- RFA -->
+  <section id="rfa" class="section section--muted">
+    <div class="container">
+      <p class="section-kicker u-reveal">Remises de fin d'année</p>
+      <h2 class="section-title u-reveal">Suivez vos RFA fournisseur par fournisseur</h2>
+      <p class="section-sub u-reveal">RFA acquise, paliers et projection par fournisseur — en un coup d'œil, sur l'exercice en cours ou les années précédentes.</p>
+      <div class="grid grid--3 u-mb-6">
+        <article class="card card--flat u-reveal">
+          <div class="card__body">
+            <div class="icon-wrap u-mb-3"><svg class="icon" aria-hidden="true"><use href="#icon-euro"/></svg></div>
+            <h3>RFA acquise et cumul annuel</h3>
+            <p class="u-text-muted u-mt-2">Cumul annuel et tendance vs. l'an passé ; historique sur cinq exercices.</p>
+          </div>
+        </article>
+        <article class="card card--flat u-reveal">
+          <div class="card__body">
+            <div class="icon-wrap u-mb-3"><svg class="icon" aria-hidden="true"><use href="#icon-clock"/></svg></div>
+            <h3>Palier en cours et projection</h3>
+            <p class="u-text-muted u-mt-2">CA, palier atteint, reste à faire pour le suivant et projection de fin d'année.</p>
+          </div>
+        </article>
+        <article class="card card--flat u-reveal">
+          <div class="card__body">
+            <div class="icon-wrap u-mb-3"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></div>
+            <h3>Achats APS et volume hors logiciel</h3>
+            <p class="u-text-muted u-mt-2">Achats APS en automatique ; déclaration à date pour le volume antérieur ou hors logiciel.</p>
+          </div>
+        </article>
+      </div>
+      <div class="browser-shot u-max-900 u-reveal">
+        <div class="browser-shot__top">
+          <div class="device-frame__dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="browser-shot__url">autopartselect.fr — Gestion RFA</div>
+        </div>
+        <picture>
+          <source type="image/avif" srcset="assets/img/suivi_rfa-640.avif 640w, assets/img/suivi_rfa-960.avif 960w, assets/img/suivi_rfa-1280.avif 1280w" sizes="(max-width:900px) 100vw, 900px" />
+          <source type="image/webp" srcset="assets/img/suivi_rfa-640.webp 640w, assets/img/suivi_rfa-960.webp 960w, assets/img/suivi_rfa-1280.webp 1280w" sizes="(max-width:900px) 100vw, 900px" />
+          <img src="assets/img/suivi_rfa-960.webp" alt="Tableau de bord Gestion RFA : RFA acquise cumulée, cartes fournisseur avec CA actuel, palier atteint, barre d'avancement et projection de fin d'année" width="960" height="369" loading="lazy" />
+        </picture>
+      </div>
+      <p class="hint u-mt-2 u-reveal">Capture : tableau de bord Gestion RFA — vue par fournisseur pour l'exercice sélectionné.</p>
+    </div>
+  </section>
+
   <!-- PREUVE -->
-  <section id="preuve" class="section section--muted">
+  <section id="preuve" class="section section--light">
     <div class="container">
       <p class="section-kicker u-reveal">Preuves</p>
       <h2 class="section-title u-reveal">Déjà adopté sur le terrain</h2>
       <p class="section-sub u-reveal">Des carrossiers qui l'utilisent au quotidien, des chiffres réels, des transformations concrètes.</p>
       <div class="grid grid--3 u-mb-4">
-        <article class="card card--raised u-reveal"><div class="card__body"><h3 class="stat-value">Jusqu'à <span class="counter" data-target="20">20</span> min gagnées / dossier</h3><p class="u-text-muted u-mt-2">Hypothèse réaliste du calculateur : 30 min aujourd'hui, ~10 min avec APS pour chercher et décider. Validez sur vos dossiers en diagnostic.</p></div></article>
-        <article class="card card--raised u-reveal"><div class="card__body"><h3 class="stat-value">+<span class="counter" data-target="3000">3&nbsp;000</span> dossiers / mois</h3><p class="u-text-muted u-mt-2">Utilisation terrain continue dans les carrosseries abonnées APS.</p></div></article>
-        <article class="card card--raised u-reveal"><div class="card__body"><h3 class="stat-value">+<span class="counter" data-target="15000">15&nbsp;000</span> références / mois</h3><p class="u-text-muted u-mt-2">Volume de recherches sur la plateforme APS.</p></div></article>
+        <article class="card card--raised u-reveal"><div class="card__body"><p class="stat-value u-mb-0">Jusqu'à <span class="counter" data-target="20">20</span> min gagnées / dossier</p><p class="u-text-muted u-mt-2">Scénario réaliste : 30 min aujourd'hui, ~10 min avec APS. À valider en diagnostic.</p></div></article>
+        <article class="card card--raised u-reveal"><div class="card__body"><p class="stat-value u-mb-0">+<span class="counter" data-target="3000">3&nbsp;000</span> dossiers / mois</p><p class="u-text-muted u-mt-2">Utilisation continue dans les carrosseries abonnées.</p></div></article>
+        <article class="card card--raised u-reveal"><div class="card__body"><p class="stat-value u-mb-0">+<span class="counter" data-target="15000">15&nbsp;000</span> références / mois</p><p class="u-text-muted u-mt-2">Volume de recherches sur la plateforme.</p></div></article>
       </div>
       <div class="card card--raised u-mb-6 u-reveal">
         <div class="card__body">
@@ -985,8 +1421,8 @@
             <div class="card card--flat card--logo"><img src="assets/img/logo-buton.jpg" alt="Carrosserie Buton" width="120" height="48" loading="lazy" /><span class="logo-name">Carrosserie Buton</span></div>
             <div class="card card--flat card--logo"><img src="assets/img/PremiumPartners_logo_black_1c.png" alt="RM Partners" width="140" height="48" loading="lazy" /><span class="logo-name">RM Partners</span></div>
             <div class="card card--flat card--logo"><img src="assets/img/arenales.jpg" alt="Carrosserie ARENALES" width="120" height="48" loading="lazy" /><span class="logo-name">Carrosserie Arenales</span></div>
-            <div class="card card--flat card--logo"><img src="assets/img/gnani.jpg" alt="Gnani" width="120" height="48" loading="lazy" /><span class="logo-name">Carrosserie Gnani</span></div>
-            <div class="card card--flat card--logo"><img src="assets/img/turco.avif" alt="Turco" width="120" height="48" loading="lazy" /><span class="logo-name">Carrosserie Turco</span></div>
+            <div class="card card--flat card--logo"><img src="assets/img/gnani.jpg" alt="Carrosserie Gnani" width="120" height="48" loading="lazy" /><span class="logo-name">Carrosserie Gnani</span></div>
+            <div class="card card--flat card--logo"><img src="assets/img/Logo_Carrosserie_laronze_bouvet.png" alt="Carrosserie Laronze Bouvet" width="120" height="48" loading="lazy" /><span class="logo-name">Carrosserie Laronze Bouvet</span></div>
           </div>
         </div>
       </div>
@@ -1008,7 +1444,7 @@
             <h3 class="aar-card-title">Stratégie d'achat</h3>
             <div class="aar-flow">
               <div class="aar-step aar-step--before"><p class="aar-label aar-label--before">Avant</p><p class="aar-value">Commandes à l'aveugle, reliquats subis, erreurs de choix faute de visibilité</p></div>
-              <div class="aar-step aar-step--after"><p class="aar-label aar-label--after">Après</p><p class="aar-value">Vue complète sur la dispo réelle, comparaison immédiate, meilleur rapport prix/délai</p></div>
+              <div class="aar-step aar-step--after"><p class="aar-label aar-label--after">Après</p><p class="aar-value">Vue complète sur la dispo réelle, comparaison immédiate, meilleur rapport prix/délai — et pilotage des paliers RFA fournisseur par fournisseur</p></div>
               <div class="aar-step aar-step--result"><p class="aar-label aar-label--result">Résultat</p><p class="aar-value">Moins d'erreurs, plus de marge, véhicules libérés plus vite</p></div>
             </div>
           </div>
@@ -1020,6 +1456,16 @@
               <div class="aar-step aar-step--before"><p class="aar-label aar-label--before">Avant</p><p class="aar-value">Tout repose sur une seule personne, impossible à déléguer</p></div>
               <div class="aar-step aar-step--after"><p class="aar-label aar-label--after">Après</p><p class="aar-value">Processus fluide et structuré, déléguable au magasin ou à l'atelier</p></div>
               <div class="aar-step aar-step--result"><p class="aar-label aar-label--result">Résultat</p><p class="aar-value">Le dirigeant se libère, l'équipe gagne en autonomie</p></div>
+            </div>
+          </div>
+        </article>
+        <article class="card card--raised u-reveal">
+          <div class="card__body">
+            <h3 class="aar-card-title">Suivi de commande</h3>
+            <div class="aar-flow">
+              <div class="aar-step aar-step--before"><p class="aar-label aar-label--before">Avant</p><p class="aar-value">Relances fournisseur, statuts éparpillés, historique à reconstituer dans les mails</p></div>
+              <div class="aar-step aar-step--after"><p class="aar-label aar-label--after">Après</p><p class="aar-value">Un statut par pièce, par commande et par dossier — avec alerte quand le fournisseur met à jour</p></div>
+              <div class="aar-step aar-step--result"><p class="aar-label aar-label--result">Résultat</p><p class="aar-value">Le dossier avance sans chasse à l'info ; les achats se lisent sans tableur</p></div>
             </div>
           </div>
         </article>
@@ -1045,7 +1491,7 @@
   </section>
 
   <!-- DÉMARRAGE -->
-  <section id="demarrage" class="section section--light">
+  <section id="demarrage" class="section section--muted">
     <div class="container">
       <p class="section-kicker u-reveal">Comment ça marche</p>
       <h2 class="section-title u-reveal">Concrètement, comment ça se passe ?</h2>
@@ -1069,42 +1515,6 @@
     </div>
   </section>
 
-  <!-- MODAL DÉMO -->
-  <div id="demo-modal" class="modal-overlay" aria-hidden="true">
-    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
-      <div class="modal-header">
-        <h2 id="modal-title" class="section-title u-mb-0">Testons APS sur un de vos dossiers</h2>
-        <button type="button" class="modal-close" aria-label="Fermer" data-close-modal>&times;</button>
-      </div>
-      <div class="card__body">
-        <p class="section-sub u-mb-4">30 min : on prend un dossier que vous avez en cours et on regarde comment APS peut vous aider, avec vos fournisseurs. Estimation de votre gain incluse, essai 1 mois si vous voulez.</p>
-        <div id="modal-roi-estimate" class="card card--accent u-hidden u-mb-4">
-          <div class="card__body">
-            <h3 class="u-mb-3">Votre estimation actuelle</h3>
-            <p id="modal-roi-text" class="u-fw-700">—</p>
-          </div>
-        </div>
-        <form class="form" method="post" action="#" id="demo-form">
-          <div id="demo-form-feedback" class="form-feedback" role="alert" aria-live="polite" hidden></div>
-          <div class="form--2">
-            <div class="field"><label for="prenom">Prénom</label><input id="prenom" name="prenom" placeholder="Ex : Loïc" required /></div>
-            <div class="field"><label for="societe">Carrosserie / Groupe</label><input id="societe" name="societe" placeholder="Ex : Carrosserie Dupont" required /></div>
-          </div>
-          <div class="form--2">
-            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="vous@carrosserie.fr" required /></div>
-            <div class="field"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel" placeholder="06 12 34 56 78" required /></div>
-          </div>
-          <div class="form--2">
-            <div class="field"><label for="codePostal">Code postal</label><input id="codePostal" name="codePostal" type="text" inputmode="text" autocomplete="postal-code" maxlength="20" placeholder="Ex : 75001" /></div>
-            <div class="field"><label for="ville">Ville</label><input id="ville" name="ville" type="text" autocomplete="address-level2" maxlength="100" placeholder="Ex : Paris" /></div>
-          </div>
-          <button id="modal-submit-btn" class="btn btn--primary btn--block" type="submit">Tester APS sur un de mes dossiers</button>
-          <p class="hint u-text-center">On vous rappelle rapidement. Sans engagement.</p>
-        </form>
-      </div>
-    </div>
-  </div>
-
   <!-- ROI -->
   <section id="roi" class="section section--dark">
     <div class="container">
@@ -1121,7 +1531,7 @@
           <h2 class="section-title">Un outil rentable dès le premier mois</h2>
           <p class="section-sub">Le temps gagné sur chaque dossier + la marge récupérée sur vos achats couvrent largement l'abonnement. Faites le calcul avec vos chiffres.</p>
           <div class="stakes-consequences">
-            <svg class="icon u-text-accent" aria-hidden="true"><use href="#icon-alert"/></svg>
+            <svg class="icon u-text-warn" aria-hidden="true"><use href="#icon-alert"/></svg>
             <span>Chaque semaine sans vue d'ensemble : des reliquats subis qui immobilisent un véhicule, des pièces payées plus cher par habitude, et une commande qui dépend toujours de la même personne.</span>
           </div>
         </div>
@@ -1218,17 +1628,14 @@
               </div>
             </div>
             <div class="list">
-              <div class="list__item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Lecture automatique de vos chiffrages en PDF</div></div>
-              <div class="list__item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Recherche multi-fournisseurs (stock/prix/délai)</div></div>
-              <div class="list__item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Connexion à vos comptes fournisseurs existants</div></div>
-              <div class="list__item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Comparaison et décision plus rapide sur chaque dossier</div></div>
+              <div class="list__item"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Lecture automatique de vos chiffrages en PDF</div></div>
+              <div class="list__item"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Recherche multi-fournisseurs (stock/prix/délai)</div></div>
+              <div class="list__item"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Connexion à vos comptes fournisseurs existants</div></div>
+              <div class="list__item"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Comparaison et décision plus rapide sur chaque dossier</div></div>
+              <div class="list__item"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Suivi des commandes et lecture des achats</div></div>
+              <div class="list__item"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Suivi RFA par fournisseur (paliers et projection)</div></div>
             </div>
-            <div class="bonus-block">
-              <div class="bonus-header">Inclus dans l'abonnement</div>
-              <div class="bonus-item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="name">Marketplace APS</div><div class="desc">Vendez votre stock à la communauté APS</div></div></div>
-              <div class="bonus-item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="name">Recherche reliquats</div><div class="desc">APS recherche chaque nuit les pièces introuvables</div></div></div>
-              <div class="bonus-item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="name">Recherche web globale</div><div class="desc">En plus de vos fournisseurs pour les cas complexes</div></div></div>
-            </div>
+            <p class="hint u-mt-4">Marketplace, recherche reliquats et recherche web globale : <a href="#marketplace">détail des outils inclus</a>.</p>
             <div class="u-gap-actions u-mt-4">
               <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
               <a class="btn" href="#roi">Calculer ma rentabilité</a>
@@ -1241,14 +1648,15 @@
             <p class="hint">Vous payez l'installation, puis l'abonnement ne démarre qu'au bout d'un mois si la valeur est au rendez-vous.</p>
             <div class="card card--accent u-mt-3">
               <div class="card__body">
-                <h3 class="u-mb-3">🎁 1 mois d'essai (abonnement offert)</h3>
+                <p class="section-kicker u-mb-2">Offert</p>
+                <h3 class="u-mb-3">1 mois d'essai (abonnement offert)</h3>
                 <p>0€ d'abonnement le premier mois. Vous continuez uniquement si APS vous apporte un gain concret.</p>
               </div>
             </div>
             <div class="list">
-              <div class="list__item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Installation payante (paramétrage + connexion fournisseurs)</div></div>
-              <div class="list__item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Abonnement à partir du 2ème mois si vous continuez</div></div>
-              <div class="list__item"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Engagement 12 mois — renouvelable</div></div>
+              <div class="list__item"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Installation payante (paramétrage + connexion fournisseurs)</div></div>
+              <div class="list__item"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Abonnement à partir du 2ème mois si vous continuez</div></div>
+              <div class="list__item"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div>Engagement 12 mois — renouvelable</div></div>
             </div>
             <div class="card card--flat u-mt-3">
               <div class="card__body">
@@ -1267,62 +1675,71 @@
   </section>
 
   <!-- BONUS ZONE -->
-  <div class="bonus-zone">
-    <div class="container">
+  <section class="bonus-zone" aria-labelledby="bonus-included-tools-title">
+    <div class="container bonus-zone__intro">
       <p class="section-kicker u-text-accent-dark u-reveal">Inclus dans votre abonnement</p>
-      <h2 class="section-title u-reveal">Deux outils complémentaires</h2>
-      <p class="section-sub u-reveal">En plus du moteur de recherche, votre abonnement inclut la marketplace et la recherche reliquats.</p>
+      <h2 id="bonus-included-tools-title" class="section-title u-reveal">Deux outils complémentaires offerts</h2>
+      <p class="section-sub u-reveal">En plus du moteur de recherche, la marketplace et la recherche reliquats sont incluses — sans supplément.</p>
     </div>
-    <div class="container" id="marketplace">
-      <div class="bonus-section-grid u-reveal">
-        <div>
-          <div class="bonus-tag">Inclus</div>
-          <p class="section-kicker u-text-accent-dark">Marketplace APS</p>
-          <h2 class="section-title">Votre stock dormant devient du cash</h2>
-          <p class="section-sub">Publiez vos pièces inutilisées, trouvez la pièce rare introuvable ailleurs, échangez entre carrossiers abonnés APS.</p>
-          <div class="bonus-features">
-            <div class="bonus-feature"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Publiez vos reliquats en quelques clics</div><div class="bonus-feature__desc">Photo, référence, prix, état : votre stock visible par toute la communauté APS.</div></div></div>
-            <div class="bonus-feature"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Trouvez la pièce rare introuvable ailleurs</div><div class="bonus-feature__desc">Accédez au stock des autres carrossiers quand vos fournisseurs sont à sec.</div></div></div>
-            <div class="bonus-feature"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Réseau de confiance entre professionnels</div><div class="bonus-feature__desc">Uniquement entre carrossiers abonnés APS — des pairs qui connaissent la qualité attendue.</div></div></div>
+    <div class="container bonus-stack">
+      <article class="bonus-panel u-reveal" id="marketplace" aria-labelledby="marketplace-title">
+        <div class="bonus-panel__grid">
+          <div class="bonus-panel__copy">
+            <div class="bonus-panel__head">
+              <span class="bonus-panel__index"><span class="u-sr-only">Outil offert 1 sur 2</span><span aria-hidden="true">01</span></span>
+            </div>
+            <p class="section-kicker u-text-accent-dark">Marketplace APS</p>
+            <h3 id="marketplace-title" class="section-title">Votre stock dormant devient du cash</h3>
+            <p class="section-sub">Publiez vos pièces inutilisées, trouvez la pièce rare introuvable ailleurs, échangez entre carrossiers abonnés APS.</p>
+            <div class="bonus-features">
+              <div class="bonus-feature"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Publiez vos reliquats en quelques clics</div><div class="bonus-feature__desc">Photo, référence, prix, état : votre stock visible par toute la communauté APS.</div></div></div>
+              <div class="bonus-feature"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Trouvez la pièce rare introuvable ailleurs</div><div class="bonus-feature__desc">Accédez au stock des autres carrossiers quand vos fournisseurs sont à sec.</div></div></div>
+              <div class="bonus-feature"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Réseau de confiance entre professionnels</div><div class="bonus-feature__desc">Uniquement entre carrossiers abonnés APS — des pairs qui connaissent la qualité attendue.</div></div></div>
+            </div>
+          </div>
+          <div class="bonus-panel__media">
+            <div class="browser-shot">
+              <div class="browser-shot__top">
+                <div class="device-frame__dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="browser-shot__url">autopartselect.fr — Marketplace</div>
+              </div>
+              <picture>
+                <source type="image/avif" srcset="assets/img/markeplace-640.avif 640w, assets/img/markeplace-960.avif 960w, assets/img/markeplace-1280.avif 1280w" sizes="(max-width:640px) 100vw, 560px" />
+                <source type="image/webp" srcset="assets/img/markeplace-640.webp 640w, assets/img/markeplace-960.webp 960w, assets/img/markeplace-1280.webp 1280w" sizes="(max-width:640px) 100vw, 560px" />
+                <img src="assets/img/markeplace-960.webp" alt="Interface Marketplace AutoPartSelect" width="960" height="600" loading="lazy" />
+              </picture>
+            </div>
           </div>
         </div>
-        <div class="browser-shot">
-          <div class="browser-shot__top">
-            <div class="device-frame__dots" aria-hidden="true"><span></span><span></span><span></span></div>
-            <div class="browser-shot__url">autopartselect.fr — Marketplace</div>
+      </article>
+      <article class="bonus-panel bonus-panel--reverse u-reveal" id="reliquats" aria-labelledby="reliquats-title">
+        <div class="bonus-panel__grid">
+          <div class="bonus-panel__media">
+            <div class="guide-photo">
+              <picture>
+                <source type="image/avif" srcset="assets/img/recherche_reliquat-640.avif 640w, assets/img/recherche_reliquat-960.avif 960w, assets/img/recherche_reliquat-1280.avif 1280w" sizes="(max-width:640px) 100vw, 560px" />
+                <source type="image/webp" srcset="assets/img/recherche_reliquat-640.webp 640w, assets/img/recherche_reliquat-960.webp 960w, assets/img/recherche_reliquat-1280.webp 1280w" sizes="(max-width:640px) 100vw, 560px" />
+                <img src="assets/img/recherche_reliquat-960.webp" alt="Atelier la nuit : écran APS affichant des phares disponibles, véhicule en attente de pièces au fond" width="960" height="600" loading="lazy" />
+              </picture>
+            </div>
           </div>
-          <picture>
-            <source type="image/avif" srcset="assets/img/markeplace-640.avif 640w, assets/img/markeplace-960.avif 960w, assets/img/markeplace-1280.avif 1280w" sizes="(max-width:640px) 100vw, 560px" />
-            <source type="image/webp" srcset="assets/img/markeplace-640.webp 640w, assets/img/markeplace-960.webp 960w, assets/img/markeplace-1280.webp 1280w" sizes="(max-width:640px) 100vw, 560px" />
-            <img src="assets/img/markeplace-960.webp" alt="Interface Marketplace AutoPartSelect" width="960" height="600" loading="lazy" />
-          </picture>
-        </div>
-      </div>
-    </div>
-    <div class="container"><hr class="bonus-divider"></div>
-    <div class="container" id="reliquats">
-      <div class="bonus-section-grid bonus-section-grid--reversed u-reveal">
-        <div class="guide-photo">
-          <picture>
-            <source type="image/avif" srcset="assets/img/recherche_reliquat-640.avif 640w, assets/img/recherche_reliquat-960.avif 960w, assets/img/recherche_reliquat-1280.avif 1280w" sizes="(max-width:640px) 100vw, 560px" />
-            <source type="image/webp" srcset="assets/img/recherche_reliquat-640.webp 640w, assets/img/recherche_reliquat-960.webp 960w, assets/img/recherche_reliquat-1280.webp 1280w" sizes="(max-width:640px) 100vw, 560px" />
-            <img src="assets/img/recherche_reliquat-960.webp" alt="Pièce auto recherchée par APS" width="960" height="600" loading="lazy" />
-          </picture>
-        </div>
-        <div>
-          <div class="bonus-tag">Inclus</div>
-          <p class="section-kicker u-text-accent-dark">Recherche reliquats</p>
-          <h2 class="section-title">Vos pièces introuvables, cherchées chaque nuit</h2>
-          <p class="section-sub">APS interroge vos fournisseurs chaque nuit jusqu'à ce qu'une pièce réapparaisse. Vous êtes alerté le matin.</p>
-          <div class="bonus-features">
-            <div class="bonus-feature"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Mise en file d'attente en 1 clic</div><div class="bonus-feature__desc">Pièce indisponible ? APS interroge vos fournisseurs chaque nuit automatiquement.</div></div></div>
-            <div class="bonus-feature"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Notification dès que c'est disponible</div><div class="bonus-feature__desc">Rapport le matin avec les pièces trouvées, leur prix et leur source.</div></div></div>
-            <div class="bonus-feature"><span class="check"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Zéro temps perdu sur les cas complexes</div><div class="bonus-feature__desc">Les dossiers bloqués avancent sans que vous ayez à y penser.</div></div></div>
+          <div class="bonus-panel__copy">
+            <div class="bonus-panel__head">
+              <span class="bonus-panel__index"><span class="u-sr-only">Outil offert 2 sur 2</span><span aria-hidden="true">02</span></span>
+            </div>
+            <p class="section-kicker u-text-accent-dark">Recherche reliquats</p>
+            <h3 id="reliquats-title" class="section-title">Vos pièces introuvables, cherchées chaque nuit</h3>
+            <p class="section-sub">APS interroge vos fournisseurs chaque nuit jusqu'à ce qu'une pièce réapparaisse. Vous êtes alerté le matin.</p>
+            <div class="bonus-features">
+              <div class="bonus-feature"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Mise en file d'attente en 1 clic</div><div class="bonus-feature__desc">Pièce indisponible ? APS interroge vos fournisseurs chaque nuit automatiquement.</div></div></div>
+              <div class="bonus-feature"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Notification dès que c'est disponible</div><div class="bonus-feature__desc">Rapport le matin avec les pièces trouvées, leur prix et leur source.</div></div></div>
+              <div class="bonus-feature"><span class="check check--circle"><svg class="icon" aria-hidden="true"><use href="#icon-check"/></svg></span><div><div class="bonus-feature__title">Zéro temps perdu sur les cas complexes</div><div class="bonus-feature__desc">Les dossiers bloqués avancent sans que vous ayez à y penser.</div></div></div>
+            </div>
           </div>
         </div>
-      </div>
+      </article>
     </div>
-  </div>
+  </section>
 
   <!-- FAQ -->
   <section id="faq" class="section section--light">
@@ -1338,6 +1755,8 @@
         <details class="u-reveal"><summary>Que comprend l'installation ?</summary><p>Le paramétrage initial, la connexion à vos comptes fournisseurs et la validation sur un cas réel avec vous. L'objectif : que vous puissiez comparer efficacement dès les premiers dossiers.</p></details>
         <details class="u-reveal"><summary>Confidentialité : que faites-vous de mes codes fournisseurs ?</summary><p>APS utilise vos accès uniquement pour consulter les sites de vos fournisseurs dans le cadre du service. Lors de l'installation, on configure les connexions ensemble et on répond à toutes vos questions.</p></details>
         <details class="u-reveal"><summary>À qui APS n'est pas adapté ?</summary><p>Si vous travaillez avec un fournisseur unique ou un volume très faible, l'intérêt est moindre. APS devient très rentable dès que vous comparez plusieurs fournisseurs.</p></details>
+        <details class="u-reveal"><summary>Le fournisseur doit-il créer un compte pour mettre à jour une commande ?</summary><p>Non. Il peut agir depuis son espace APS ou depuis le lien reçu par email, sans compte obligatoire. Côté garage, pour une commande email, vous voyez si le lien a été envoyé, consulté ou pris en compte, et vous pouvez relancer d'un clic.</p></details>
+        <details class="u-reveal"><summary>Comment le suivi RFA prend-il en compte les achats hors APS ?</summary><p>Les commandes passées dans APS alimentent automatiquement le tableau de bord. Pour le volume déjà réalisé avant l'outil ou en dehors du logiciel, vous pouvez poser une déclaration à date : APS enregistre le montant et ne compte ensuite que les achats postérieurs à cette date, sans double comptage. L'historique des déclarations reste consultable. L'accès à la Gestion RFA est réservé aux administrateurs et aux utilisateurs garage habilités.</p></details>
       </div>
     </div>
   </section>
@@ -1349,7 +1768,7 @@
         <div class="card__body card__body--lg u-gap-actions u-gap-actions--between">
           <div>
             <div class="transformation-line">De « je cours après les infos » à « je pilote mes achats »</div>
-            <div class="u-fw-900">Toutes les pièces d'un dossier trouvées en moins d'une minute, vos véhicules dehors plus vite.</div>
+            <h2 class="section-title u-mb-0">Trouvez vos pièces en moins d'une minute, suivez-les jusqu'à la livraison</h2>
             <p class="hint u-text-light u-mt-2">Diagnostic sur vos dossiers réels + estimation de votre rentabilité + essai 1 mois offert.</p>
           </div>
           <div class="u-gap-actions">
@@ -1361,12 +1780,50 @@
     </div>
   </section>
 
+  </main>
+
+  <!-- MODAL DÉMO -->
+  <div id="demo-modal" class="modal-overlay" aria-hidden="true" inert>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+      <div class="modal-header">
+        <h2 id="modal-title" class="section-title u-mb-0">Testons APS sur un de vos dossiers</h2>
+        <button type="button" class="modal-close" aria-label="Fermer" data-close-modal>&times;</button>
+      </div>
+      <div class="card__body">
+        <p class="section-sub u-mb-4">30 min sur un dossier en cours, avec vos fournisseurs. Estimation de gain incluse ; essai 1 mois si vous le souhaitez.</p>
+        <div id="modal-roi-estimate" class="card card--accent u-hidden u-mb-4">
+          <div class="card__body">
+            <h3 class="u-mb-3">Votre estimation actuelle</h3>
+            <p id="modal-roi-text" class="u-fw-700">—</p>
+          </div>
+        </div>
+        <form class="form" method="post" action="#" id="demo-form">
+          <div id="demo-form-feedback" class="form-feedback" role="alert" aria-live="polite" hidden></div>
+          <div class="form--2">
+            <div class="field"><label for="prenom">Prénom</label><input id="prenom" name="prenom" placeholder="Ex : Loïc" required /></div>
+            <div class="field"><label for="societe">Carrosserie / Groupe</label><input id="societe" name="societe" placeholder="Ex : Carrosserie Dupont" required /></div>
+          </div>
+          <div class="form--2">
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="vous@carrosserie.fr" required /></div>
+            <div class="field"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel" placeholder="06 12 34 56 78" required /></div>
+          </div>
+          <div class="form--2">
+            <div class="field"><label for="codePostal">Code postal</label><input id="codePostal" name="codePostal" type="text" inputmode="text" autocomplete="postal-code" maxlength="20" placeholder="Ex : 75001" required /></div>
+            <div class="field"><label for="ville">Ville</label><input id="ville" name="ville" type="text" autocomplete="address-level2" maxlength="100" placeholder="Ex : Paris" required /></div>
+          </div>
+          <button id="modal-submit-btn" class="btn btn--primary btn--block" type="submit">Tester APS sur un de vos dossiers</button>
+          <p class="hint u-text-center">On vous rappelle rapidement. Sans engagement.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="container footer-inner">
       <div>&copy; <span id="year"></span> AutoPartSelect — APS Logiciel</div>
       <div class="footer-links">
-        <a href="#">Mentions légales</a>
-        <a href="#">Politique de confidentialité</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="politique-confidentialite.html">Politique de confidentialité</a>
         <a href="#" class="open-demo">Contact</a>
       </div>
     </div>
@@ -1499,6 +1956,7 @@
     function closeDemoModal(){
       modal.classList.remove('is-open');
       modal.setAttribute('aria-hidden', 'true');
+      modal.inert = true;
       document.body.classList.remove('u-body-lock');
       if (modalFocusTrap) {
         modal.removeEventListener('keydown', modalFocusTrap);
@@ -1564,6 +2022,7 @@
       lastFocusedElement = document.activeElement;
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
+      modal.inert = false;
       document.body.classList.add('u-body-lock');
       modalFocusTrap = trapFocus;
       modal.addEventListener('keydown', modalFocusTrap);
@@ -1709,8 +2168,9 @@
       if (!wrap) return;
       const video = wrap.querySelector('video');
       const poster = wrap.querySelector('.poster-overlay');
+      const playBtn = wrap.querySelector('.play-btn');
       const playLabel = wrap.querySelector('.play-label');
-      if (!poster) return;
+      if (!poster || !playBtn) return;
 
       function startPlay() {
         poster.classList.add('is-hidden');
@@ -1724,7 +2184,26 @@
         }
       }
 
-      wrap.addEventListener('click', function() {
+      function toggleFromUser(){
+        if (poster.classList.contains('is-hidden')) {
+          video.paused ? startPlay() : video.pause();
+        } else {
+          startPlay();
+        }
+      }
+
+      playBtn.addEventListener('click', function(e){
+        e.stopPropagation();
+        toggleFromUser();
+      });
+      playBtn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleFromUser();
+        }
+      });
+      wrap.addEventListener('click', function(e){
+        if (e.target === playBtn || playBtn.contains(e.target)) return;
         if (poster.classList.contains('is-hidden')) {
           video.paused ? startPlay() : video.pause();
         } else {
@@ -1743,6 +2222,27 @@
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobile-nav');
     const mobileNavLinks = mobileNav ? mobileNav.querySelectorAll('a') : [];
+    let mobileNavFocusTrap = null;
+    let mobileNavLastFocus = null;
+
+    function trapFocusInContainer(container, e){
+      const focusable = getFocusableElements(container);
+      if (hamburger && !focusable.includes(hamburger)) focusable.unshift(hamburger);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+      if (e.key === 'Escape') closeMobileNav();
+    }
+
     function setMobileNavOpen(isOpen){
       if (!hamburger || !mobileNav) return;
       hamburger.classList.toggle('is-open', isOpen);
@@ -1753,6 +2253,23 @@
       mobileNavLinks.forEach(function(link){
         link.tabIndex = isOpen ? 0 : -1;
       });
+      if (isOpen) {
+        mobileNavLastFocus = document.activeElement;
+        mobileNavFocusTrap = function(e){ trapFocusInContainer(mobileNav, e); };
+        document.addEventListener('keydown', mobileNavFocusTrap);
+        const firstLink = mobileNav.querySelector('a');
+        if (firstLink) firstLink.focus();
+      } else {
+        if (mobileNavFocusTrap) {
+          document.removeEventListener('keydown', mobileNavFocusTrap);
+          mobileNavFocusTrap = null;
+        }
+        if (mobileNavLastFocus && typeof mobileNavLastFocus.focus === 'function') {
+          mobileNavLastFocus.focus();
+        } else {
+          hamburger.focus();
+        }
+      }
     }
     function closeMobileNav(){ setMobileNavOpen(false); }
     setMobileNavOpen(false);
