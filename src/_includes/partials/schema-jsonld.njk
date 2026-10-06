@@ -32,28 +32,28 @@
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
       "description": "Moteur de recherche de pièces carrosserie multi-fournisseurs pour carrossiers.",
-      "offers": [
-        {
-          "@type": "Offer",
-          "name": "Installation (forfait unique)",
-          "price": "{{ site.installPrice }}",
-          "priceCurrency": "{{ site.currency }}",
-          "description": "Paramétrage et connexion à vos comptes fournisseurs. Requis avant utilisation."
-        },
-        {
-          "@type": "Offer",
-          "name": "Abonnement mensuel",
-          "price": "{{ site.subscriptionPrice }}",
-          "priceCurrency": "{{ site.currency }}",
-          "priceSpecification": {
+      "offers": {
+        "@type": "Offer",
+        "name": "Installation et abonnement AutoPartSelect",
+        "priceCurrency": "{{ site.currency }}",
+        "description": "Une seule offre : forfait d'installation (paramétrage et connexion fournisseurs), puis abonnement mensuel HT sur 12 mois. Premier mois d'abonnement non facturé si vous poursuivez après l'essai.",
+        "priceSpecification": [
+          {
             "@type": "UnitPriceSpecification",
+            "name": "Installation",
+            "price": "{{ site.installPrice }}",
+            "priceCurrency": "{{ site.currency }}",
+            "unitText": "ONE_TIME"
+          },
+          {
+            "@type": "UnitPriceSpecification",
+            "name": "Abonnement",
             "price": "{{ site.subscriptionPrice }}",
             "priceCurrency": "{{ site.currency }}",
             "unitText": "MONTH"
-          },
-          "description": "150 € HT/mois, engagement 12 mois. Premier mois d'abonnement non facturé après l'installation si vous poursuivez."
-        }
-      ]
+          }
+        ]
+      }
     }
     {% endif %}
     {% if breadcrumbs and breadcrumbs.length %}
