@@ -19,6 +19,20 @@
 
 set -euo pipefail
 
+# Le shell courant peut encore être sur Node 18 (nvm). Eleventy exige Node 20+.
+if ! command -v node >/dev/null 2>&1 || [[ "$(node -p "process.versions.node.split('.')[0]")" -lt 20 ]]; then
+  export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+  if [[ -s "${NVM_DIR}/nvm.sh" ]]; then
+    # shellcheck disable=SC1091
+    . "${NVM_DIR}/nvm.sh"
+    nvm use 20 >/dev/null
+  fi
+fi
+if ! command -v node >/dev/null 2>&1 || [[ "$(node -p "process.versions.node.split('.')[0]")" -lt 20 ]]; then
+  printf '[deploy] ERREUR: Node.js 20+ requis (actuel: %s).\n' "$(node -v 2>/dev/null || echo absent)" >&2
+  exit 1
+fi
+
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "${ROOT}"
 
