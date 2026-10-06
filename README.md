@@ -43,7 +43,9 @@ cp .deploy.env.example .deploy.env   # puis éditer APS_WEB_ROOT
 ./deploy.sh
 ```
 
-Le script fait un `git fetch` + `reset --hard` sur `main`, lance `scripts/prepare-pages-artifact.sh` (npm ci, build, minification, vidéos/ffmpeg si disponible, `check-build`), puis `rsync --delete` de `_site/` vers `APS_WEB_ROOT`.
+Le script fait un `git fetch` + `reset --hard` sur `main`, lance `scripts/prepare-pages-artifact.sh` (npm ci, build, minification, vidéos/ffmpeg si disponible, `check-build`).
+
+Si `APS_WEB_ROOT` est vide ou pointe vers un dossier absent, le site reste dans `_site/` : le vhost doit avoir ce dossier comme `DocumentRoot` (sur le serveur actuel, `/var/www/aps-logiciel/_site`). Un `rsync` vers le clone est refusé.
 
 Variables utiles : `APS_DEMO_VIDEO_URL`, `APS_TESTIMONIAL_VIDEO_URL`, `APS_SKIP_GIT=1`, `APS_SKIP_RSYNC=1` (build seul).
 

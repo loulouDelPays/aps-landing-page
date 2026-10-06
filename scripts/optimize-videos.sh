@@ -18,7 +18,7 @@ optimize_file() {
   fi
   echo "Optimisation vidéo : ${file}…"
   ffmpeg -y -i "${file}" \
-    -vf "scale=${scale}:force_original_aspect_ratio=decrease" \
+    -vf "scale=${scale}:force_original_aspect_ratio=decrease,scale=trunc(iw/2)*2:trunc(ih/2)*2" \
     -c:v libx264 -preset slow -crf 30 -maxrate 2500k -bufsize 5000k -movflags +faststart \
     -c:a aac -b:a 96k \
     "${tmp}"

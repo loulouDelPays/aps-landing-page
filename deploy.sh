@@ -4,7 +4,10 @@
 # Prérequis : Node.js 20+, npm, git, curl ; ffmpeg recommandé (vidéos).
 #
 # Variables d'environnement :
-#   APS_WEB_ROOT          (obligatoire) répertoire servi par le serveur web, ex. /var/www/aps-logiciel.fr
+#   APS_WEB_ROOT          docroot distinct du clone git.
+#                         Vide ou dossier absent : le site reste dans _site/
+#                         (à déclarer comme DocumentRoot). Ne jamais viser le clone :
+#                         rsync --delete effacerait .git et src/.
 #   APS_GIT_BRANCH        branche à déployer (défaut : main)
 #   APS_DEMO_VIDEO_URL    URL optionnelle du MP4 démo si absent du disque
 #   APS_TESTIMONIAL_VIDEO_URL  idem témoignages
@@ -43,11 +46,20 @@ else
   log "APS_SKIP_GIT=1 — pas de git pull."
 fi
 
-if [[ -z "${WEB_ROOT}" ]]; then
-  die "Définissez APS_WEB_ROOT (répertoire web) ou créez .deploy.env à la racine du clone."
+if [[ -z "${WEB_ROOT}" || ! -d "${WEB_ROOT}" ]]; then
+  if [[ -n "${WEB_ROOT}" ]]; then
+    log "APS_WEB_ROOT inexistant (${WEB_ROOT}) — pas de copie."
+  fi
+  WEB_ROOT=""
 fi
 
-[[ -d "${WEB_ROOT}" ]] || die "APS_WEB_ROOT inexistant : ${WEB_ROOT}"
+# Un rsync --delete dans le clone supprimerait git, src et node_modules.
+if [[ -n "${WEB_ROOT}" ]]; then
+  WEB_ROOT="$(cd "${WEB_ROOT}" && pwd)"
+  if [[ "${WEB_ROOT}" == "${ROOT}" || "${WEB_ROOT}" == "${ROOT}/"* ]]; then
+    die "APS_WEB_ROOT (${WEB_ROOT}) est dans le clone. Pointez le vhost sur ${SITE_DIR}, ou choisissez un dossier hors du dépôt."
+  fi
+fi
 
 log "Build et optimisations (prepare-pages-artifact)…"
 bash "${ROOT}/scripts/prepare-pages-artifact.sh"
@@ -55,8 +67,9 @@ bash "${ROOT}/scripts/prepare-pages-artifact.sh"
 [[ -d "${SITE_DIR}" ]] || die "Build sans _site/ — abandon."
 [[ -f "${SITE_DIR}/index.html" ]] || die "_site/index.html manquant — abandon."
 
-if [[ "${APS_SKIP_RSYNC:-0}" == "1" ]]; then
-  log "APS_SKIP_RSYNC=1 — artefact prêt dans ${SITE_DIR}"
+if [[ "${APS_SKIP_RSYNC:-0}" == "1" || -z "${WEB_ROOT}" ]]; then
+  log "Artefact prêt : ${SITE_DIR}"
+  log "DocumentRoot Apache/Nginx : ${SITE_DIR}"
   exit 0
 fi
 
