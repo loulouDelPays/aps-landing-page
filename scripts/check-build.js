@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteDir = path.join(root, "_site");
+const siteOrigin = "https://aps-logiciel.fr";
 
 function walkHtml(dir, acc = []) {
   if (!fs.existsSync(dir)) return acc;
@@ -17,8 +18,47 @@ function walkHtml(dir, acc = []) {
   return acc;
 }
 
+function isNoindex(html) {
+  return /<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html);
+}
+
+function extractTitle(html) {
+  const m = html.match(/<title>([^<]*)<\/title>/);
+  return m ? m[1].trim() : "";
+}
+
+function extractDescription(html) {
+  const m = html.match(/<meta\s+name="description"\s+content="([^"]*)"/);
+  return m ? m[1].trim() : "";
+}
+
+function extractCanonical(html) {
+  const m = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/);
+  return m ? m[1].trim() : "";
+}
+
+function locToSiteRelPath(loc) {
+  const u = new URL(loc);
+  if (u.pathname === "/" || u.pathname === "") return "index.html";
+  return u.pathname.replace(/^\//, "");
+}
+
+function validateJsonLd(html, rel) {
+  const re = /<script\s+type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/g;
+  let match;
+  while ((match = re.exec(html)) !== null) {
+    try {
+      JSON.parse(match[1]);
+    } catch (e) {
+      errors.push(`${rel}: invalid JSON-LD — ${e.message}`);
+    }
+  }
+}
+
 const errors = [];
 const htmlFiles = walkHtml(siteDir);
+const titlesSeen = new Map();
+const descriptionsSeen = new Map();
 
 for (const file of htmlFiles) {
   const html = fs.readFileSync(file, "utf8");
@@ -30,12 +70,32 @@ for (const file of htmlFiles) {
   if (is404) {
     if (!html.includes("noindex")) errors.push("404.html: missing noindex");
     if (html.includes('rel="canonical"')) errors.push("404.html: canonical must be absent");
-  } else if (!html.includes('rel="canonical"')) {
+  } else if (!isNoindex(html) && !html.includes('rel="canonical"')) {
     errors.push(`${rel}: missing canonical`);
   }
 
   if (html.includes('target="_blank"') && !html.includes("noopener")) {
     errors.push(`${rel}: target=_blank without noopener`);
+  }
+
+  validateJsonLd(html, rel);
+
+  if (!is404 && !isNoindex(html)) {
+    const title = extractTitle(html);
+    const description = extractDescription(html);
+    if (!title) errors.push(`${rel}: missing or empty <title>`);
+    if (!description) errors.push(`${rel}: missing or empty meta description`);
+
+    if (title) {
+      const prev = titlesSeen.get(title);
+      if (prev) errors.push(`${rel}: duplicate title (same as ${prev})`);
+      else titlesSeen.set(title, rel);
+    }
+    if (description) {
+      const prev = descriptionsSeen.get(description);
+      if (prev) errors.push(`${rel}: duplicate meta description (same as ${prev})`);
+      else descriptionsSeen.set(description, rel);
+    }
   }
 }
 
@@ -48,6 +108,61 @@ for (const file of faqSchemaPages) {
   const rel = path.relative(siteDir, file);
   if (!allowedFaq.has(rel)) {
     errors.push(`${rel}: unexpected FAQPage schema (only home allowed)`);
+  }
+}
+
+const indexHtml = path.join(siteDir, "index.html");
+if (fs.existsSync(indexHtml)) {
+  const index = fs.readFileSync(indexHtml, "utf8");
+  const requiredInternal = ["/#faq", "/mentions-legales.html", "/politique-confidentialite.html"];
+  for (const href of requiredInternal) {
+    if (!index.includes(`href="${href}"`)) {
+      errors.push(`index.html: missing internal link href="${href}"`);
+    }
+  }
+  if (index.includes('"price": "0"')) {
+    errors.push("index.html: misleading SoftwareApplication offer price 0 in JSON-LD");
+  }
+}
+
+const sitemapPath = path.join(siteDir, "sitemap.xml");
+if (!fs.existsSync(sitemapPath)) {
+  errors.push("sitemap.xml missing in _site");
+} else {
+  const sitemap = fs.readFileSync(sitemapPath, "utf8");
+  const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim());
+  if (locs.length === 0) errors.push("sitemap.xml: no <loc> entries");
+
+  const locSet = new Set(locs);
+  for (const loc of locs) {
+    if (!loc.startsWith(`${siteOrigin}/`) && loc !== `${siteOrigin}`) {
+      errors.push(`sitemap.xml: unexpected loc host ${loc}`);
+    }
+    const relPath = locToSiteRelPath(loc);
+    const filePath = path.join(siteDir, relPath);
+    if (!fs.existsSync(filePath)) {
+      errors.push(`sitemap.xml: loc ${loc} has no file ${relPath}`);
+    } else {
+      const html = fs.readFileSync(filePath, "utf8");
+      const canon = extractCanonical(html);
+      if (canon && canon !== loc) {
+        errors.push(`sitemap.xml: loc ${loc} ≠ canonical ${canon} on ${relPath}`);
+      }
+    }
+  }
+
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(file, "utf8");
+    if (isNoindex(html)) continue;
+    const rel = path.relative(siteDir, file);
+    const canon = extractCanonical(html);
+    if (!canon) continue;
+    const inSitemap = locSet.has(canon);
+    const isLegal =
+      rel === "mentions-legales.html" || rel === "politique-confidentialite.html";
+    if (!inSitemap && !isLegal && rel === "index.html") {
+      errors.push(`${rel}: canonical ${canon} must appear in sitemap.xml`);
+    }
   }
 }
 
@@ -92,7 +207,6 @@ const testMp4 = path.join(siteDir, "assets/videos/testimonials.mp4");
 const hasDemoMp4 = fs.existsSync(demoMp4);
 const hasTestMp4 = fs.existsSync(testMp4);
 
-const indexHtml = path.join(siteDir, "index.html");
 if (fs.existsSync(indexHtml)) {
   const index = fs.readFileSync(indexHtml, "utf8");
   const hasDemoSchema = index.includes("Démonstration recherche AutoPartSelect");

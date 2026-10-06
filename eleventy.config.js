@@ -27,6 +27,30 @@ export default function (eleventyConfig) {
     return fs.statSync(inputPath).mtime.toISOString().slice(0, 10);
   });
 
+  /** Home lastmod: max mtime of template + included partials / data (not just index.njk). */
+  const homeSitemapDeps = [
+    "src/_includes/partials/home-main.njk",
+    "src/_includes/partials/roi-section.html",
+    "src/_data/faqHome.json",
+    "src/index.11tydata.js",
+    "src/_data/videos.json",
+  ].map((rel) => path.join(process.cwd(), rel));
+
+  eleventyConfig.addFilter("sitemapLastMod", (page) => {
+    const paths = [];
+    if (page?.inputPath) paths.push(page.inputPath);
+    if (page?.url === "/") paths.push(...homeSitemapDeps);
+
+    let maxMs = 0;
+    for (const p of paths) {
+      if (p && fs.existsSync(p)) {
+        maxMs = Math.max(maxMs, fs.statSync(p).mtimeMs);
+      }
+    }
+    const d = maxMs ? new Date(maxMs) : new Date();
+    return d.toISOString().slice(0, 10);
+  });
+
   eleventyConfig.addFilter("absoluteUrl", (value, base) => {
     const site = (base && base.url) || "https://aps-logiciel.fr";
     const root = site.replace(/\/$/, "");

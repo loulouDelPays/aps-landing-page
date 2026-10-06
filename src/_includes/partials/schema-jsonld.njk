@@ -35,10 +35,10 @@
       "offers": [
         {
           "@type": "Offer",
-          "name": "Essai — 1er mois d'abonnement offert",
-          "price": "0",
+          "name": "Installation (forfait unique)",
+          "price": "{{ site.installPrice }}",
           "priceCurrency": "{{ site.currency }}",
-          "description": "Abonnement non facturé le premier mois après l'installation."
+          "description": "Paramétrage et connexion à vos comptes fournisseurs. Requis avant utilisation."
         },
         {
           "@type": "Offer",
@@ -50,13 +50,8 @@
             "price": "{{ site.subscriptionPrice }}",
             "priceCurrency": "{{ site.currency }}",
             "unitText": "MONTH"
-          }
-        },
-        {
-          "@type": "Offer",
-          "name": "Installation",
-          "price": "{{ site.installPrice }}",
-          "priceCurrency": "{{ site.currency }}"
+          },
+          "description": "150 € HT/mois, engagement 12 mois. Premier mois d'abonnement non facturé après l'installation si vous poursuivez."
         }
       ]
     }

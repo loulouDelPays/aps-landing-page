@@ -8,7 +8,7 @@ sitemapExclude: true
 {%- for page in collections.sitemapPages %}
   <url>
     <loc>{{ page.url | absoluteUrl(site) }}</loc>
-    <lastmod>{{ page.inputPath | fileLastMod }}</lastmod>
+    <lastmod>{{ page | sitemapLastMod }}</lastmod>
     {%- if page.url == '/' %}
     <priority>1.0</priority>
     {%- else %}
