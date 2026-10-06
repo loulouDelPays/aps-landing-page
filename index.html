@@ -9,11 +9,11 @@
   <meta property="og:description" content="Comparez stocks, prix et délais de vos fournisseurs sur un seul écran. Essai 1 mois offert." />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="fr_FR" />
-  <link rel="canonical" href="https://www.autopartselect.fr/" />
-  <meta property="og:url" content="https://www.autopartselect.fr/" />
-  <meta property="og:image" content="https://www.autopartselect.fr/assets/img/atelier-hero-1440.webp" />
+  <link rel="canonical" href="https://landing.aps-logiciel.com/" />
+  <meta property="og:url" content="https://landing.aps-logiciel.com/" />
+  <meta property="og:image" content="https://landing.aps-logiciel.com/assets/img/atelier-hero-1440.webp" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://www.autopartselect.fr/assets/img/atelier-hero-1440.webp" />
+  <meta name="twitter:image" content="https://landing.aps-logiciel.com/assets/img/atelier-hero-1440.webp" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -21,8 +21,8 @@
       {
         "@type": "Organization",
         "name": "APS Logiciel",
-        "url": "https://www.autopartselect.fr/",
-        "logo": "https://www.autopartselect.fr/assets/img/logo_aps.avif"
+        "url": "https://landing.aps-logiciel.com/",
+        "logo": "https://landing.aps-logiciel.com/assets/img/logo_aps.avif"
       },
       {
         "@type": "SoftwareApplication",
@@ -318,40 +318,6 @@
       border-color: rgba(101,210,170,.5); box-shadow: var(--focus-ring);
     }
     .hint { font-size: var(--text-xs); color: var(--muted); margin-top: var(--sp-2); }
-    .form-feedback { display: none; padding: var(--sp-3); border-radius: var(--radius-md); font-size: var(--text-sm); }
-    .form-feedback:not([hidden]) { display: block; }
-    .form-feedback.is-success { border: 1px solid rgba(101,210,170,.4); background: rgba(101,210,170,.12); color: var(--ink); }
-    .form-feedback.is-error { border: 1px solid rgba(214,69,69,.35); background: rgba(214,69,69,.08); color: #991b1b; }
-
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(6,6,26,.55); backdrop-filter: blur(6px);
-      display: flex; align-items: center; justify-content: center;
-      padding: var(--sp-5);
-      opacity: 0; visibility: hidden;
-      pointer-events: none;
-      transition: opacity .2s ease, visibility .2s ease;
-    }
-    .modal-overlay.is-open { pointer-events: auto; }
-    .modal-overlay.is-open { opacity: 1; visibility: visible; }
-    .modal-box {
-      background: var(--paper); border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-xl); max-width: 480px; width: 100%;
-      max-height: calc(100vh - 40px); overflow-y: auto;
-      transform: scale(.96); transition: transform .2s ease;
-    }
-    .modal-overlay.is-open .modal-box { transform: scale(1); }
-    .modal-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: var(--sp-5); border-bottom: 1px solid var(--line);
-    }
-    .modal-close {
-      width: 2.25rem; height: 2.25rem; display: flex; align-items: center; justify-content: center;
-      border: none; background: none; cursor: pointer; border-radius: var(--radius-md);
-      color: var(--muted); font-size: 1.4rem; line-height: 1;
-    }
-    .modal-close:hover { background: var(--surface); color: var(--ink); }
-
     .device-frame {
       border-radius: var(--radius-xl);
       border: 1px solid rgba(255,255,255,.12);
@@ -480,11 +446,7 @@
     .roi-advanced summary::-webkit-details-marker { display: none; }
     .roi-advanced summary::before { content: '▸'; display: inline-block; margin-right: 6px; transition: transform .15s; }
     .roi-advanced[open] summary::before { transform: rotate(90deg); }
-    .roi-dual { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); margin-bottom: var(--sp-4); }
-    .roi-hero, .roi-cost { text-align: center; padding: var(--sp-6) var(--sp-4); border-radius: var(--radius-md); }
-    .roi-cost { border: 1px solid rgba(242,194,48,.35); background: rgba(242,194,48,.08); }
-    .roi-cost .roi-hero-value { color: var(--warn-ink); }
-    .roi-hero { border: 1px solid rgba(101,210,170,.25); background: linear-gradient(180deg, rgba(101,210,170,.1), rgba(255,255,255,.02)); }
+    .roi-hero { text-align: center; padding: var(--sp-6) var(--sp-4); border-radius: var(--radius-md); border: 1px solid rgba(101,210,170,.25); background: linear-gradient(180deg, rgba(101,210,170,.1), rgba(255,255,255,.02)); margin-bottom: var(--sp-4); }
     .roi-hero-label { font-size: var(--text-sm); color: var(--muted); font-weight: 600; }
     .roi-hero-value { font-size: var(--text-3xl); font-weight: 800; letter-spacing: -.03em; margin-top: var(--sp-2); }
     .roi-hero-detail { font-size: var(--text-xs); color: var(--muted); margin-top: var(--sp-2); }
@@ -492,15 +454,6 @@
     .roi-metric { flex: 1; border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-md); padding: var(--sp-3); }
     .roi-metric-label { font-size: var(--text-xs); color: rgba(255,255,255,.6); }
     .roi-metric-value { font-size: var(--text-xl); font-weight: 900; margin-top: var(--sp-1); }
-    .roi-capture { margin-top: var(--sp-4); padding-top: var(--sp-4); border-top: 1px solid rgba(255,255,255,.1); }
-    .roi-capture-row { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
-    .roi-capture-row input { flex: 1; min-width: 180px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.06); color: #fff; padding: 0.7rem 0.85rem; }
-    .roi-capture-row input::placeholder { color: rgba(255,255,255,.4); }
-    .roi-capture .form-feedback.is-error {
-      color: #fecaca;
-      background: rgba(214,69,69,.15);
-      border-color: rgba(214,69,69,.4);
-    }
     .roi-card > .card__body { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-8); align-items: start; }
     .section--dark .roi-inputs input,
     .section--dark .roi-advanced input {
@@ -991,7 +944,6 @@
     .u-reveal { transition: opacity .6s ease, transform .6s ease; }
     .js .u-reveal:not(.is-visible) { opacity: 0; transform: translateY(24px); }
     .js .u-reveal.is-visible { opacity: 1; transform: none; }
-    .u-body-lock { overflow: hidden; }
     .u-play-hidden { display: none; }
 
     /* ===== RESPONSIVE ===== */
@@ -1013,7 +965,7 @@
       .mobile-nav { display: flex; }
       .hero__grid, #guide .guide-intro, #guide .guide-outcomes__grid, .roi-intro, .bonus-panel__grid, .bonus-section-grid, .bonus-section-grid--reversed,
       .roi-card > .card__body, .pricing, .grid--2, .grid--3, .grid--4,
-      .aar-grid, .logo-grid, .roi-dual, .form--2, .price-clarity-grid {
+      .aar-grid, .logo-grid, .form--2, .price-clarity-grid {
         grid-template-columns: 1fr;
       }
       #guide .guide-intro__media { order: -1; }
@@ -1092,7 +1044,7 @@
         </nav>
         <div class="header-actions">
           <a class="btn btn--ghost" href="#roi">Calculer ma rentabilité</a>
-          <a class="btn btn--primary header-actions__cta open-demo" href="#">Tester sur un dossier</a>
+          <a class="btn btn--primary header-actions__cta" href="https://crm.aps-logiciel.fr/demo">Tester sur un dossier</a>
           <button type="button" class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
             <span></span><span></span><span></span>
           </button>
@@ -1109,7 +1061,7 @@
     <a href="#roi">Rentabilité</a>
     <a href="#offre">Offre</a>
     <a href="#faq">FAQ</a>
-    <a class="btn btn--primary open-demo u-mt-3" href="#">Tester APS sur un de mes dossiers</a>
+    <a class="btn btn--primary u-mt-3" href="https://crm.aps-logiciel.fr/demo">Tester APS sur un de mes dossiers</a>
   </nav>
 
   <main id="main">
@@ -1138,7 +1090,7 @@
             <span class="tag-pill tag-pill--reuse">Réemploi</span>
           </div>
           <div class="hero__cta">
-            <a class="btn btn--primary btn--lg open-demo" href="#">Tester APS sur un de mes dossiers</a>
+            <a class="btn btn--primary btn--lg" href="https://crm.aps-logiciel.fr/demo">Tester APS sur un de mes dossiers</a>
             <a class="btn btn--ghost btn--lg" href="#roi">Calculer ma rentabilité</a>
           </div>
           <p class="hint hero__hint">Pas prêt à parler ? <a href="#hero-player" class="play-hero-demo">Voir une recherche APS en 2 min</a></p>
@@ -1267,7 +1219,7 @@
           </article>
         </div>
         <div class="guide-outcomes__actions u-reveal">
-          <a class="btn btn--primary btn--lg open-demo" href="#">Tester APS sur un de mes dossiers</a>
+          <a class="btn btn--primary btn--lg" href="https://crm.aps-logiciel.fr/demo">Tester APS sur un de mes dossiers</a>
           <a class="btn btn--lg" href="#preuve">Voir les preuves terrain</a>
         </div>
       </div>
@@ -1300,7 +1252,7 @@
       <div class="browser-shot u-max-900 u-reveal">
         <div class="browser-shot__top">
           <div class="device-frame__dots" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="browser-shot__url">autopartselect.fr — Résultat de recherche</div>
+          <div class="browser-shot__url">landing.aps-logiciel.com — Résultat de recherche</div>
         </div>
         <picture>
           <source type="image/avif" srcset="assets/img/exemple_resultat_recherche-640.avif 640w, assets/img/exemple_resultat_recherche-900.avif 900w, assets/img/exemple_resultat_recherche-1280.avif 1280w" sizes="(max-width:900px) 100vw, 900px" />
@@ -1309,7 +1261,7 @@
         </picture>
       </div>
       <div class="u-gap-actions u-gap-actions--center u-mt-6">
-        <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
+        <a class="btn btn--primary" href="https://crm.aps-logiciel.fr/demo">Tester APS sur un de mes dossiers</a>
         <a class="btn" href="#roi">Calculer ma rentabilité</a>
       </div>
     </div>
@@ -1343,7 +1295,7 @@
           <div class="browser-shot">
             <div class="browser-shot__top">
               <div class="device-frame__dots" aria-hidden="true"><span></span><span></span><span></span></div>
-              <div class="browser-shot__url">autopartselect.fr — Suivi des achats</div>
+              <div class="browser-shot__url">landing.aps-logiciel.com — Suivi des achats</div>
             </div>
             <picture>
               <source type="image/avif" srcset="assets/img/suivi_achats-640.avif 640w, assets/img/suivi_achats-960.avif 960w, assets/img/suivi_achats-1280.avif 1280w" sizes="(max-width:640px) 100vw, 560px" />
@@ -1390,7 +1342,7 @@
       <div class="browser-shot u-max-900 u-reveal">
         <div class="browser-shot__top">
           <div class="device-frame__dots" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="browser-shot__url">autopartselect.fr — Gestion RFA</div>
+          <div class="browser-shot__url">landing.aps-logiciel.com — Gestion RFA</div>
         </div>
         <picture>
           <source type="image/avif" srcset="assets/img/suivi_rfa-640.avif 640w, assets/img/suivi_rfa-960.avif 960w, assets/img/suivi_rfa-1280.avif 1280w" sizes="(max-width:900px) 100vw, 900px" />
@@ -1509,7 +1461,7 @@
         <span class="commitment-chip">Le coût d'installation annoncé avant le diagnostic</span>
       </div>
       <div class="u-gap-actions u-gap-actions--center u-mt-6">
-        <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
+        <a class="btn btn--primary" href="https://crm.aps-logiciel.fr/demo">Tester APS sur un de mes dossiers</a>
         <a class="btn" href="#offre">Voir l'offre</a>
       </div>
     </div>
@@ -1574,33 +1526,17 @@
             </details>
           </div>
           <div class="roi-result">
-            <div class="roi-dual">
-              <div class="roi-cost">
-                <div class="roi-hero-label">Coût de la situation actuelle / mois</div>
-                <div class="roi-hero-value" id="kCost">—</div>
-                <div class="roi-hero-detail" id="kCostSub">—</div>
-              </div>
-              <div class="roi-hero">
-                <div class="roi-hero-label">Gain net estimé / mois</div>
-                <div class="roi-hero-value u-text-accent" id="kNet">—</div>
-                <div class="roi-hero-detail" id="kNetSub">—</div>
-              </div>
+            <div class="roi-hero">
+              <div class="roi-hero-label">Gain net estimé / mois</div>
+              <div class="roi-hero-value u-text-accent" id="kNet">—</div>
+              <div class="roi-hero-detail" id="kNetSub">—</div>
             </div>
             <div class="roi-secondary">
               <div class="roi-metric"><span class="roi-metric-label">Gain net / an</span><span class="roi-metric-value" id="kNetAnnual">—</span></div>
               <div class="roi-metric"><span class="roi-metric-label">Amortissement installation</span><span class="roi-metric-value" id="kPayback">—</span></div>
             </div>
-            <div class="roi-capture">
-              <label for="roi-email" class="u-fw-700 u-mb-3">Continuer vers le diagnostic avec mon estimation</label>
-              <div id="roi-email-feedback" class="form-feedback is-error u-mb-3" role="alert" aria-live="polite" hidden></div>
-              <div class="roi-capture-row">
-                <input id="roi-email" type="email" placeholder="vous@carrosserie.fr" autocomplete="email" aria-describedby="roi-email-feedback" />
-                <button type="button" class="btn btn--primary" id="roi-email-btn">Voir mon diagnostic et mon estimation</button>
-              </div>
-              <p class="hint u-text-light">On préremplit votre email et votre estimation dans le formulaire de diagnostic — sans engagement.</p>
-            </div>
             <div class="u-gap-actions u-mt-4">
-              <a id="roi-cta-demo" class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
+              <a id="roi-cta-demo" class="btn btn--primary" href="https://crm.aps-logiciel.fr/demo">Tester APS sur un de mes dossiers</a>
               <a class="btn btn--ghost" href="#offre">Voir l'offre</a>
             </div>
           </div>
@@ -1637,7 +1573,7 @@
             </div>
             <p class="hint u-mt-4">Marketplace, recherche reliquats et recherche web globale : <a href="#marketplace">détail des outils inclus</a>.</p>
             <div class="u-gap-actions u-mt-4">
-              <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
+              <a class="btn btn--primary" href="https://crm.aps-logiciel.fr/demo">Tester APS sur un de mes dossiers</a>
               <a class="btn" href="#roi">Calculer ma rentabilité</a>
             </div>
           </div>
@@ -1665,7 +1601,7 @@
               </div>
             </div>
             <div class="u-gap-actions u-mt-4">
-              <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
+              <a class="btn btn--primary" href="https://crm.aps-logiciel.fr/demo">Tester APS sur un de mes dossiers</a>
               <a class="btn" href="#faq">Voir la FAQ</a>
             </div>
           </div>
@@ -1701,7 +1637,7 @@
             <div class="browser-shot">
               <div class="browser-shot__top">
                 <div class="device-frame__dots" aria-hidden="true"><span></span><span></span><span></span></div>
-                <div class="browser-shot__url">autopartselect.fr — Marketplace</div>
+                <div class="browser-shot__url">landing.aps-logiciel.com — Marketplace</div>
               </div>
               <picture>
                 <source type="image/avif" srcset="assets/img/markeplace-640.avif 640w, assets/img/markeplace-960.avif 960w, assets/img/markeplace-1280.avif 1280w" sizes="(max-width:640px) 100vw, 560px" />
@@ -1772,7 +1708,7 @@
             <p class="hint u-text-light u-mt-2">Diagnostic sur vos dossiers réels + estimation de votre rentabilité + essai 1 mois offert.</p>
           </div>
           <div class="u-gap-actions">
-            <a class="btn btn--primary open-demo" href="#">Tester APS sur un de mes dossiers</a>
+            <a class="btn btn--primary" href="https://crm.aps-logiciel.fr/demo">Tester APS sur un de mes dossiers</a>
             <a class="btn btn--ghost" href="#roi">Calculer ma rentabilité</a>
           </div>
         </div>
@@ -1782,49 +1718,12 @@
 
   </main>
 
-  <!-- MODAL DÉMO -->
-  <div id="demo-modal" class="modal-overlay" aria-hidden="true" inert>
-    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
-      <div class="modal-header">
-        <h2 id="modal-title" class="section-title u-mb-0">Testons APS sur un de vos dossiers</h2>
-        <button type="button" class="modal-close" aria-label="Fermer" data-close-modal>&times;</button>
-      </div>
-      <div class="card__body">
-        <p class="section-sub u-mb-4">30 min sur un dossier en cours, avec vos fournisseurs. Estimation de gain incluse ; essai 1 mois si vous le souhaitez.</p>
-        <div id="modal-roi-estimate" class="card card--accent u-hidden u-mb-4">
-          <div class="card__body">
-            <h3 class="u-mb-3">Votre estimation actuelle</h3>
-            <p id="modal-roi-text" class="u-fw-700">—</p>
-          </div>
-        </div>
-        <form class="form" method="post" action="#" id="demo-form">
-          <div id="demo-form-feedback" class="form-feedback" role="alert" aria-live="polite" hidden></div>
-          <div class="form--2">
-            <div class="field"><label for="prenom">Prénom</label><input id="prenom" name="prenom" placeholder="Ex : Loïc" required /></div>
-            <div class="field"><label for="societe">Carrosserie / Groupe</label><input id="societe" name="societe" placeholder="Ex : Carrosserie Dupont" required /></div>
-          </div>
-          <div class="form--2">
-            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="vous@carrosserie.fr" required /></div>
-            <div class="field"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel" placeholder="06 12 34 56 78" required /></div>
-          </div>
-          <div class="form--2">
-            <div class="field"><label for="codePostal">Code postal</label><input id="codePostal" name="codePostal" type="text" inputmode="text" autocomplete="postal-code" maxlength="20" placeholder="Ex : 75001" required /></div>
-            <div class="field"><label for="ville">Ville</label><input id="ville" name="ville" type="text" autocomplete="address-level2" maxlength="100" placeholder="Ex : Paris" required /></div>
-          </div>
-          <button id="modal-submit-btn" class="btn btn--primary btn--block" type="submit">Tester APS sur un de vos dossiers</button>
-          <p class="hint u-text-center">On vous rappelle rapidement. Sans engagement.</p>
-        </form>
-      </div>
-    </div>
-  </div>
-
   <footer>
     <div class="container footer-inner">
       <div>&copy; <span id="year"></span> AutoPartSelect — APS Logiciel</div>
       <div class="footer-links">
         <a href="mentions-legales.html">Mentions légales</a>
         <a href="politique-confidentialite.html">Politique de confidentialité</a>
-        <a href="#" class="open-demo">Contact</a>
       </div>
     </div>
   </footer>
@@ -1832,7 +1731,7 @@
   <!-- MOBILE BOTTOM CTA -->
   <div class="bottom-cta" aria-label="Actions rapides">
     <a class="btn btn--ghost" href="#roi">Rentabilité</a>
-    <a class="btn btn--primary open-demo" href="#">Tester sur un dossier</a>
+    <a class="btn btn--primary" href="https://crm.aps-logiciel.fr/demo">Tester sur un dossier</a>
   </div>
 
   <script>
@@ -1850,12 +1749,9 @@
       const install = Number(document.getElementById('install').value || 0);
 
       const minGagnees = Math.max(0, minAvant - minApres);
-      const hoursToday = (dossiers * minAvant) / 60;
       const hoursSaved = (dossiers * minGagnees) / 60;
-      const timeCostToday = hoursToday * tauxHoraire;
       const timeValueSaved = hoursSaved * tauxHoraire;
       const marginValue = dossiers * margeParDossier;
-      const currentCost = timeCostToday + marginValue;
       const net = timeValueSaved + marginValue - abo;
       const netAnnual = net * 12;
       const paybackMonths = (install > 0 && net > 0) ? (install / net) : null;
@@ -1864,14 +1760,6 @@
       document.getElementById('kNet').dataset.value = net;
       document.getElementById('kNetSub').textContent =
         `${fmtH(hoursSaved)} r\u00e9cup\u00e9r\u00e9es (${fmtEUR(timeValueSaved)}) + ${fmtEUR(marginValue)} de marge \u2212 ${fmtEUR(abo)} d'abo`;
-
-      const kCostEl = document.getElementById('kCost');
-      const kCostSubEl = document.getElementById('kCostSub');
-      if (kCostEl) kCostEl.textContent = `\u2212${fmtEUR(currentCost)}`;
-      if (kCostSubEl) {
-        kCostSubEl.textContent =
-          `${fmtH(hoursToday)} de recherche (${fmtEUR(timeCostToday)}) + ${fmtEUR(marginValue)} de marge non capt\u00e9e`;
-      }
 
       const minGagneesHintEl = document.getElementById('minGagneesHint');
       if (minGagneesHintEl) {
@@ -1927,190 +1815,11 @@
       if (roiCta) roiCta.textContent = 'Tester APS sur un de mes dossiers';
     }
 
-    /* Modal */
-    const modal = document.getElementById('demo-modal');
-    const modalBox = modal.querySelector('.modal-box');
-    let modalFocusTrap = null;
-    let lastFocusedElement = null;
-
     function getFocusableElements(container){
       return Array.from(container.querySelectorAll(
         'a[href], button:not([disabled]), textarea, input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
       )).filter(el => el.offsetParent !== null || el === container);
     }
-
-    function trapFocus(e){
-      const focusable = getFocusableElements(modalBox);
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (e.key === 'Tab') {
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault(); last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault(); first.focus();
-        }
-      }
-    }
-
-    function closeDemoModal(){
-      modal.classList.remove('is-open');
-      modal.setAttribute('aria-hidden', 'true');
-      modal.inert = true;
-      document.body.classList.remove('u-body-lock');
-      if (modalFocusTrap) {
-        modal.removeEventListener('keydown', modalFocusTrap);
-        modalFocusTrap = null;
-      }
-      if (lastFocusedElement) lastFocusedElement.focus();
-    }
-
-    const DEMO_REQUEST_URL = 'https://supplier.lead-dev.com/api/demo-request';
-
-    function clearDemoFormFeedback(){
-      const fb = document.getElementById('demo-form-feedback');
-      if (!fb) return;
-      fb.hidden = true;
-      fb.textContent = '';
-      fb.classList.remove('is-success', 'is-error');
-    }
-    function showDemoFormFeedback(kind, message){
-      const fb = document.getElementById('demo-form-feedback');
-      if (!fb) return;
-      fb.classList.remove('is-success', 'is-error');
-      fb.classList.add(kind === 'success' ? 'is-success' : 'is-error');
-      fb.textContent = message;
-      fb.hidden = false;
-    }
-    function collectRoiSnapshot(){
-      const ids = ['dossiers', 'minAvant', 'minApres', 'margeParDossier', 'tauxHoraire', 'abo', 'install'];
-      const snap = {};
-      for (let i = 0; i < ids.length; i++){
-        const el = document.getElementById(ids[i]);
-        if (!el) return null;
-        const n = Number(el.value);
-        snap[ids[i]] = Number.isFinite(n) ? n : 0;
-      }
-      return snap;
-    }
-    async function parseDemoRequestErrorMessage(res, bodyText){
-      try {
-        const j = JSON.parse(bodyText);
-        if (typeof j.message === 'string' && j.message.trim()) return j.message.trim();
-        if (typeof j.error === 'string' && j.error.trim()) return j.error.trim();
-        if (Array.isArray(j.errors) && j.errors.length){
-          return j.errors.map(function(e){
-            if (typeof e === 'string') return e;
-            if (e && typeof e.message === 'string') return e.message;
-            if (e && e.field && e.message) return e.field + ' : ' + e.message;
-            return JSON.stringify(e);
-          }).join(' ');
-        }
-        if (j.details){
-          if (typeof j.details === 'string') return j.details;
-          if (typeof j.details === 'object') return JSON.stringify(j.details);
-        }
-      } catch (err) { /* ignore */ }
-      if (res.status === 400) return 'Donn\u00e9es invalides. V\u00e9rifiez les champs du formulaire.';
-      if (res.status === 429) return 'Trop de demandes. R\u00e9essayez dans quelques minutes.';
-      if (res.status >= 500) return 'Le service est temporairement indisponible. R\u00e9essayez plus tard.';
-      return 'Une erreur est survenue. R\u00e9essayez plus tard.';
-    }
-
-    function openDemoModal(){
-      clearDemoFormFeedback();
-      lastFocusedElement = document.activeElement;
-      modal.classList.add('is-open');
-      modal.setAttribute('aria-hidden', 'false');
-      modal.inert = false;
-      document.body.classList.add('u-body-lock');
-      modalFocusTrap = trapFocus;
-      modal.addEventListener('keydown', modalFocusTrap);
-      const focusable = getFocusableElements(modalBox);
-      if (focusable.length) focusable[0].focus();
-
-      const kNetEl = document.getElementById('kNet');
-      const net = kNetEl ? kNetEl.dataset.value : undefined;
-      const kPaybackEl = document.getElementById('kPayback');
-      const paybackText = kPaybackEl ? kPaybackEl.textContent : '';
-      const estimateBox = document.getElementById('modal-roi-estimate');
-      const estimateText = document.getElementById('modal-roi-text');
-      if (estimateBox && estimateText && net !== undefined && Number(net) > 0){
-        const fmtNet = Number(net).toLocaleString('fr-FR', { maximumFractionDigits:0 });
-        estimateText.textContent = '+' + fmtNet + '\u20ac/mois, amortissement ' + paybackText;
-        estimateBox.classList.remove('u-hidden');
-      } else if (estimateBox) {
-        estimateBox.classList.add('u-hidden');
-      }
-    }
-
-    document.querySelectorAll('.open-demo').forEach(trigger => {
-      trigger.addEventListener('click', function(e){
-        e.preventDefault();
-        openDemoModal();
-      });
-    });
-    modal.querySelector('[data-close-modal]').addEventListener('click', closeDemoModal);
-    document.getElementById('demo-form').addEventListener('submit', function(e){
-      e.preventDefault();
-      const form = e.target;
-      const btn = document.getElementById('modal-submit-btn');
-      const defaultBtnLabel = 'Tester APS sur un de mes dossiers';
-      clearDemoFormFeedback();
-
-      const codePostal = (document.getElementById('codePostal').value || '').trim();
-      const ville = (document.getElementById('ville').value || '').trim();
-      if (!codePostal) { showDemoFormFeedback('error', 'Le code postal est obligatoire.'); return; }
-      if (!ville) { showDemoFormFeedback('error', 'La ville est obligatoire.'); return; }
-      if (codePostal.length > 20) { showDemoFormFeedback('error', 'Le code postal ne peut pas d\u00e9passer 20 caract\u00e8res.'); return; }
-      if (ville.length > 100) { showDemoFormFeedback('error', 'La ville ne peut pas d\u00e9passer 100 caract\u00e8res.'); return; }
-
-      const payload = {
-        prenom: (document.getElementById('prenom').value || '').trim(),
-        societe: (document.getElementById('societe').value || '').trim(),
-        email: (document.getElementById('email').value || '').trim(),
-        tel: (document.getElementById('tel').value || '').trim(),
-        codePostal: codePostal,
-        ville: ville,
-        pageContext: { pageUrl: window.location.href }
-      };
-      const roiSnap = collectRoiSnapshot();
-      if (roiSnap) payload.roiSnapshot = roiSnap;
-
-      btn.classList.add('is-loading');
-      btn.disabled = true;
-      btn.setAttribute('aria-busy', 'true');
-      btn.textContent = 'Envoi en cours\u2026';
-
-      fetch(DEMO_REQUEST_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
-      }).then(async function(res){
-        const text = await res.text();
-        if (res.ok){
-          showDemoFormFeedback('success',
-            'Merci ! Votre demande a bien \u00e9t\u00e9 envoy\u00e9e. Nous vous recontactons tr\u00e8s vite.');
-          form.reset();
-          setTimeout(function(){ closeDemoModal(); }, 2800);
-          return;
-        }
-        const msg = await parseDemoRequestErrorMessage(res, text);
-        showDemoFormFeedback('error', msg);
-      }).catch(function(){
-        showDemoFormFeedback('error',
-          'Envoi impossible depuis cette page (connexion ou s\u00e9curit\u00e9 du navigateur). ' +
-          'En test : servez la page via un site (pas un fichier ouvert en local) et demandez \u00e0 l\u2019\u00e9quipe API ' +
-          'd\u2019autoriser ce domaine pour les requ\u00eates crois\u00e9es (en-t\u00eate CORS Access-Control-Allow-Origin).');
-      }).finally(function(){
-        btn.classList.remove('is-loading');
-        btn.disabled = false;
-        btn.removeAttribute('aria-busy');
-        btn.textContent = defaultBtnLabel;
-      });
-    });
-    modal.addEventListener('click', e => { if (e.target === modal) closeDemoModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('is-open')) closeDemoModal(); });
 
     document.querySelector('.play-hero-demo')?.addEventListener('click', function(e){
       e.preventDefault();
@@ -2131,35 +1840,6 @@
             if (playLabel) playLabel.classList.remove('u-play-hidden');
           });
         }
-      }
-    });
-
-    const roiEmailFeedback = document.getElementById('roi-email-feedback');
-    function clearRoiEmailFeedback(){
-      if (!roiEmailFeedback) return;
-      roiEmailFeedback.hidden = true;
-      roiEmailFeedback.textContent = '';
-    }
-    function showRoiEmailFeedback(message){
-      if (!roiEmailFeedback) return;
-      roiEmailFeedback.textContent = message;
-      roiEmailFeedback.hidden = false;
-    }
-    document.getElementById('roi-email').addEventListener('input', clearRoiEmailFeedback);
-    document.getElementById('roi-email-btn').addEventListener('click', function(){
-      const emailInput = document.getElementById('roi-email');
-      const email = emailInput ? emailInput.value.trim() : '';
-      clearRoiEmailFeedback();
-      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showRoiEmailFeedback('Adresse email invalide. Exemple : vous@carrosserie.fr');
-        emailInput.focus();
-        return;
-      }
-      openDemoModal();
-      const demoEmail = document.getElementById('email');
-      if (demoEmail && email) {
-        demoEmail.value = email;
-        demoEmail.focus();
       }
     });
 
