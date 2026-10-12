@@ -16,7 +16,7 @@
         {% endfor %}
       </nav>
       <div class="header-actions">
-        <a class="btn btn--primary header-actions__cta" href="{{ site.demoUrl }}" rel="noopener noreferrer">Tester sur un dossier</a>
+        <a class="btn btn--primary header-actions__cta" href="{{ site.demoUrl }}">Tester sur un dossier</a>
         <button type="button" class="hamburger" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
           <span></span><span></span><span></span>
         </button>
@@ -28,5 +28,5 @@
   {% for item in nav.primary %}
   <a href="{{ item.href }}"{% if item.external %} rel="noopener noreferrer"{% endif %} tabindex="-1">{{ item.label }}</a>
   {% endfor %}
-  <a class="btn btn--primary u-mt-3" href="{{ site.demoUrl }}" rel="noopener noreferrer" tabindex="-1">Tester APS sur un de mes dossiers</a>
+  <a class="btn btn--primary u-mt-3" href="{{ site.demoUrl }}" tabindex="-1">Tester APS sur un de mes dossiers</a>
 </nav>

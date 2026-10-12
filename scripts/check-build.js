@@ -265,6 +265,9 @@ if (fs.existsSync(adsPath)) {
   if (ads.includes('rel="canonical"')) errors.push(`${adsRel}: canonical must be absent (noindex landing)`);
   if (!ads.includes("js-demo-cta")) errors.push(`${adsRel}: missing demo CTA tracking class`);
   if (!ads.includes("crm.aps-logiciel.fr/demo")) errors.push(`${adsRel}: missing CRM demo URL`);
+  if (ads.includes('js-demo-cta"') && ads.match(/js-demo-cta[^>]*noreferrer/)) {
+    errors.push(`${adsRel}: demo CTA must not use noreferrer (breaks CRM return link)`);
+  }
   if (ads.includes('href="/"')) errors.push(`${adsRel}: link to home should be avoided`);
   if (!ads.includes("id=\"qualification\"")) errors.push(`${adsRel}: missing qualification section`);
   if (!ads.includes("consent-banner")) errors.push(`${adsRel}: missing consent banner include`);

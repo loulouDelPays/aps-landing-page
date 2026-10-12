@@ -125,32 +125,80 @@
       return merged;
     }
 
-    function appendAcqParams(rawUrl) {
+    function getDemoBaseUrl() {
+      return (window.__APS_SITE__ && window.__APS_SITE__.demoUrl) || 'https://crm.aps-logiciel.fr/demo';
+    }
+
+    function isDemoBookingHref(href) {
+      if (!href) return false;
+      try {
+        const target = new URL(href, window.location.href);
+        const demo = new URL(getDemoBaseUrl(), window.location.href);
+        const normPath = function(path) {
+          return path.replace(/\/$/, '') || '/';
+        };
+        return target.origin === demo.origin && normPath(target.pathname) === normPath(demo.pathname);
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function buildDemoBookingUrl(rawUrl) {
       try {
         const target = new URL(rawUrl, window.location.href);
         const acq = getAcqParams();
         ACQ_PARAMS.forEach(function(key) {
           if (acq[key]) target.searchParams.set(key, acq[key]);
         });
+        target.searchParams.set('origine', 'site');
+        target.searchParams.set('retour', window.location.href);
         return target.toString();
       } catch (_) {
         return rawUrl;
       }
     }
 
+    function normalizeDemoLinkRel(link) {
+      const rel = (link.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+      const filtered = rel.filter(function(token) {
+        return token.toLowerCase() !== 'noreferrer';
+      });
+      if (link.target === '_blank' && filtered.indexOf('noopener') === -1) {
+        filtered.push('noopener');
+      }
+      if (filtered.length) link.setAttribute('rel', filtered.join(' '));
+      else link.removeAttribute('rel');
+    }
+
+    function applyDemoLinkHref(link) {
+      const baseHref = link.getAttribute('href');
+      if (!baseHref || !isDemoBookingHref(baseHref)) return;
+      link.setAttribute('href', buildDemoBookingUrl(baseHref));
+      normalizeDemoLinkRel(link);
+    }
+
     persistAcqFromUrl();
 
     function initDemoCtaLinks() {
-      document.querySelectorAll('.js-demo-cta').forEach(function(link) {
-        const baseHref = link.getAttribute('href');
-        if (baseHref) link.setAttribute('href', appendAcqParams(baseHref));
-        link.addEventListener('click', function() {
-          const placement = link.dataset.demoPlacement || 'unknown';
-          link.setAttribute('aria-busy', 'true');
-          if (typeof window.plausible === 'function') {
-            window.plausible('Demo CTA Click', { props: { placement: placement } });
-          }
+      document.querySelectorAll('a[href]').forEach(function(link) {
+        if (!isDemoBookingHref(link.getAttribute('href'))) return;
+        applyDemoLinkHref(link);
+        link.addEventListener('pointerenter', function() {
+          applyDemoLinkHref(link);
         });
+        link.addEventListener('pointerdown', function() {
+          applyDemoLinkHref(link);
+        });
+        if (link.classList.contains('js-demo-cta')) {
+          link.addEventListener('click', function() {
+            applyDemoLinkHref(link);
+            const placement = link.dataset.demoPlacement || 'unknown';
+            link.setAttribute('aria-busy', 'true');
+            if (typeof window.plausible === 'function') {
+              window.plausible('Demo CTA Click', { props: { placement: placement } });
+            }
+          });
+        }
       });
     }
     initDemoCtaLinks();

@@ -11,7 +11,7 @@ layout: layouts/base.njk
       {% if heroActions %}
       <div class="u-gap-actions u-mt-4">
         {% for action in heroActions %}
-        <a class="btn {{ action.class | default('btn--primary') }}" href="{{ action.href }}"{% if action.external %} rel="noopener noreferrer"{% endif %}>{{ action.label }}</a>
+        <a class="btn {{ action.class | default('btn--primary') }}" href="{{ action.href }}"{% if action.external and not action.demoBooking %} rel="noopener noreferrer"{% endif %}>{{ action.label }}</a>
         {% endfor %}
       </div>
       {% endif %}
@@ -28,7 +28,7 @@ layout: layouts/base.njk
           <h2 class="section-title u-mb-3">{{ pageCta.title }}</h2>
           <p class="section-sub">{{ pageCta.text }}</p>
           <div class="u-gap-actions u-mt-4">
-            <a class="btn btn--primary" href="{{ site.demoUrl }}" rel="noopener noreferrer">{{ pageCta.primaryLabel | default("Tester sur un dossier") }}</a>
+            <a class="btn btn--primary" href="{{ site.demoUrl }}">{{ pageCta.primaryLabel | default("Tester sur un dossier") }}</a>
             {% if pageCta.secondaryHref %}
             <a class="btn" href="{{ pageCta.secondaryHref }}">{{ pageCta.secondaryLabel }}</a>
             {% endif %}

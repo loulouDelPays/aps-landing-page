@@ -23,7 +23,7 @@
   {% set primaryCtaLabel = bottomCtaPrimaryLabel | default('Tester sur un dossier') %}
   <div class="bottom-cta" aria-label="Actions rapides">
     <a class="btn btn--ghost{% if bottomCtaGhostPhone %} js-phone-cta{% endif %}" href="{{ ghostCtaHref }}"{% if bottomCtaGhostPhone %} data-phone-placement="sticky"{% endif %}>{{ ghostCtaLabel }}</a>
-    <a class="btn btn--primary{% if adsLanding %} js-demo-cta{% endif %}" href="{{ site.demoUrl }}"{% if adsLanding %} data-demo-placement="sticky"{% endif %} rel="noopener noreferrer">{{ primaryCtaLabel }}</a>
+    <a class="btn btn--primary{% if adsLanding %} js-demo-cta{% endif %}" href="{{ site.demoUrl }}"{% if adsLanding %} data-demo-placement="sticky"{% endif %}>{{ primaryCtaLabel }}</a>
   </div>
   {% endif %}
   {% include "partials/consent-banner.njk" %}
