@@ -1,3 +1,2 @@
-{% if site.plausibleDomain %}
-<script defer data-domain="{{ site.plausibleDomain }}" src="https://plausible.io/js/script.js"></script>
-{% endif %}
+{% include "partials/consent-head.njk" %}
+{# Plausible et Google Ads sont chargés via consent.js après choix utilisateur #}

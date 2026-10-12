@@ -1,0 +1,352 @@
+  <main id="main">
+  <section class="hero hero--ads" aria-label="Introduction">
+    <div class="hero__bg" aria-hidden="true">
+      <picture>
+        <source type="image/avif" srcset="/assets/img/atelier-hero-960.avif 960w, /assets/img/atelier-hero-1440.avif 1440w, /assets/img/atelier-hero-1920.avif 1920w" sizes="100vw" />
+        <source type="image/webp" srcset="/assets/img/atelier-hero-960.webp 960w, /assets/img/atelier-hero-1440.webp 1440w, /assets/img/atelier-hero-1920.webp 1920w" sizes="100vw" />
+        <img src="/assets/img/atelier-hero-1440.webp" alt="" width="1440" height="810" fetchpriority="high" />
+      </picture>
+    </div>
+    <div class="hero__overlay" aria-hidden="true"></div>
+    <div class="container hero__content">
+      <div class="hero__grid u-reveal">
+        <div>
+          <div class="badge"><span class="badge__dot"></span> Assistant d'achat · Carrossiers · Vos fournisseurs, zéro ressaisie</div>
+          <h1>
+            <span class="hero-title-line">Jusqu'à 4 points de marge en plus</span>
+            <span class="hero-title-line hero-title-line--sub">sur vos achats de pièces carrosserie</span>
+          </h1>
+          <p class="hero__lead">Depuis votre chiffrage PDF : prix, stocks et délais chez vos fournisseurs habituels — avec vos remises, sans ressaisie.</p>
+          <div class="tag-row u-mb-4">
+            <span class="tag-pill tag-pill--oem">Pièces d'origine</span>
+            <span class="tag-pill tag-pill--eq">Qualité équivalente</span>
+            <span class="tag-pill tag-pill--reuse">Réemploi</span>
+          </div>
+          <div class="hero__cta">
+            <a id="ads-hero-cta" class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="hero" rel="noopener noreferrer">Réserver ma démo gratuite</a>
+            <a class="btn btn--ghost btn--lg play-hero-demo" href="#hero-player">Voir une recherche en 2 min</a>
+          </div>
+          <p class="hint hero__hint">30 minutes · gratuit · sur un dossier réel de votre atelier</p>
+          <p class="hero__trust-line u-mt-3">Conçu par un carrossier · vos fournisseurs restent les vôtres</p>
+        </div>
+        <div class="hero__media-col">
+          <div class="device-frame">
+            <div class="device-frame__bar">
+              <div class="device-frame__dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span class="device-frame__label">AutoPartSelect</span>
+            </div>
+            <div class="video-player" id="hero-player">
+              <video preload="none" playsinline width="960" height="600">
+                <source data-src="/assets/videos/APS-demo.mp4" type="video/mp4" />
+              </video>
+              <div class="poster-overlay">
+                <picture>
+                  <source type="image/avif" srcset="/assets/img/screenshot_search-640.avif 640w, /assets/img/screenshot_search-960.avif 960w, /assets/img/screenshot_search-1280.avif 1280w" sizes="(max-width:640px) 640px, 960px" />
+                  <source type="image/webp" srcset="/assets/img/screenshot_search-640.webp 640w, /assets/img/screenshot_search-960.webp 960w, /assets/img/screenshot_search-1280.webp 1280w" sizes="(max-width:640px) 640px, 960px" />
+                  <img src="/assets/img/screenshot_search-960.webp" alt="Capture d'écran AutoPartSelect" width="960" height="600" />
+                </picture>
+                <button type="button" class="play-btn" aria-label="Voir une recherche APS en 2 min">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+              </div>
+              <span class="play-label">Voir une recherche APS en 2 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include "partials/crm-slots-notice.njk" %}
+
+  <div class="trust-band">
+    <div class="container">
+      <p class="trust-band__label">Ils nous font confiance</p>
+      <div class="trust-band__logos">
+        <img src="/assets/img/logo-morel.jpg" alt="Carrosserie Morel" width="124" height="64" decoding="async" />
+        <img src="/assets/img/logo-buton.jpg" alt="Carrosserie Buton" width="124" height="64" decoding="async" />
+        <img src="/assets/img/PremiumPartners_logo_black_1c.png" alt="RM Partners" width="124" height="64" decoding="async" />
+        <img src="/assets/img/arenales.jpg" alt="Carrosserie ARENALES" width="124" height="64" decoding="async" />
+        <img src="/assets/img/gnani.jpg" alt="Carrosserie Gnani" width="124" height="64" decoding="async" />
+        <img src="/assets/img/Logo_Carrosserie_laronze_bouvet.png" alt="Carrosserie Laronze Bouvet" width="124" height="64" decoding="async" />
+      </div>
+    </div>
+  </div>
+
+  <section id="probleme" class="section section--muted">
+    <div class="container">
+      <div class="ads-section-head u-reveal">
+        <p class="section-kicker">Le problème</p>
+        <h2 class="section-title">Ce qui vous coûte le plus cher : la chasse à l'info</h2>
+        <p class="section-sub">Avant de comparer les prix, il faut déjà trouver l'information, dossier après dossier.</p>
+      </div>
+      <div class="grid grid--3 u-mb-4">
+        <article class="card card--raised u-reveal">
+          <div class="card__body">
+            <div class="icon-wrap u-mb-3"><svg class="icon" aria-hidden="true"><use href="#icon-supplier"/></svg></div>
+            <h3>Vos fournisseurs, un par un</h3>
+            <p class="u-text-muted u-mt-2">Appels, mails et onglets en série : l'information existe déjà chez chacun d'eux, mais vous la cherchez à la main à chaque dossier.</p>
+          </div>
+        </article>
+        <article class="card card--raised u-reveal">
+          <div class="card__body">
+            <div class="icon-wrap icon-wrap--warn u-mb-3"><svg class="icon" aria-hidden="true"><use href="#icon-clock"/></svg></div>
+            <h3>Des stocks difficiles à sécuriser</h3>
+            <p class="u-text-muted u-mt-2">Relances et vérifications avant de commander, avec le risque d'un reliquat qui immobilise un véhicule en atelier.</p>
+          </div>
+        </article>
+        <article class="card card--raised u-reveal">
+          <div class="card__body">
+            <div class="icon-wrap u-mb-3"><svg class="icon" aria-hidden="true"><use href="#icon-euro"/></svg></div>
+            <h3>Peu de marge de manœuvre à l'achat</h3>
+            <p class="u-text-muted u-mt-2">Sans vue d'ensemble, difficile de confronter origine, qualité équivalente et réemploi avant de valider la commande.</p>
+          </div>
+        </article>
+      </div>
+      <div class="card card--accent u-reveal">
+        <div class="card__body u-gap-actions u-gap-actions--between">
+          <div>
+            <div class="u-fw-900">AutoPartSelect n'est pas une centrale d'achat</div>
+            <p class="u-text-muted u-mt-2">Vous conservez vos fournisseurs, vos remises et votre liberté. L'outil centralise l'information pour décider plus vite.</p>
+          </div>
+          <span class="chip">Liberté conservée</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="solution" class="section section--light">
+    <div class="container">
+      <div class="ads-section-head u-reveal">
+        <p class="section-kicker">La solution</p>
+        <h2 class="section-title">Stocks, prix et délais de vos fournisseurs habituels, sur un seul écran</h2>
+        <p class="section-sub">Déposez votre chiffrage PDF. APS interroge vos comptes fournisseurs et affiche le comparatif avec vos remises.</p>
+      </div>
+      <div class="grid grid--3 how-steps u-mb-6">
+        <article class="card card--raised how-step u-reveal">
+          <h3>1. Déposez le chiffrage</h3>
+          <p>Le PDF ou le rapport d'expert suffit : les références sont extraites automatiquement, sans ressaisie.</p>
+        </article>
+        <article class="card card--raised how-step u-reveal">
+          <h3>2. Comparez en direct</h3>
+          <p>Tous vos fournisseurs interrogés en une fois : prix négociés, stocks et délais côte à côte.</p>
+        </article>
+        <article class="card card--raised how-step u-reveal">
+          <h3>3. Validez et suivez</h3>
+          <p>Vous choisissez la meilleure option par pièce, puis suivez chaque commande jusqu'à la livraison.</p>
+        </article>
+      </div>
+      <div class="browser-shot u-reveal">
+        <div class="browser-shot__top">
+          <div class="device-frame__dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="browser-shot__url">aps-logiciel.fr — Résultat de recherche</div>
+        </div>
+        <picture>
+          <source type="image/avif" srcset="/assets/img/exemple_resultat_recherche-640.avif 640w, /assets/img/exemple_resultat_recherche-900.avif 900w, /assets/img/exemple_resultat_recherche-1280.avif 1280w" sizes="(max-width: 1180px) 100vw, 1100px" />
+          <source type="image/webp" srcset="/assets/img/exemple_resultat_recherche-640.webp 640w, /assets/img/exemple_resultat_recherche-900.webp 900w, /assets/img/exemple_resultat_recherche-1280.webp 1280w" sizes="(max-width: 1180px) 100vw, 1100px" />
+          <img src="/assets/img/exemple_resultat_recherche-1280.webp" alt="Exemple de résultat de recherche APS" width="1280" height="800" loading="lazy" />
+        </picture>
+      </div>
+      <div class="u-gap-actions u-gap-actions--center u-mt-6 u-reveal">
+        <a class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="solution" rel="noopener noreferrer">Réserver ma démo gratuite</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="resultats" class="section section--muted">
+    <div class="container">
+      <div class="ads-section-head u-reveal">
+        <p class="section-kicker">Preuves</p>
+        <h2 class="section-title">Des résultats mesurables en atelier</h2>
+        <p class="section-sub">Ordres de grandeur constatés chez des carrossiers utilisateurs — à estimer sur vos dossiers en démo.</p>
+      </div>
+      <div class="ads-proof-block ads-proof-block--stats u-reveal">
+        <div class="grid grid--3">
+          <article class="card card--raised"><div class="card__body"><div class="icon-wrap u-mb-3" aria-hidden="true"><svg class="icon"><use href="#icon-euro"/></svg></div><p class="stat-value u-mb-0">Environ +4 points de marge nette</p><p class="u-text-muted u-mt-2">Gain mesuré sur les achats de pièces lorsque la comparaison multi-fournisseurs est systématisée.</p></div></article>
+          <article class="card card--raised"><div class="card__body"><div class="icon-wrap u-mb-3" aria-hidden="true"><svg class="icon"><use href="#icon-workshop"/></svg></div><p class="stat-value u-mb-0">+<span class="counter" data-target="16000">16&nbsp;000</span> € / an</p><p class="u-text-muted u-mt-2">Bénéfice net moyen observé pour un atelier indépendant d'environ 4 personnes.</p></div></article>
+          <article class="card card--raised"><div class="card__body"><div class="icon-wrap u-mb-3" aria-hidden="true"><svg class="icon"><use href="#icon-clock"/></svg></div><p class="stat-value u-mb-0">Environ <span class="counter" data-target="20">20</span> min gagnées / dossier</p><p class="u-text-muted u-mt-2">Temps de recherche fournisseurs estimé : 30 min aujourd'hui, environ 10 min avec APS.</p></div></article>
+        </div>
+        <p class="ads-results-disclaimer hint u-text-center">Ces chiffres ne sont pas une garantie. Ils dépendent de votre volume, de vos fournisseurs et de votre organisation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="temoignages" class="section section--light">
+    <div class="container">
+      <div class="ads-section-head ads-section-head--center u-reveal">
+        <p class="section-kicker">Témoignages</p>
+        <h2 class="section-title">Ce qu'en disent les carrossiers</h2>
+        <p class="section-sub">Retours d'ateliers qui utilisent APS au quotidien, sur le temps de recherche et la lisibilité des achats.</p>
+      </div>
+        <div class="grid grid--3">
+          {% for t in testimonials %}
+          <blockquote class="card card--raised ads-quote u-reveal">
+            <div class="card__body">
+              <p class="ads-quote__mark" aria-hidden="true">«</p>
+              <p class="ads-quote__lead">{{ t.quote }}</p>
+              <p class="ads-quote__text">{{ t.text }}</p>
+              <footer class="ads-quote__author">
+                {% if t.logo %}
+                <img class="ads-quote__logo" src="{{ t.logo }}" alt="" width="40" height="40" loading="lazy" />
+                {% else %}
+                <span class="ads-quote__initials" aria-hidden="true">{{ t.initials }}</span>
+                {% endif %}
+                <span class="ads-quote__who">
+                  <span class="u-fw-700">{{ t.name }}</span>
+                  <span>{{ t.company }}</span>
+                </span>
+              </footer>
+            </div>
+          </blockquote>
+          {% endfor %}
+        </div>
+        <div class="ads-video-extra u-reveal">
+          <p class="section-kicker">En vidéo</p>
+          <h3 class="ads-video-extra__title">Ils en parlent aussi à l'atelier</h3>
+          <div class="video-block">
+            <div class="video-player" id="testimonial-player">
+              <video preload="none" playsinline width="720" height="405">
+                <source data-src="/assets/videos/testimonials.mp4" type="video/mp4" />
+              </video>
+              <div class="poster-overlay">
+                <picture>
+                  <source type="image/avif" srcset="/assets/img/testimonials_couverture-640.avif 640w, /assets/img/testimonials_couverture-960.avif 960w, /assets/img/testimonials_couverture-1280.avif 1280w" sizes="(max-width: 1180px) 100vw, 1100px" />
+                  <source type="image/webp" srcset="/assets/img/testimonials_couverture-640.webp 640w, /assets/img/testimonials_couverture-960.webp 960w, /assets/img/testimonials_couverture-1280.webp 1280w" sizes="(max-width: 1180px) 100vw, 1100px" />
+                  <img src="/assets/img/testimonials_couverture-1280.webp" alt="Couverture vidéo témoignages carrossiers" width="1280" height="480" loading="lazy" />
+                </picture>
+                <button type="button" class="play-btn" aria-label="Lire les témoignages vidéo">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <span class="play-label">Lire les témoignages</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <section id="fondateur" class="section section--dark ads-founder-section">
+    <div class="container">
+      <div class="ads-founder u-reveal">
+        <div class="ads-founder__media guide-photo">
+          <picture>
+            <source type="image/avif" srcset="/assets/img/atelier-equipe-640.avif 640w, /assets/img/atelier-equipe-960.avif 960w, /assets/img/atelier-equipe-1280.avif 1280w" sizes="(max-width:980px) 100vw, min(420px, 40vw)" />
+            <source type="image/webp" srcset="/assets/img/atelier-equipe-640.webp 640w, /assets/img/atelier-equipe-960.webp 960w, /assets/img/atelier-equipe-1280.webp 1280w" sizes="(max-width:980px) 100vw, min(420px, 40vw)" />
+            <img src="/assets/img/atelier-equipe-960.webp" alt="Équipe carrosserie au travail" width="960" height="540" loading="lazy" />
+          </picture>
+        </div>
+        <div class="ads-founder__copy">
+          <p class="section-kicker section-kicker--light">Conçu sur le terrain</p>
+          <h2 class="section-title">Né dans une carrosserie, pas dans un bureau</h2>
+          <p class="section-sub">Fondé par Rémi Casals, carrossier depuis 20 ans : une entreprise 100&nbsp;% indépendante, sans lien avec un groupement, un fabricant ou un assureur. Les équipes se déplacent à vos côtés pour paramétrer vos accès.</p>
+          <div class="tag-row u-mt-3">
+            <span class="tag-pill">Expertise atelier</span>
+            <span class="tag-pill">100 % indépendant</span>
+            <span class="tag-pill">Accompagnement humain</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="qualification" class="section section--light">
+    <div class="container">
+      <div class="ads-section-head u-reveal">
+        <p class="section-kicker">Pour qui ?</p>
+        <h2 class="section-title">APS est fait pour vous si…</h2>
+      </div>
+      <div class="grid grid--3 u-reveal">
+        <article class="card card--raised"><div class="card__body"><h3>Vous comparez plusieurs fournisseurs</h3><p class="u-text-muted u-mt-2">Plusieurs comptes distributeurs, plusieurs interlocuteurs : la centralisation fait gagner du temps à chaque dossier.</p></div></article>
+        <article class="card card--raised"><div class="card__body"><h3>Vous traitez des dossiers chaque semaine</h3><p class="u-text-muted u-mt-2">Le gain temps + marge devient visible dès que le volume de chiffrages est régulier.</p></div></article>
+        <article class="card card--raised"><div class="card__body"><h3>Vous voulez mieux maîtriser vos achats</h3><p class="u-text-muted u-mt-2">Vous choisissez chaque pièce avec une vision claire du prix, du stock et du délai, tout en gardant la décision finale.</p></div></article>
+      </div>
+      <p class="hint ads-fit-note u-text-center u-mt-4 u-reveal">Le bénéfice est le plus net avec plusieurs fournisseurs et un flux régulier de dossiers.</p>
+    </div>
+  </section>
+
+  <section id="demo" class="section section--muted ads-demo-block">
+    <div class="container">
+      <div class="ads-section-head ads-section-head--center u-reveal">
+        <p class="section-kicker">Démo gratuite</p>
+        <h2 class="section-title">30 minutes sur un dossier réel de votre atelier</h2>
+        <p class="section-sub">On part de votre chiffrage pour estimer le temps économisé et la marge supplémentaire, sur vos fournisseurs.</p>
+      </div>
+      <article class="card card--raised ads-demo-card u-reveal">
+        <div class="card__body">
+          <h3>Ce que vous voyez pendant la démo</h3>
+          <ul class="ads-demo-list">
+            <li>Lecture de votre PDF et recherche multi-fournisseurs</li>
+            <li>Comparatif prix, stock et délai avec vos remises</li>
+            <li>Estimation de rentabilité adaptée à votre volume</li>
+          </ul>
+          <p class="hint">Gratuit · sans engagement · 30 minutes</p>
+          <p class="ads-offer">Installation 850 € · 1<sup>er</sup> mois offert · puis 150 € HT/mois pendant 12 mois</p>
+          <div class="u-gap-actions">
+            <a class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="demo-block" rel="noopener noreferrer">Réserver ma démo gratuite</a>
+            <a class="btn btn--lg" href="#rentabilite">Calculer ma rentabilité</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  {% set roiDemoLabel = 'Réserver ma démo gratuite' %}
+  {% set roiDemoTrack = true %}
+  {% set roiDefaultDossiers = 80 %}
+  {% set roiGhostHref = '#faq' %}
+  {% set roiGhostLabel = 'Voir les questions fréquentes' %}
+  {% include "partials/roi-section.njk" %}
+
+  <section id="faq" class="section section--light">
+    <div class="container">
+      <div class="ads-section-head u-reveal">
+        <p class="section-kicker">Questions fréquentes</p>
+        <h2 class="section-title">Vos questions avant de réserver</h2>
+      </div>
+      <div class="grid grid--2">
+        {% for item in faq %}
+        <details class="u-reveal"><summary>{{ item.question }}</summary><p>{{ item.answer }}</p></details>
+        {% endfor %}
+      </div>
+      <div class="u-gap-actions u-gap-actions--center u-mt-6 u-reveal">
+        <a class="btn btn--primary js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="faq" rel="noopener noreferrer">Réserver ma démo gratuite</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta section section--dark">
+    <div class="container">
+      <div class="card card--dark card--raised u-reveal">
+        <div class="card__body card__body--lg u-gap-actions u-gap-actions--between">
+          <div>
+            <div class="transformation-line">De « je cours après les infos » à « je pilote mes achats »</div>
+            <h2 class="section-title u-mb-0">Trouvez vos pièces plus vite, avec une marge plus claire</h2>
+            <p class="hint u-text-light u-mt-2">Démo gratuite · essai 1 mois offert · vos fournisseurs inchangés.</p>
+          </div>
+          <div class="u-gap-actions">
+            <a class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="final" rel="noopener noreferrer">Réserver ma démo gratuite</a>
+            <a class="btn btn--ghost" href="#rentabilite">Calculer ma rentabilité</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="video-stage" id="video-stage" aria-label="Lecture vidéo">
+    <div class="video-stage__panel">
+      <div class="video-stage__media"></div>
+      <div class="video-stage__bar">
+        <button type="button" class="video-stage__toggle">
+          <svg class="video-stage__icon video-stage__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+          <svg class="video-stage__icon video-stage__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <span class="video-stage__toggle-text">Pause</span>
+        </button>
+        <button type="button" class="video-stage__close">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 5 5 6.2 10.8 12 5 17.8 6.2 19 12 13.2 17.8 19 19 17.8 13.2 12 19 6.2 17.8 5 12 10.8z"/></svg>
+          <span>Fermer</span>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  </main>

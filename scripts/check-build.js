@@ -257,6 +257,29 @@ for (const legacy of legacyPages) {
   }
 }
 
+const adsRel = "assistant-achats-pieces-carrosserie/index.html";
+const adsPath = path.join(siteDir, adsRel);
+if (fs.existsSync(adsPath)) {
+  const ads = fs.readFileSync(adsPath, "utf8");
+  if (!isNoindex(ads)) errors.push(`${adsRel}: must be noindex`);
+  if (ads.includes('rel="canonical"')) errors.push(`${adsRel}: canonical must be absent (noindex landing)`);
+  if (!ads.includes("js-demo-cta")) errors.push(`${adsRel}: missing demo CTA tracking class`);
+  if (!ads.includes("crm.aps-logiciel.fr/demo")) errors.push(`${adsRel}: missing CRM demo URL`);
+  if (ads.includes('href="/"')) errors.push(`${adsRel}: link to home should be avoided`);
+  if (!ads.includes("id=\"qualification\"")) errors.push(`${adsRel}: missing qualification section`);
+  if (!ads.includes("consent-banner")) errors.push(`${adsRel}: missing consent banner include`);
+  if (!ads.includes('id="consent-analytics"')) errors.push(`${adsRel}: missing granular consent (audience only)`);
+  if (!ads.includes("partial:crm-slots-notice")) {
+    errors.push(`${adsRel}: missing CRM slots fallback partial include`);
+  }
+  if (!ads.includes("ads-results-disclaimer")) errors.push(`${adsRel}: missing results disclaimer`);
+  if (!ads.includes('id="resultats"')) errors.push(`${adsRel}: missing #resultats section`);
+  const sitemap = fs.existsSync(sitemapPath) ? fs.readFileSync(sitemapPath, "utf8") : "";
+  if (sitemap.includes("assistant-achats-pieces-carrosserie")) {
+    errors.push("sitemap.xml: ads landing must not be listed");
+  }
+}
+
 if (errors.length) {
   console.error("check-build failed:\n" + errors.map((e) => `  - ${e}`).join("\n"));
   process.exit(1);

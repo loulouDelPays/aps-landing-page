@@ -1,0 +1,20 @@
+<!-- partial:crm-slots-notice -->
+{# Fallback uniquement si crmStatus.slotsAvailable === false (signal fiable, ex. API future) #}
+{% if crmStatus and crmStatus.slotsAvailable == false %}
+<div class="crm-slots-notice u-reveal" id="crm-slots-notice" role="status" data-crm-slots="unavailable">
+  <div class="container">
+    <div class="crm-slots-notice__inner card card--raised">
+      <div class="card__body">
+        <p class="crm-slots-notice__title">Créneaux en ligne temporairement complets</p>
+        <p class="u-text-muted u-mt-2">Réservez votre démo par téléphone ou par e-mail : nous vous proposons un créneau sous {{ site.phoneResponseHint | lower }}.</p>
+        <div class="u-gap-actions u-mt-4">
+          <a class="btn btn--primary js-phone-cta" href="tel:{{ site.phone }}" data-phone-placement="crm-fallback">{{ site.phoneDisplay }}</a>
+          <a class="btn" href="mailto:{{ site.email }}?subject=D%C3%A9mo%20AutoPartSelect">Écrire à {{ site.email }}</a>
+          <a class="btn btn--ghost js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="crm-fallback" rel="noopener noreferrer">Réessayer en ligne</a>
+        </div>
+        <p class="hint u-mt-3">{{ site.phoneHours }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

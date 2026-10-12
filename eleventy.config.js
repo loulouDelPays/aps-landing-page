@@ -30,7 +30,7 @@ export default function (eleventyConfig) {
   /** Home lastmod: max mtime of template + included partials / data (not just index.njk). */
   const homeSitemapDeps = [
     "src/_includes/partials/home-main.njk",
-    "src/_includes/partials/roi-section.html",
+    "src/_includes/partials/roi-section.njk",
     "src/_data/faqHome.json",
     "src/index.11tydata.js",
     "src/_data/videos.json",
@@ -58,6 +58,12 @@ export default function (eleventyConfig) {
     if (String(value).startsWith("http")) return value;
     const pathPart = String(value).startsWith("/") ? value : `/${value}`;
     return root + pathPart;
+  });
+
+  eleventyConfig.addFilter("envOr", (fallback, envName) => {
+    const v = process.env[envName];
+    if (typeof v === "string" && v.trim()) return v.trim();
+    return fallback;
   });
 
   eleventyConfig.addCollection("sitemapPages", (api) => {

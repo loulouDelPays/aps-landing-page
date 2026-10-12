@@ -14,6 +14,10 @@
   "ogImageAlt": "Atelier carrosserie — AutoPartSelect",
   "logo": "/assets/apple-touch-icon.png",
   "plausibleDomain": "aps-logiciel.fr",
+  "googleAdsId": "",
+  "googleAdsConversionLabel": "",
+  "phoneHours": "Lun–ven, 9h–18h",
+  "phoneResponseHint": "Rappel sous 24 h ouvrées",
   "subscriptionPrice": 150,
   "installPrice": 850,
   "currency": "EUR"

@@ -1,0 +1,44 @@
+{
+  "launch": {
+    "maxDailyBudgetEur": 30,
+    "minQualifiedClicksBeforeScale": 300,
+    "evaluationWeeks": 3,
+    "primaryKpi": "demo_booked / ad_clicks",
+    "secondaryKpis": ["demo_cta_click", "phone_click", "show_rate", "qualified_lead_rate"]
+  },
+  "experiments": [
+    {
+      "id": "hero_margin_vs_compare",
+      "hypothesis": "Promesse marge vs promesse comparaison fournisseurs",
+      "variants": ["Jusqu'à 4 points de marge", "Comparez vos fournisseurs depuis votre PDF"],
+      "minClicksPerVariant": 200
+    },
+    {
+      "id": "cta_wording",
+      "hypothesis": "Libellé CTA démo",
+      "variants": ["Réserver ma démo gratuite", "Tester APS sur mon dossier"],
+      "minClicksPerVariant": 200
+    },
+    {
+      "id": "price_visibility",
+      "hypothesis": "Prix visible avant réservation vs FAQ seulement",
+      "variants": ["note_prix_demo_block", "faq_only"],
+      "minClicksPerVariant": 200
+    },
+    {
+      "id": "roi_position",
+      "hypothesis": "Calculateur avant vs après preuves",
+      "variants": ["roi_after_proofs", "roi_before_proofs"],
+      "minClicksPerVariant": 200
+    }
+  ],
+  "thresholds9of10": {
+    "messageMatchScore": 0.9,
+    "lighthousePerformanceMobile": 90,
+    "lighthouseAccessibility": 95,
+    "lcpSeconds": 2.5,
+    "inpMs": 200,
+    "cls": 0.1,
+    "conversionTagDedup": true
+  }
+}

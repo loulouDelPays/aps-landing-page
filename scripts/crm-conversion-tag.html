@@ -1,0 +1,40 @@
+<!--
+  Modèle manuel. Préférer la version générée : npm run generate:crm-tag
+  (scripts/crm-conversion-tag.generated.html) avec GOOGLE_ADS_ID / GOOGLE_ADS_CONVERSION_LABEL ou site.json.
+
+  À coller sur la page de CONFIRMATION du CRM (crm.aps-logiciel.fr), après réservation réussie.
+  Remplacer AW-XXXXXXXXX et CONVERSION_LABEL par les valeurs Google Ads.
+
+  Prérequis :
+  - Consent Mode v2 déjà initialisé (refus par défaut) sur le CRM comme sur la landing.
+  - Ne déclencher ce snippet qu'une fois la réservation validée (pas au chargement du formulaire).
+  - Conserver gclid / utm_* depuis l'URL ou les champs cachés du formulaire.
+-->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'AW-XXXXXXXXX', { allow_enhanced_conversions: true });
+
+  // Après accord cookies marketing (adapter selon votre bannière CRM) :
+  // gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted' });
+
+  if (!window.__apsDemoBookedFired) {
+    window.__apsDemoBookedFired = true;
+    gtag('event', 'conversion', {
+      send_to: 'AW-XXXXXXXXX/CONVERSION_LABEL',
+      value: 1.0,
+      currency: 'EUR'
+    });
+  }
+</script>

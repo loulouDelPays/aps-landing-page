@@ -1,0 +1,16 @@
+<header class="topbar topbar--ads" id="top">
+  <div class="container">
+    <div class="topbar__inner topbar__inner--ads">
+      <a class="brand brand--ads" href="#top" aria-label="{{ site.name }} — haut de page">
+        <span class="brand__mark">
+          <img src="/assets/favicon.png" alt="" width="32" height="32" class="brand__logo-icon" decoding="async" />
+        </span>
+        <span class="brand__text">
+          <span class="brand__name">{{ site.name }}</span>
+          <span class="brand__tag">{{ site.tagline }}</span>
+        </span>
+      </a>
+      <a class="btn btn--primary js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="header" rel="noopener noreferrer"><span class="ads-cta-full">{{ adsDemoLabel | default('Réserver ma démo gratuite') }}</span><span class="ads-cta-compact">Réserver une démo</span></a>
+    </div>
+  </div>
+</header>

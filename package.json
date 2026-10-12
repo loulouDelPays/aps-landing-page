@@ -3,10 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/write-videos-data.js && eleventy && node scripts/minify-css.js && node scripts/minify-js.js && node scripts/align-video-schema.js",
+    "build": "node scripts/write-videos-data.js && node scripts/write-crm-status.js && node scripts/generate-crm-conversion-tag.js && eleventy && node scripts/minify-css.js && node scripts/minify-js.js && node scripts/align-video-schema.js",
     "build:pages": "bash scripts/prepare-pages-artifact.sh",
     "serve": "node scripts/write-videos-data.js && eleventy --serve --port=8080",
-    "check": "node scripts/check-build.js"
+    "check": "node scripts/check-build.js && node scripts/validate-google-ads-config.js",
+    "check:crm": "node scripts/verify-crm-demo.js",
+    "check:lighthouse": "node scripts/check-lighthouse.js",
+    "generate:crm-tag": "node scripts/generate-crm-conversion-tag.js"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",

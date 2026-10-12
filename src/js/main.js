@@ -19,16 +19,20 @@
       const netAnnual = net * 12;
       const paybackMonths = (install > 0 && net > 0) ? (install / net) : null;
 
-      document.getElementById('kNet').textContent = fmtEUR(net);
+      const netFormatted = fmtEUR(net);
+      document.getElementById('kNet').textContent = netFormatted;
       document.getElementById('kNet').dataset.value = net;
+      document.querySelectorAll('[data-roi-mirror="kNet"]').forEach((el) => {
+        el.textContent = netFormatted;
+      });
       document.getElementById('kNetSub').textContent =
-        `${fmtH(hoursSaved)} r\u00e9cup\u00e9r\u00e9es (${fmtEUR(timeValueSaved)}) + ${fmtEUR(marginValue)} de marge \u2212 ${fmtEUR(abo)} d'abo`;
+        `${fmtH(hoursSaved)} de travail économisées (${fmtEUR(timeValueSaved)}) + ${fmtEUR(marginValue)} de marge supplémentaire estimée \u2212 ${fmtEUR(abo)} d'abonnement`;
 
       const minGagneesHintEl = document.getElementById('minGagneesHint');
       if (minGagneesHintEl) {
         minGagneesHintEl.textContent = (minGagnees > 0)
-          ? `Soit ${minGagnees.toLocaleString('fr-FR', { maximumFractionDigits: 1 })} min gagn\u00e9es par dossier.`
-          : `Aucun gain de temps avec ces valeurs : le temps \u00ab avec APS \u00bb doit \u00eatre inf\u00e9rieur au temps actuel.`;
+          ? `Soit ${minGagnees.toLocaleString('fr-FR', { maximumFractionDigits: 1 })} min de recherche fournisseurs économisées par dossier.`
+          : `Aucun temps économisé avec ces valeurs : le temps de recherche avec APS doit être inférieur au temps actuel.`;
       }
 
       document.getElementById('kNetAnnual').textContent = fmtEUR(netAnnual);
@@ -40,19 +44,26 @@
           ? `≈ ${Math.round(paybackMonths * 30)} jours`
           : `≈ ${paybackMonths.toLocaleString('fr-FR', { maximumFractionDigits:1 })} mois`;
       }
-      if (typeof updateRoiCta === 'function') updateRoiCta();
+    }
+
+    function inputDefaultValue(id) {
+      const el = document.getElementById(id);
+      if (!el) return '';
+      if (el.defaultValue !== undefined && el.defaultValue !== '') return el.defaultValue;
+      return el.getAttribute('value') || '';
     }
 
     function resetDefaults(){
-      document.getElementById('dossiers').value = 80;
-      document.getElementById('minAvant').value = 30;
-      document.getElementById('minApres').value = 10;
-      document.getElementById('tauxHoraire').value = 35;
-      document.getElementById('margeParDossier').value = 30;
-      document.getElementById('abo').value = 150;
-      document.getElementById('install').value = 850;
+      document.getElementById('dossiers').value = inputDefaultValue('dossiers');
+      document.getElementById('minAvant').value = inputDefaultValue('minAvant');
+      document.getElementById('minApres').value = inputDefaultValue('minApres');
+      document.getElementById('tauxHoraire').value = inputDefaultValue('tauxHoraire');
+      document.getElementById('margeParDossier').value = inputDefaultValue('margeParDossier');
+      document.getElementById('abo').value = inputDefaultValue('abo');
+      document.getElementById('install').value = inputDefaultValue('install');
       document.querySelectorAll('.roi-preset').forEach(b => b.classList.remove('active'));
-      document.querySelector('.roi-preset[data-avant="30"]').classList.add('active');
+      const defaultPreset = document.querySelector('.roi-preset[data-default]');
+      if (defaultPreset) defaultPreset.classList.add('active');
       recalc();
     }
 
@@ -64,6 +75,7 @@
           document.querySelectorAll('.roi-preset').forEach(b => b.classList.remove('active'));
           this.classList.add('active');
           document.getElementById('minAvant').value = this.dataset.avant;
+          document.getElementById('minApres').value = this.dataset.apres;
           document.getElementById('margeParDossier').value = this.dataset.marge;
           recalc();
         });
@@ -78,10 +90,109 @@
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    function updateRoiCta(){
-      const roiCta = document.getElementById('roi-cta-demo');
-      if (roiCta) roiCta.textContent = 'Tester APS sur un de mes dossiers';
+    const ACQ_PARAMS = [
+      'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+      'gclid', 'gbraid', 'wbraid'
+    ];
+    const ACQ_STORAGE_KEY = 'aps_acq_params_v1';
+
+    function persistAcqFromUrl() {
+      try {
+        const incoming = new URLSearchParams(window.location.search);
+        const stored = JSON.parse(sessionStorage.getItem(ACQ_STORAGE_KEY) || '{}');
+        let changed = false;
+        ACQ_PARAMS.forEach(function(key) {
+          const value = incoming.get(key);
+          if (value) {
+            stored[key] = value;
+            changed = true;
+          }
+        });
+        if (changed) sessionStorage.setItem(ACQ_STORAGE_KEY, JSON.stringify(stored));
+      } catch (_) { /* ignore */ }
     }
+
+    function getAcqParams() {
+      const merged = {};
+      try {
+        Object.assign(merged, JSON.parse(sessionStorage.getItem(ACQ_STORAGE_KEY) || '{}'));
+      } catch (_) { /* ignore */ }
+      const pageParams = new URLSearchParams(window.location.search);
+      ACQ_PARAMS.forEach(function(key) {
+        const value = pageParams.get(key);
+        if (value) merged[key] = value;
+      });
+      return merged;
+    }
+
+    function appendAcqParams(rawUrl) {
+      try {
+        const target = new URL(rawUrl, window.location.href);
+        const acq = getAcqParams();
+        ACQ_PARAMS.forEach(function(key) {
+          if (acq[key]) target.searchParams.set(key, acq[key]);
+        });
+        return target.toString();
+      } catch (_) {
+        return rawUrl;
+      }
+    }
+
+    persistAcqFromUrl();
+
+    function initDemoCtaLinks() {
+      document.querySelectorAll('.js-demo-cta').forEach(function(link) {
+        const baseHref = link.getAttribute('href');
+        if (baseHref) link.setAttribute('href', appendAcqParams(baseHref));
+        link.addEventListener('click', function() {
+          const placement = link.dataset.demoPlacement || 'unknown';
+          link.setAttribute('aria-busy', 'true');
+          if (typeof window.plausible === 'function') {
+            window.plausible('Demo CTA Click', { props: { placement: placement } });
+          }
+        });
+      });
+    }
+    initDemoCtaLinks();
+
+    function initPhoneCtaLinks() {
+      document.querySelectorAll('.js-phone-cta').forEach(function(link) {
+        link.addEventListener('click', function() {
+          const placement = link.dataset.phonePlacement || 'unknown';
+          if (typeof window.plausible === 'function') {
+            window.plausible('Phone Click', { props: { placement: placement } });
+          }
+        });
+      });
+    }
+    initPhoneCtaLinks();
+
+    function initAdsStickyCta() {
+      const bar = document.querySelector('body.page-ads .bottom-cta');
+      const heroCta = document.getElementById('ads-hero-cta');
+      const finalCta = document.querySelector('.final-cta');
+      if (!bar || !heroCta || !('IntersectionObserver' in window)) return;
+      let heroVisible = true;
+      let finalVisible = false;
+      function syncSticky() {
+        const show = !heroVisible && !finalVisible;
+        bar.classList.toggle('is-visible', show);
+        document.body.classList.toggle('has-sticky-cta', show);
+      }
+      const heroObs = new IntersectionObserver(function(entries) {
+        heroVisible = entries[0].isIntersecting;
+        syncSticky();
+      }, { threshold: 0, rootMargin: '0px 0px -8px 0px' });
+      heroObs.observe(heroCta);
+      if (finalCta) {
+        const finalObs = new IntersectionObserver(function(entries) {
+          finalVisible = entries[0].isIntersecting;
+          syncSticky();
+        }, { threshold: 0.15 });
+        finalObs.observe(finalCta);
+      }
+    }
+    initAdsStickyCta();
 
     function getFocusableElements(container){
       return Array.from(container.querySelectorAll(

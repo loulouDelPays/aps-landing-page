@@ -3,20 +3,39 @@
 <head>
   {% include "partials/head-seo.njk" %}
 </head>
-<body>
+<body{% if adsLanding %} class="page-ads"{% endif %}>
   <a class="skip-link" href="#main">Aller au contenu principal</a>
   {% include "partials/svg-sprite.njk" %}
+  {% if adsLanding %}
+  {% include "partials/ads-header.njk" %}
+  {% else %}
   {% include "partials/header.njk" %}
+  {% endif %}
   {{ content | safe }}
+  {% if adsLanding %}
+  {% include "partials/ads-footer.njk" %}
+  {% else %}
   {% include "partials/footer.njk" %}
+  {% endif %}
   {% if showBottomCta %}
   {% set ghostCtaHref = bottomCtaGhostHref | default('/#rentabilite') %}
   {% set ghostCtaLabel = bottomCtaGhostLabel | default('Rentabilité') %}
+  {% set primaryCtaLabel = bottomCtaPrimaryLabel | default('Tester sur un dossier') %}
   <div class="bottom-cta" aria-label="Actions rapides">
-    <a class="btn btn--ghost" href="{{ ghostCtaHref }}">{{ ghostCtaLabel }}</a>
-    <a class="btn btn--primary" href="{{ site.demoUrl }}" rel="noopener noreferrer">Tester sur un dossier</a>
+    <a class="btn btn--ghost{% if bottomCtaGhostPhone %} js-phone-cta{% endif %}" href="{{ ghostCtaHref }}"{% if bottomCtaGhostPhone %} data-phone-placement="sticky"{% endif %}>{{ ghostCtaLabel }}</a>
+    <a class="btn btn--primary{% if adsLanding %} js-demo-cta{% endif %}" href="{{ site.demoUrl }}"{% if adsLanding %} data-demo-placement="sticky"{% endif %} rel="noopener noreferrer">{{ primaryCtaLabel }}</a>
   </div>
   {% endif %}
+  {% include "partials/consent-banner.njk" %}
+  <script>
+    window.__APS_SITE__ = {
+      plausibleDomain: {{ site.plausibleDomain | dump | safe }},
+      demoUrl: {{ site.demoUrl | dump | safe }},
+      googleAdsId: {{ site.googleAdsId | envOr('GOOGLE_ADS_ID') | dump | safe }},
+      googleAdsConversionLabel: {{ site.googleAdsConversionLabel | envOr('GOOGLE_ADS_CONVERSION_LABEL') | dump | safe }}
+    };
+  </script>
+  <script src="/js/consent.js" defer></script>
   <script src="/js/main.js" defer></script>
 </body>
 </html>

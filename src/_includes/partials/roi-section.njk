@@ -1,0 +1,82 @@
+{% set _roiDemoLabel = roiDemoLabel | default('Tester APS sur un de mes dossiers') %}
+{% set _roiGhostHref = roiGhostHref | default('/#tarifs') %}
+{% set _roiGhostLabel = roiGhostLabel | default('Voir l\'offre') %}
+{% set _roiDossiers = roiDefaultDossiers | default(80) %}
+{% set _roiDemoClass = 'btn btn--primary' + (' js-demo-cta' if roiDemoTrack else '') %}
+  <section id="rentabilite" class="section section--dark">
+    <div class="container">
+      <div class="roi-intro">
+        <div class="roi-intro__photo u-reveal">
+          <picture>
+            <source type="image/avif" srcset="/assets/img/piece-etiquetee-560.avif 560w, /assets/img/piece-etiquetee-840.avif 840w, /assets/img/piece-etiquetee-1122.avif 1122w" sizes="(max-width:980px) 100vw, 480px" />
+            <source type="image/webp" srcset="/assets/img/piece-etiquetee-560.webp 560w, /assets/img/piece-etiquetee-840.webp 840w, /assets/img/piece-etiquetee-1122.webp 1122w" sizes="(max-width:980px) 100vw, 480px" />
+            <img src="/assets/img/piece-etiquetee-840.webp" alt="Pièce carrosserie étiquetée en atelier" width="840" height="1050" loading="lazy" />
+          </picture>
+        </div>
+        <div class="u-reveal">
+          <p class="section-kicker section-kicker--light">Rentabilité</p>
+          <h2 class="section-title">Un outil rentable dès le premier mois</h2>
+          <p class="section-sub">Estimez la valeur du temps de recherche économisé et de la marge supplémentaire obtenue sur vos achats, puis déduisez le coût de l'abonnement.</p>
+          <div class="stakes-consequences">
+            <svg class="icon u-text-warn" aria-hidden="true"><use href="#icon-alert"/></svg>
+            <span>Sans vue d'ensemble, vous passez du temps à consulter chaque fournisseur et risquez de commander plus cher ou avec un délai moins favorable.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card--dark card--raised roi-card u-reveal">
+        <div class="card__body card__body--lg">
+          <div class="roi-inputs">
+            <div class="field">
+              <label for="dossiers">Combien de dossiers avec achats de pièces traitez-vous par mois ?</label>
+              <input id="dossiers" type="number" min="0" step="1" value="{{ _roiDossiers }}" />
+            </div>
+            <fieldset class="roi-presets-group u-mt-3">
+              <legend class="u-fw-700 u-mb-3">Choisissez vos hypothèses de départ</legend>
+              <div class="roi-presets">
+                <button class="btn roi-preset" type="button" data-avant="20" data-apres="10" data-marge="20"><strong>Prudent</strong><span>Recherche fournisseurs : 20 min → 10 min</span><span>+20 € de marge estimée par dossier</span></button>
+                <button class="btn roi-preset active" type="button" data-default data-avant="30" data-apres="10" data-marge="30"><strong>Réaliste</strong><span>Recherche fournisseurs : 30 min → 10 min</span><span>+30 € de marge estimée par dossier</span></button>
+              </div>
+            </fieldset>
+            <details class="roi-advanced">
+              <summary>Personnaliser les hypothèses</summary>
+              <div class="form--2 u-mt-3">
+                <div class="field"><label for="minAvant">Temps de recherche fournisseurs actuel (min/dossier)</label><input id="minAvant" type="number" min="0" step="0.5" value="30" /></div>
+                <div class="field"><label for="minApres">Temps de recherche fournisseurs avec APS (min/dossier)</label><input id="minApres" type="number" min="0" step="0.5" value="10" /></div>
+              </div>
+              <p class="hint u-text-light" id="minGagneesHint">—</p>
+              <div class="form--2 u-mt-3">
+                <div class="field"><label for="margeParDossier">Marge supplémentaire estimée (€ par dossier)</label><input id="margeParDossier" type="number" min="0" step="0.5" value="30" /></div>
+                <div class="field"></div>
+              </div>
+              <div class="form--2 u-mt-3">
+                <div class="field"><label for="tauxHoraire">Valeur d'une heure de travail économisée (€)</label><input id="tauxHoraire" type="number" min="0" step="1" value="35" /></div>
+                <div class="field"><label for="abo">Abonnement APS (€/mois)</label><input id="abo" type="number" min="0" step="1" value="150" /></div>
+              </div>
+              <div class="form--2 u-mt-3">
+                <div class="field"><label for="install">Installation (forfait unique, €)</label><input id="install" type="number" min="0" step="1" value="850" /></div>
+                <div class="field"></div>
+              </div>
+              <div class="u-mt-3"><button class="btn" type="button" id="btnReset">Réinitialiser</button></div>
+            </details>
+          </div>
+          <div class="roi-result">
+            <div class="roi-hero">
+              <div class="roi-hero-label">Gain mensuel estimé, abonnement déduit</div>
+              <div class="roi-hero-value u-text-accent" id="kNet">—</div>
+              <div class="roi-hero-detail" id="kNetSub">—</div>
+            </div>
+            <div class="roi-secondary">
+              <div class="roi-metric"><span class="roi-metric-label">Gain annuel estimé</span><span class="roi-metric-value" id="kNetAnnual">—</span></div>
+              <div class="roi-metric"><span class="roi-metric-label">Délai estimé pour amortir l'installation</span><span class="roi-metric-value" id="kPayback">—</span></div>
+            </div>
+            <p class="hint u-text-light u-mt-3">Simulation indicative, sans garantie de résultat. Ajustez les hypothèses selon votre atelier.</p>
+            <div class="u-gap-actions u-mt-4">
+              <a id="roi-cta-demo" class="{{ _roiDemoClass }}" href="{{ site.demoUrl }}"{% if roiDemoTrack %} data-demo-placement="roi"{% endif %} rel="noopener noreferrer">{{ _roiDemoLabel }}</a>
+              <a class="btn btn--ghost" href="{{ _roiGhostHref }}">{{ _roiGhostLabel }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

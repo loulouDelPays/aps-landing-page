@@ -1,0 +1,170 @@
+{
+  "landingUrl": "https://aps-logiciel.fr/assistant-achats-pieces-carrosserie/",
+  "utmDefaults": {
+    "utm_source": "google",
+    "utm_medium": "cpc"
+  },
+  "negativeKeywords": [
+    "emploi",
+    "recrutement",
+    "formation",
+    "stage",
+    "gratuit logiciel",
+    "crack",
+    "télécharger",
+    "particulier",
+    "casse auto",
+    "catalogue pièces",
+    "occasion particulier",
+    "ebay",
+    "leboncoin"
+  ],
+  "adGroups": [
+    {
+      "id": "assistant_achat",
+      "name": "Assistant achat pièces carrosserie",
+      "keywords": [
+        "[assistant achat pièces carrosserie]",
+        "[assistant achats carrosserie]",
+        "\"assistant achat pièces carrosserie\"",
+        "\"logiciel achat carrosserie\""
+      ],
+      "headlines": [
+        "Assistant achat carrosserie",
+        "Jusqu'à 4 points de marge",
+        "Depuis votre chiffrage PDF",
+        "Vos fournisseurs, zéro ressaisie",
+        "Démo gratuite 30 minutes",
+        "Sur un dossier réel",
+        "Stocks et prix comparés",
+        "Pièces OEM, PQE, réemploi",
+        "Conçu par un carrossier",
+        "Pas une centrale d'achat",
+        "AutoPartSelect APS",
+        "Comparez vos distributeurs",
+        "Gain de temps en atelier",
+        "Réservez votre démo",
+        "Essai 1 mois offert"
+      ],
+      "descriptions": [
+        "Comparez vos fournisseurs depuis le PDF. Démo gratuite de 30 min sur un dossier de votre atelier.",
+        "Prix, stocks et délais sur un écran. Vos remises négociées. Sans changer de fournisseurs.",
+        "Assistant d'achat pour carrossiers indépendants. Paramétrage et accompagnement humain.",
+        "Réservez une démo : on simule le gain de temps et de marge sur votre chiffrage réel."
+      ]
+    },
+    {
+      "id": "comparateur",
+      "name": "Comparateur fournisseurs carrosserie",
+      "keywords": [
+        "[comparateur fournisseurs carrosserie]",
+        "[comparer prix pièces carrosserie]",
+        "\"comparateur pièces carrosserie\"",
+        "\"comparer fournisseurs carrosserie\""
+      ],
+      "headlines": [
+        "Comparateur multi-fournisseurs",
+        "Prix et stocks côte à côte",
+        "Depuis votre chiffrage PDF",
+        "Vos remises appliquées",
+        "Démo gratuite 30 min",
+        "Zéro ressaisie manuelle",
+        "Origine, PQE, réemploi",
+        "Décidez plus vite",
+        "AutoPartSelect",
+        "Pour carrossiers pros",
+        "Jusqu'à 4 points de marge",
+        "Vos fournisseurs habituels",
+        "Réservez une démo",
+        "Sur dossier réel",
+        "Essai sans engagement"
+      ],
+      "descriptions": [
+        "Un seul écran pour comparer vos distributeurs habituels. Démo gratuite sur votre PDF.",
+        "Finissez la chasse à l'info : stocks, délais et marges visibles avant de commander.",
+        "Logiciel conçu en carrosserie. Pas de centrale d'achat imposée.",
+        "30 minutes chrono pour voir APS sur un de vos dossiers en cours."
+      ]
+    },
+    {
+      "id": "logiciel",
+      "name": "Logiciel achat pièces carrosserie",
+      "keywords": [
+        "[logiciel achat pièces carrosserie]",
+        "[logiciel pièces carrosserie]",
+        "\"logiciel achat carrosserie\"",
+        "\"outil achat pièces carrosserie\""
+      ],
+      "headlines": [
+        "Logiciel achat carrosserie",
+        "Lecture PDF automatique",
+        "Multi-fournisseurs",
+        "Démo gratuite 30 min",
+        "Vos comptes connectés",
+        "Suivi des commandes",
+        "AutoPartSelect APS",
+        "Pour ateliers indépendants",
+        "Jusqu'à 4 pts de marge",
+        "Sans centrale d'achat",
+        "Paramétrage accompagné",
+        "1er mois offert",
+        "Réservez votre démo",
+        "Chiffrage → commande",
+        "Carrossiers terrain"
+      ],
+      "descriptions": [
+        "Depuis le chiffrage PDF jusqu'à la commande. Démo gratuite sur un dossier réel.",
+        "Connecté à vos distributeurs habituels. Vos remises, vos interlocuteurs.",
+        "Installation paramétrée avec vous. Essai 1 mois d'abonnement offert.",
+        "Réservez 30 min : simulation de gain temps et marge sur votre volume."
+      ]
+    },
+    {
+      "id": "pdf",
+      "name": "Recherche pièces depuis chiffrage PDF",
+      "keywords": [
+        "[chiffrage pdf pièces carrosserie]",
+        "[recherche pièces depuis pdf]",
+        "\"chiffrage pdf carrosserie\"",
+        "\"extraire pièces pdf chiffrage\""
+      ],
+      "headlines": [
+        "Glissez votre chiffrage PDF",
+        "Pièces extraites auto",
+        "Comparez vos fournisseurs",
+        "Sans ressaisie",
+        "Démo gratuite 30 min",
+        "Stocks et délais visibles",
+        "AutoPartSelect",
+        "Pour carrossiers",
+        "Rapport expert accepté",
+        "Jusqu'à 4 points marge",
+        "Vos remises négociées",
+        "Réservez une démo",
+        "Sur dossier réel",
+        "Gain de temps atelier",
+        "Essai 1 mois offert"
+      ],
+      "descriptions": [
+        "Déposez le PDF de chiffrage : APS interroge vos fournisseurs et affiche le comparatif.",
+        "Zéro saisie ligne par ligne. Démo gratuite sur un dossier de votre semaine.",
+        "Origine, qualité équivalente et réemploi sur la même base tarifaire.",
+        "30 minutes pour voir le gain concret sur vos achats de pièces."
+      ]
+    }
+  ],
+  "sitelinks": [
+    { "label": "Preuves terrain", "path": "#resultats" },
+    { "label": "Démo 30 min", "path": "#demo" },
+    { "label": "Questions fréquentes", "path": "#faq" },
+    { "label": "Rentabilité", "path": "#rentabilite" }
+  ],
+  "callouts": [
+    "Zéro ressaisie",
+    "Vos fournisseurs habituels",
+    "Stocks et délais centralisés",
+    "Démo gratuite 30 min",
+    "Conçu par un carrossier",
+    "Pas une centrale d'achat"
+  ]
+}

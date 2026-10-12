@@ -1,0 +1,25 @@
+[
+  {
+    "quote": "C'est très, très facile. Et le gain de temps est énorme.",
+    "text": "On élimine les appels interminables aux fournisseurs et on retrouve du temps pour l'atelier.",
+    "name": "Michel Zanzi",
+    "company": "Carrosserie Gnani",
+    "initials": "MZ",
+    "logo": "/assets/img/gnani.jpg"
+  },
+  {
+    "quote": "Gain de temps, gain d'argent… il faut le prendre !",
+    "text": "Les pièces et les disponibilités remontent tout de suite — le temps de traitement des dossiers est divisé par trois.",
+    "name": "Jonathan Arénalès",
+    "company": "Carrosserie Arénalès",
+    "initials": "JA",
+    "logo": "/assets/img/arenales.jpg"
+  },
+  {
+    "quote": "En un coup d'œil on voit les marges et la disponibilité.",
+    "text": "Indispensable pour chiffrer vite les imprévus : marge et stock sur la même ligne.",
+    "name": "Matthieu Lavisse",
+    "company": "Somail Auto Carrosserie",
+    "initials": "ML"
+  }
+]

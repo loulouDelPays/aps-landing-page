@@ -1,0 +1,30 @@
+[
+  {
+    "question": "Dois-je changer de fournisseurs ou de façon de travailler ?",
+    "answer": "Non. AutoPartSelect n'est pas une centrale d'achat : vous gardez vos fournisseurs, vos remises et vos interlocuteurs. L'outil se branche sur vos comptes existants pour afficher stock, prix et délais au même endroit."
+  },
+  {
+    "question": "Mes identifiants et tarifs négociés restent-ils privés ?",
+    "answer": "Oui. Vos accords commerciaux restent les vôtres. APS consulte vos comptes fournisseurs uniquement pour vous aider à décider. Lors de l'installation, on paramètre les connexions avec vous, sur place ou à distance."
+  },
+  {
+    "question": "Mes fournisseurs sont-ils compatibles ?",
+    "answer": "APS se connecte aux comptes en ligne de vos distributeurs habituels. Lors du diagnostic, on vérifie avec vous que vos fournisseurs principaux remontent bien — c'est l'objectif de la démo de 30 minutes."
+  },
+  {
+    "question": "En combien de temps suis-je opérationnel ?",
+    "answer": "Comptez quelques jours après la démo : paramétrage de vos accès, connexion fournisseurs et validation sur un dossier réel avec vous. Pas de matériel à changer ni de formation lourde."
+  },
+  {
+    "question": "Aucun créneau en ligne : que faire ?",
+    "answer": "Appelez-nous au 06 58 81 67 37 ou écrivez à contact@aps-logiciel.fr : nous fixons un créneau de 30 minutes sous 24 h ouvrées. Vous pouvez aussi réessayer la page de réservation plus tard."
+  },
+  {
+    "question": "La démo est-elle vraiment gratuite et limitée à 30 minutes ?",
+    "answer": "Oui : 30 minutes chrono, gratuit, sans engagement. On part d'un chiffrage de votre semaine et on simule le gain de temps et de marge — pas une présentation générique."
+  },
+  {
+    "question": "Que se passe-t-il si je veux continuer après la démo ?",
+    "answer": "Si vous continuez : installation forfaitaire 850 € (connexion et paramétrage), 1er mois d'abonnement offert, puis 150 € HT/mois sur 12 mois uniquement si vous validez la valeur sur vos dossiers."
+  }
+]
