@@ -8,6 +8,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     "assets/favicon.png": "assets/favicon.png",
     "assets/apple-touch-icon.png": "assets/apple-touch-icon.png",
+    "assets/lead-magnet-aps.pdf": "assets/lead-magnet-aps.pdf",
   });
   eleventyConfig.addPassthroughCopy({ "src/robots.txt": "robots.txt" });
   eleventyConfig.addPassthroughCopy({ "src/css": "css" });
