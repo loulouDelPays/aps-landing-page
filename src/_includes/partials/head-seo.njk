@@ -1,5 +1,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+{% include "partials/consent-head.njk" %}
 {% if noindex %}
 <meta name="robots" content="noindex, follow" />
 {% endif %}
@@ -30,5 +31,4 @@
 {% endif %}
 <link rel="stylesheet" href="/css/main.css" />
 <script>document.documentElement.classList.add('js');</script>
-{% include "partials/analytics.njk" %}
 {% include "partials/schema-jsonld.njk" %}

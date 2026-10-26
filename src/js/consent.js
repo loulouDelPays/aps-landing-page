@@ -1,9 +1,44 @@
 (function () {
   const STORAGE_KEY = 'aps_consent_v2';
   const LEGACY_KEY = 'aps_consent_v1';
+  const COOKIE_MAX_AGE = 15552000;
   const cfg = window.__APS_SITE__ || {};
 
+  function canUseSharedCookie() {
+    if (window.location.protocol !== 'https:') return false;
+    const host = window.location.hostname;
+    return host === 'aps-logiciel.fr' || host.endsWith('.aps-logiciel.fr');
+  }
+
+  function readCookieChoice() {
+    try {
+      const match = document.cookie.match(/(?:^|;\s*)aps_consent_v2=([^;]*)/);
+      if (!match) return null;
+      const parsed = JSON.parse(decodeURIComponent(match[1]));
+      return parsed && typeof parsed === 'object' ? parsed : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function writeCookieChoice(choice) {
+    if (!canUseSharedCookie()) return;
+    try {
+      const value = encodeURIComponent(JSON.stringify(choice));
+      document.cookie =
+        STORAGE_KEY +
+        '=' +
+        value +
+        '; domain=.aps-logiciel.fr; path=/; max-age=' +
+        COOKIE_MAX_AGE +
+        '; SameSite=Lax; Secure';
+    } catch (_) { /* ignore */ }
+  }
+
   function readChoice() {
+    const fromCookie = readCookieChoice();
+    if (fromCookie) return fromCookie;
+
     try {
       let raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) {
@@ -19,7 +54,12 @@
           return migrated;
         }
       }
-      return raw ? JSON.parse(raw) : null;
+      if (raw) {
+        const choice = JSON.parse(raw);
+        writeCookieChoice(choice);
+        return choice;
+      }
+      return null;
     } catch (_) {
       return null;
     }
@@ -29,6 +69,7 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(choice));
     } catch (_) { /* ignore */ }
+    writeCookieChoice(choice);
   }
 
   function updateConsent(choice) {
@@ -52,6 +93,8 @@
   }
 
   function loadGoogleAds() {
+    const gtmId = (cfg.gtmId || '').trim();
+    if (gtmId && /^GTM-[A-Z0-9]+$/i.test(gtmId)) return;
     const id = cfg.googleAdsId;
     if (!id || !/^AW-\d+$/.test(id) || document.querySelector('script[data-gtag-ads]')) return;
     const loader = document.createElement('script');

@@ -4,6 +4,7 @@
   {% include "partials/head-seo.njk" %}
 </head>
 <body{% if adsLanding %} class="page-ads"{% endif %}>
+  {% include "partials/gtm-noscript.njk" %}
   <a class="skip-link" href="#main">Aller au contenu principal</a>
   {% include "partials/svg-sprite.njk" %}
   {% if adsLanding %}
@@ -31,6 +32,7 @@
     window.__APS_SITE__ = {
       plausibleDomain: {{ site.plausibleDomain | dump | safe }},
       demoUrl: {{ site.demoUrl | dump | safe }},
+      gtmId: {{ site.gtmId | envOr('GTM_ID') | dump | safe }},
       googleAdsId: {{ site.googleAdsId | envOr('GOOGLE_ADS_ID') | dump | safe }},
       googleAdsConversionLabel: {{ site.googleAdsConversionLabel | envOr('GOOGLE_ADS_CONVERSION_LABEL') | dump | safe }}
     };

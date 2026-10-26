@@ -22,6 +22,26 @@ function isNoindex(html) {
   return /<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html);
 }
 
+function assertGtmTracking(html, rel, gtmId) {
+  if (!gtmId) return;
+  const headEnd = html.indexOf("</head>");
+  const head = headEnd >= 0 ? html.slice(0, headEnd) : html;
+  if (!head.includes(gtmId)) {
+    errors.push(`${rel}: missing GTM container ${gtmId} in <head>`);
+  }
+  const consentIdx = head.indexOf("gtag('consent', 'default'");
+  const gtmIdx = head.indexOf("gtm.js");
+  if (consentIdx === -1) {
+    errors.push(`${rel}: missing consent default in <head>`);
+  } else if (gtmIdx !== -1 && consentIdx > gtmIdx) {
+    errors.push(`${rel}: consent default must appear before gtm.js in <head>`);
+  }
+  const bodyMatch = html.match(/<body[^>]*>([\s\S]{0,1200})/);
+  if (!bodyMatch || !bodyMatch[1].includes(`ns.html?id=${gtmId}`)) {
+    errors.push(`${rel}: missing GTM noscript iframe right after <body>`);
+  }
+}
+
 function extractTitle(html) {
   const m = html.match(/<title>([^<]*)<\/title>/);
   return m ? m[1].trim() : "";
@@ -110,6 +130,17 @@ for (const file of faqSchemaPages) {
     errors.push(`${rel}: unexpected FAQPage schema (only home allowed)`);
   }
 }
+
+const siteJson = JSON.parse(fs.readFileSync(path.join(root, "src/_data/site.json"), "utf8"));
+const gtmId = (process.env.GTM_ID || siteJson.gtmId || "").trim();
+
+function checkGtmPage(relPath) {
+  const p = path.join(siteDir, relPath);
+  if (!fs.existsSync(p)) return;
+  assertGtmTracking(fs.readFileSync(p, "utf8"), relPath, gtmId);
+}
+checkGtmPage("index.html");
+checkGtmPage("assistant-achats-pieces-carrosserie/index.html");
 
 const indexHtml = path.join(siteDir, "index.html");
 if (fs.existsSync(indexHtml)) {

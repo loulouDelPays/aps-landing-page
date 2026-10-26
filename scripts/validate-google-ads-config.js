@@ -18,16 +18,27 @@ function readJson(rel) {
 const errors = [];
 const warnings = [];
 
+const gtmId = (process.env.GTM_ID || site.gtmId || "").trim();
 const googleAdsId = (process.env.GOOGLE_ADS_ID || site.googleAdsId || "").trim();
 const googleAdsConversionLabel = (process.env.GOOGLE_ADS_CONVERSION_LABEL || site.googleAdsConversionLabel || "").trim();
 
-if (!googleAdsId || !/^AW-\d+$/.test(googleAdsId)) {
+if (!gtmId || !/^GTM-[A-Z0-9]+$/i.test(gtmId)) {
+  warnings.push("gtmId manquant ou invalide (attendu GTM-XXXXXXX). Définir dans site.json ou GTM_ID.");
+}
+if (gtmId && googleAdsId) {
   warnings.push(
-    "googleAdsId manquant ou invalide (attendu AW-XXXXXXXX). Définir dans site.json ou GOOGLE_ADS_ID."
+    "googleAdsId défini alors que GTM est actif — laisser googleAdsId vide (tags Ads via GTM uniquement)."
   );
 }
-if (googleAdsId && !googleAdsConversionLabel) {
-  warnings.push("googleAdsConversionLabel manquant (site.json ou GOOGLE_ADS_CONVERSION_LABEL).");
+if (!gtmId) {
+  if (!googleAdsId || !/^AW-\d+$/.test(googleAdsId)) {
+    warnings.push(
+      "googleAdsId manquant ou invalide (attendu AW-XXXXXXXX). Définir dans site.json ou GOOGLE_ADS_ID."
+    );
+  }
+  if (googleAdsId && !googleAdsConversionLabel) {
+    warnings.push("googleAdsConversionLabel manquant (site.json ou GOOGLE_ADS_CONVERSION_LABEL).");
+  }
 }
 
 const campaign = readJson("src/_data/googleAdsCampaign.json");
