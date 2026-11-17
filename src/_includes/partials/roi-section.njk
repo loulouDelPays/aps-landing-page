@@ -1,3 +1,4 @@
+{% from "partials/callback-macros.njk" import callbackAlternate %}
 {% set _roiDemoLabel = roiDemoLabel | default('Réserver un diagnostic gratuit') %}
 {% set _roiGhostHref = roiGhostHref | default('/#tarifs') %}
 {% set _roiGhostLabel = roiGhostLabel | default('Voir l\'offre') %}
@@ -71,9 +72,12 @@
               <div class="roi-metric"><span class="roi-metric-label">Délai estimé pour amortir l'installation</span><span class="roi-metric-value" id="kPayback">—</span></div>
             </div>
             <p class="hint u-text-light u-mt-3">Simulation indicative, sans garantie de résultat. Ajustez les hypothèses selon votre atelier.</p>
-            <div class="u-gap-actions u-mt-4">
-              <a id="roi-cta-demo" class="{{ _roiDemoClass }}" href="{{ site.demoUrl }}"{% if roiDemoTrack %} data-demo-placement="roi"{% endif %}>{{ _roiDemoLabel }}</a>
-              <a class="btn btn--ghost" href="{{ _roiGhostHref }}">{{ _roiGhostLabel }}</a>
+            <div class="ads-cta-stack ads-cta-stack--roi u-mt-4">
+              <div class="u-gap-actions">
+                <a id="roi-cta-demo" class="{{ _roiDemoClass }}" href="{{ site.demoUrl }}"{% if roiDemoTrack %} data-demo-placement="roi"{% endif %}>{{ _roiDemoLabel }}</a>
+                <a class="btn btn--ghost" href="{{ _roiGhostHref }}">{{ _roiGhostLabel }}</a>
+              </div>
+              {% if roiCallbackAlternate %}{{ callbackAlternate('roi') }}{% endif %}
             </div>
           </div>
         </div>

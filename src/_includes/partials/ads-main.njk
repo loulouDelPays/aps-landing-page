@@ -1,3 +1,4 @@
+{% from "partials/callback-macros.njk" import callbackAlternate, callbackModalDialog %}
   <main id="main">
   <section class="hero hero--ads" aria-label="Introduction">
     <div class="hero__bg" aria-hidden="true">
@@ -22,9 +23,12 @@
             <span class="tag-pill tag-pill--eq">Qualité équivalente</span>
             <span class="tag-pill tag-pill--reuse">Réemploi</span>
           </div>
-          <div class="hero__cta">
-            <a id="ads-hero-cta" class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="hero">Réserver ma démo gratuite</a>
-            <a class="btn btn--ghost btn--lg play-hero-demo" href="#hero-player">Voir une recherche en 2 min</a>
+          <div class="hero__cta hero__cta--ads">
+            <div class="hero__cta-row">
+              <a id="ads-hero-cta" class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="hero">Réserver ma démo gratuite</a>
+              <a class="btn btn--ghost btn--lg play-hero-demo" href="#hero-player">Voir une recherche en 2 min</a>
+            </div>
+            {{ callbackAlternate('hero') }}
           </div>
           <p class="hint hero__hint">45 minutes · gratuit · sur un dossier réel de votre atelier</p>
           <p class="hero__trust-line u-mt-3">Conçu par un carrossier · vos fournisseurs restent les vôtres</p>
@@ -147,8 +151,9 @@
           <img src="/assets/img/exemple_resultat_recherche-1280.webp" alt="Exemple de résultat de recherche APS" width="1280" height="800" loading="lazy" />
         </picture>
       </div>
-      <div class="u-gap-actions u-gap-actions--center u-mt-6 u-reveal">
+      <div class="ads-cta-stack ads-cta-stack--center u-mt-6 u-reveal">
         <a class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="solution">Réserver ma démo gratuite</a>
+        {{ callbackAlternate('solution') }}
       </div>
     </div>
   </section>
@@ -272,7 +277,7 @@
         <p class="section-sub">On part de votre chiffrage pour estimer le temps économisé et la marge supplémentaire, sur vos fournisseurs.</p>
       </div>
       <div class="ads-demo-grid u-reveal">
-        <article class="card card--raised ads-demo-card">
+        <article class="card card--raised ads-demo-card ads-demo-card--primary">
           <div class="card__body">
             <h3>Ce que vous voyez pendant la démo</h3>
             <ul class="ads-demo-list">
@@ -280,12 +285,18 @@
               <li>Comparatif prix, stock et délai avec vos remises</li>
               <li>Estimation de rentabilité adaptée à votre volume</li>
             </ul>
-            <p class="hint">Gratuit · sans engagement · 45 minutes</p>
-            <p class="ads-offer">Installation 850 € · 1<sup>er</sup> mois offert · puis 150 € HT/mois pendant 12 mois</p>
-            <div class="u-gap-actions">
+            <p class="hint ads-demo-reassurance">Gratuit · sans engagement sur la démo · 45 minutes sur un dossier réel</p>
+            <div class="ads-demo-actions">
               <a class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="demo-block">Réserver ma démo gratuite</a>
-              <a class="btn btn--lg" href="#rentabilite">Calculer ma rentabilité</a>
+              {{ callbackAlternate('demo-block') }}
             </div>
+            <details class="ads-offer-details">
+              <summary>Conditions si vous continuez après la démo</summary>
+              <p class="ads-offer ads-offer--muted">Installation 850 € · 1<sup>er</sup> mois offert · puis 150 € HT/mois pendant 12 mois. Rien n'est engagé tant que vous n'avez pas validé après la démo.</p>
+            </details>
+            <p class="ads-demo-foot">
+              <a class="ads-text-link" href="#rentabilite">Calculer ma rentabilité</a>
+            </p>
           </div>
         </article>
         {% include "partials/callback-form.njk" %}
@@ -295,6 +306,7 @@
 
   {% set roiDemoLabel = 'Réserver ma démo gratuite' %}
   {% set roiDemoTrack = true %}
+  {% set roiCallbackAlternate = true %}
   {% set roiDefaultDossiers = 80 %}
   {% set roiGhostHref = '#faq' %}
   {% set roiGhostLabel = 'Voir les questions fréquentes' %}
@@ -311,8 +323,9 @@
         <details class="u-reveal"><summary>{{ item.question }}</summary><p>{{ item.answer }}</p></details>
         {% endfor %}
       </div>
-      <div class="u-gap-actions u-gap-actions--center u-mt-6 u-reveal">
+      <div class="ads-cta-stack ads-cta-stack--center u-mt-6 u-reveal">
         <a class="btn btn--primary js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="faq">Réserver ma démo gratuite</a>
+        {{ callbackAlternate('faq') }}
       </div>
     </div>
   </section>
@@ -326,14 +339,19 @@
             <h2 class="section-title u-mb-0">Trouvez vos pièces plus vite, avec une marge plus claire</h2>
             <p class="hint u-text-light u-mt-2">Démo gratuite · essai 1 mois offert · vos fournisseurs inchangés.</p>
           </div>
-          <div class="u-gap-actions">
-            <a class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="final">Réserver ma démo gratuite</a>
-            <a class="btn btn--ghost" href="#rentabilite">Calculer ma rentabilité</a>
+          <div class="ads-cta-stack ads-cta-stack--end">
+            <div class="u-gap-actions">
+              <a class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="final">Réserver ma démo gratuite</a>
+              <a class="btn btn--ghost" href="#rentabilite">Calculer ma rentabilité</a>
+            </div>
+            {{ callbackAlternate('final') }}
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  {{ callbackModalDialog() }}
 
   <dialog class="video-stage" id="video-stage" aria-label="Lecture vidéo">
     <div class="video-stage__panel">

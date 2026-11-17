@@ -1,0 +1,80 @@
+{% macro callbackAlternate(placement) %}
+<p class="ads-callback-alt">
+  <span class="ads-callback-alt__lead">Pas le temps de choisir un créneau ?</span>
+  <button type="button" class="ads-callback-link js-callback-trigger" data-callback-placement="{{ placement }}">Être rappelé sous 24 h</button>
+</p>
+{% endmacro %}
+
+{% macro callbackFormFields(suffix) %}
+{% set sid = suffix if suffix else '' %}
+<div class="form--2">
+  <div class="field">
+    <label for="callback-first-name{{ sid }}">Prénom</label>
+    <input type="text" id="callback-first-name{{ sid }}" name="contactFirstName" required autocomplete="given-name" />
+  </div>
+  <div class="field">
+    <label for="callback-last-name{{ sid }}">Nom</label>
+    <input type="text" id="callback-last-name{{ sid }}" name="contactLastName" required autocomplete="family-name" />
+  </div>
+</div>
+<div class="field">
+  <label for="callback-company{{ sid }}">Garage</label>
+  <input type="text" id="callback-company{{ sid }}" name="companyName" required autocomplete="organization" />
+</div>
+<div class="field">
+  <label for="callback-phone{{ sid }}">Téléphone</label>
+  <input type="tel" id="callback-phone{{ sid }}" name="contactPhone" required autocomplete="tel" inputmode="tel" />
+</div>
+<div class="field">
+  <label for="callback-email{{ sid }}">E-mail</label>
+  <input type="email" id="callback-email{{ sid }}" name="contactEmail" required autocomplete="email" inputmode="email" />
+</div>
+<div class="field field--checkbox">
+  <label class="callback-consent" for="callback-consent{{ sid }}">
+    <input type="checkbox" id="callback-consent{{ sid }}" name="consent" required value="1" />
+    <span>J'accepte d'être rappelé pour une démo</span>
+  </label>
+  <p class="hint callback-consent-note">Voir la <a href="/politique-confidentialite.html">politique de confidentialité</a>.</p>
+</div>
+{% endmacro %}
+
+{% macro callbackForm(formId, suffix, placement, submitClass) %}
+<form id="{{ formId }}" class="form js-callback-form" novalidate data-callback-placement="{{ placement }}">
+  <input type="text" name="website" class="callback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  {{ callbackFormFields(suffix) }}
+  <p class="hint callback-form-status" role="status" aria-live="polite" hidden></p>
+  <button type="submit" class="{{ submitClass }} callback-form-submit">Demander un rappel</button>
+</form>
+{% endmacro %}
+
+{% macro callbackInlineCard() %}
+<article class="card card--raised ads-callback-card ads-callback-card--secondary">
+  <div class="card__body">
+    <h3>Être rappelé</h3>
+    <p class="u-text-muted u-mt-2">Laissez vos coordonnées : nous vous rappelons pour fixer les 45 minutes sur un dossier réel. {{ site.phoneResponseHint }}.</p>
+    <p class="hint ads-callback-objective">Sans engagement · la démo reste gratuite · on ne démarre rien sans votre accord.</p>
+    {{ callbackForm('callback-form', '', 'inline', 'btn btn--primary btn--lg') }}
+    <p class="hint ads-callback-phone u-mt-3">Ou appelez le <a class="ads-phone-link js-phone-cta" href="tel:{{ site.phone }}" data-phone-placement="demo-callback">{{ site.phoneDisplay }}</a></p>
+  </div>
+</article>
+{% endmacro %}
+
+{% macro callbackModalDialog() %}
+<dialog class="callback-stage" id="callback-stage" aria-labelledby="callback-stage-title" aria-describedby="callback-stage-desc">
+  <div class="callback-stage__panel">
+    <header class="callback-stage__head">
+      <div>
+        <h2 id="callback-stage-title" class="callback-stage__title">Être rappelé pour une démo</h2>
+        <p id="callback-stage-desc" class="u-text-muted callback-stage__desc">Vous ouvrez ce formulaire parce que vous préférez être rappelé plutôt que de choisir un créneau en ligne. {{ site.phoneResponseHint }}.</p>
+      </div>
+      <button type="button" class="callback-stage__close js-callback-close" aria-label="Fermer le formulaire de rappel">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.2 5 5 6.2 10.8 12 5 17.8 6.2 19 12 13.2 17.8 19 19 17.8 13.2 12 19 6.2 17.8 5 12 10.8z"/></svg>
+      </button>
+    </header>
+    <div class="callback-stage__body">
+      {{ callbackForm('callback-form-modal', '-modal', 'modal', 'btn btn--primary btn--lg') }}
+      <p class="hint ads-callback-phone u-mt-3">Ou appelez le <a class="ads-phone-link js-phone-cta" href="tel:{{ site.phone }}" data-phone-placement="callback-modal">{{ site.phoneDisplay }}</a></p>
+    </div>
+  </div>
+</dialog>
+{% endmacro %}

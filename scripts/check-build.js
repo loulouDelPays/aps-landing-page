@@ -309,8 +309,17 @@ if (fs.existsSync(adsPath)) {
   if (!ads.includes("ads-results-disclaimer")) errors.push(`${adsRel}: missing results disclaimer`);
   if (!ads.includes('id="resultats"')) errors.push(`${adsRel}: missing #resultats section`);
   if (!ads.includes('id="callback-form"')) errors.push(`${adsRel}: missing callback request form`);
+  if (!ads.includes('id="callback-form-modal"')) errors.push(`${adsRel}: missing callback modal form`);
+  if (!ads.includes('id="callback-stage"')) errors.push(`${adsRel}: missing callback modal dialog`);
   if (!ads.includes("js-callback-form")) errors.push(`${adsRel}: missing callback form JS hook`);
+  if (!ads.includes("js-callback-trigger")) errors.push(`${adsRel}: missing callback modal triggers`);
+  if (!ads.includes("data-callback-placement")) errors.push(`${adsRel}: missing callback placement tracking`);
   if (!ads.includes("callbackRequestUrl")) errors.push(`${adsRel}: missing callbackRequestUrl in __APS_SITE__`);
+  const callbackFormIds = [...ads.matchAll(/\bid="callback-form[^"]*"/g)].map((m) => m[0]);
+  const uniqueCallbackFormIds = new Set(callbackFormIds);
+  if (callbackFormIds.length !== uniqueCallbackFormIds.size) {
+    errors.push(`${adsRel}: duplicate callback form ids`);
+  }
   if (!ads.includes("45 minutes")) errors.push(`${adsRel}: demo duration should be 45 minutes on page`);
   const sitemap = fs.existsSync(sitemapPath) ? fs.readFileSync(sitemapPath, "utf8") : "";
   if (sitemap.includes("assistant-achats-pieces-carrosserie")) {

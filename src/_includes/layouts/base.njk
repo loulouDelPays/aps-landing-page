@@ -23,7 +23,11 @@
   {% set ghostCtaLabel = bottomCtaGhostLabel | default('Rentabilité') %}
   {% set primaryCtaLabel = bottomCtaPrimaryLabel | default('Réserver un diagnostic gratuit') %}
   <div class="bottom-cta" aria-label="Actions rapides">
+    {% if adsLanding and bottomCtaGhostIsCallback %}
+    <button type="button" class="btn btn--ghost js-callback-trigger" data-callback-placement="sticky">Être rappelé</button>
+    {% else %}
     <a class="btn btn--ghost{% if bottomCtaGhostPhone %} js-phone-cta{% endif %}" href="{{ ghostCtaHref }}"{% if bottomCtaGhostPhone %} data-phone-placement="sticky"{% endif %}>{{ ghostCtaLabel }}</a>
+    {% endif %}
     <a class="btn btn--primary{% if adsLanding %} js-demo-cta{% endif %}" href="{{ site.demoUrl }}"{% if adsLanding %} data-demo-placement="sticky"{% endif %}>{{ primaryCtaLabel }}</a>
   </div>
   {% endif %}
