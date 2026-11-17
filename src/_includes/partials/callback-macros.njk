@@ -10,30 +10,36 @@
 <div class="form--2">
   <div class="field">
     <label for="callback-first-name{{ sid }}">Prénom</label>
-    <input type="text" id="callback-first-name{{ sid }}" name="contactFirstName" required autocomplete="given-name" />
+    <input type="text" id="callback-first-name{{ sid }}" name="contactFirstName" required autocomplete="given-name" aria-describedby="callback-first-name-error{{ sid }}" />
+    <p class="field-error" id="callback-first-name-error{{ sid }}" hidden></p>
   </div>
   <div class="field">
     <label for="callback-last-name{{ sid }}">Nom</label>
-    <input type="text" id="callback-last-name{{ sid }}" name="contactLastName" required autocomplete="family-name" />
+    <input type="text" id="callback-last-name{{ sid }}" name="contactLastName" required autocomplete="family-name" aria-describedby="callback-last-name-error{{ sid }}" />
+    <p class="field-error" id="callback-last-name-error{{ sid }}" hidden></p>
   </div>
 </div>
 <div class="field">
   <label for="callback-company{{ sid }}">Garage</label>
-  <input type="text" id="callback-company{{ sid }}" name="companyName" required autocomplete="organization" />
+  <input type="text" id="callback-company{{ sid }}" name="companyName" required autocomplete="organization" aria-describedby="callback-company-error{{ sid }}" />
+  <p class="field-error" id="callback-company-error{{ sid }}" hidden></p>
 </div>
 <div class="field">
   <label for="callback-phone{{ sid }}">Téléphone</label>
-  <input type="tel" id="callback-phone{{ sid }}" name="contactPhone" required autocomplete="tel" inputmode="tel" />
+  <input type="tel" id="callback-phone{{ sid }}" name="contactPhone" required autocomplete="tel" inputmode="tel" aria-describedby="callback-phone-error{{ sid }}" />
+  <p class="field-error" id="callback-phone-error{{ sid }}" hidden></p>
 </div>
 <div class="field">
   <label for="callback-email{{ sid }}">E-mail</label>
-  <input type="email" id="callback-email{{ sid }}" name="contactEmail" required autocomplete="email" inputmode="email" />
+  <input type="email" id="callback-email{{ sid }}" name="contactEmail" required autocomplete="email" inputmode="email" aria-describedby="callback-email-error{{ sid }}" />
+  <p class="field-error" id="callback-email-error{{ sid }}" hidden></p>
 </div>
 <div class="field field--checkbox">
   <label class="callback-consent" for="callback-consent{{ sid }}">
-    <input type="checkbox" id="callback-consent{{ sid }}" name="consent" required value="1" />
+    <input type="checkbox" id="callback-consent{{ sid }}" name="consent" required value="1" aria-describedby="callback-consent-error{{ sid }}" />
     <span>J'accepte d'être rappelé pour une démo</span>
   </label>
+  <p class="field-error" id="callback-consent-error{{ sid }}" hidden></p>
   <p class="hint callback-consent-note">Voir la <a href="/politique-confidentialite.html">politique de confidentialité</a>.</p>
 </div>
 {% endmacro %}

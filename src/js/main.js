@@ -264,6 +264,15 @@
     let closeCallbackModal = null;
     let callbackModalSession = 0;
 
+    const CALLBACK_FIELD_NAMES = [
+      'contactFirstName',
+      'contactLastName',
+      'companyName',
+      'contactPhone',
+      'contactEmail',
+      'consent'
+    ];
+
     function getNamedFormValue(form, name) {
       const el = form.elements.namedItem(name);
       if (!el) return '';
@@ -271,37 +280,123 @@
       return '';
     }
 
-    function formatCallbackApiError(data) {
-      if (!data || !data.error) return 'Vérifiez les champs du formulaire.';
-      const msg = data.error.message || '';
-      const details = data.error.details;
-      if (!details) return msg || 'Vérifiez les champs du formulaire.';
-      if (typeof details === 'string') return details;
-      if (Array.isArray(details)) {
-        const parts = details.map(function(item) {
-          if (typeof item === 'string') return item;
-          if (item && typeof item.message === 'string') return item.message;
-          return '';
-        }).filter(Boolean);
-        if (parts.length) {
-          return (msg ? msg + ' ' : '') + parts.join(' ');
-        }
+    function normalizePhoneCompact(value) {
+      return String(value || '').replace(/[\s.\-()]/g, '');
+    }
+
+    function isValidFrenchPhone(value) {
+      const compact = normalizePhoneCompact(value);
+      if (compact.length > 50) return false;
+      if (/^0[1-9]\d{8}$/.test(compact)) return true;
+      if (/^(\+33|0033)[1-9]\d{8}$/.test(compact)) return true;
+      return false;
+    }
+
+    function isValidCallbackEmail(value) {
+      const v = value.trim();
+      if (v.length > 255) return false;
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
+
+    function getCallbackFieldError(form, name) {
+      const el = form.elements.namedItem(name);
+      if (!el) return '';
+      if (name === 'consent') {
+        return el.checked ? '' : 'Cochez cette case pour être rappelé.';
       }
-      if (typeof details === 'object') {
-        const parts = [];
-        Object.keys(details).forEach(function(key) {
-          const v = details[key];
-          if (Array.isArray(v)) {
-            v.forEach(function(line) { if (line) parts.push(String(line)); });
-          } else if (v) {
-            parts.push(String(v));
-          }
-        });
-        if (parts.length) {
-          return (msg ? msg + ' ' : '') + parts.join(' ');
-        }
+      const val = typeof el.value === 'string' ? el.value.trim() : '';
+      if (name === 'contactFirstName') {
+        if (!val) return 'Le prénom est requis';
+        if (val.length > 255) return '255 caractères maximum';
+        return '';
       }
-      return msg || 'Vérifiez les champs du formulaire.';
+      if (name === 'contactLastName') {
+        if (!val) return 'Le nom est requis';
+        if (val.length > 255) return '255 caractères maximum';
+        return '';
+      }
+      if (name === 'companyName') {
+        if (!val) return 'Le nom de la société est requis';
+        if (val.length > 255) return '255 caractères maximum';
+        return '';
+      }
+      if (name === 'contactEmail') {
+        if (!val) return 'L\'email est requis';
+        if (!isValidCallbackEmail(val)) return 'Format d\'email invalide';
+        return '';
+      }
+      if (name === 'contactPhone') {
+        if (!val) return 'Le téléphone est requis';
+        if (!isValidFrenchPhone(val)) {
+          return 'Indiquez un numéro à 10 chiffres, par exemple 06 12 34 56 78.';
+        }
+        return '';
+      }
+      return '';
+    }
+
+    function collectCallbackValidationErrors(form) {
+      const errors = [];
+      CALLBACK_FIELD_NAMES.forEach(function(name) {
+        const message = getCallbackFieldError(form, name);
+        if (message) errors.push({ name: name, message: message });
+      });
+      return errors;
+    }
+
+    function setCallbackFieldError(form, name, message) {
+      const control = form.elements.namedItem(name);
+      if (!control) return;
+      const field = control.closest('.field');
+      const errId = control.getAttribute('aria-describedby');
+      const errEl = errId ? document.getElementById(errId) : (field && field.querySelector('.field-error'));
+      if (field) field.classList.add('is-invalid');
+      control.setAttribute('aria-invalid', 'true');
+      if (errEl) {
+        errEl.textContent = message;
+        errEl.hidden = false;
+      }
+    }
+
+    function clearCallbackFieldError(form, name) {
+      const control = form.elements.namedItem(name);
+      if (!control) return;
+      const field = control.closest('.field');
+      const errId = control.getAttribute('aria-describedby');
+      const errEl = errId ? document.getElementById(errId) : (field && field.querySelector('.field-error'));
+      if (field) field.classList.remove('is-invalid');
+      control.removeAttribute('aria-invalid');
+      if (errEl) {
+        errEl.textContent = '';
+        errEl.hidden = true;
+      }
+    }
+
+    function clearAllCallbackFieldErrors(form) {
+      CALLBACK_FIELD_NAMES.forEach(function(name) {
+        clearCallbackFieldError(form, name);
+      });
+    }
+
+    function applyCallbackApiFieldErrors(form, data) {
+      const details = data && data.error && data.error.details;
+      const msg = (data && data.error && data.error.message) || '';
+      if (!details || typeof details !== 'object' || Array.isArray(details)) {
+        return msg || 'Vérifiez les champs du formulaire.';
+      }
+      const unmapped = [];
+      Object.keys(details).forEach(function(key) {
+        const v = details[key];
+        const line = Array.isArray(v) ? (v[0] || '') : String(v || '');
+        if (!line) return;
+        if (CALLBACK_FIELD_NAMES.indexOf(key) >= 0 && form.elements.namedItem(key)) {
+          setCallbackFieldError(form, key, line);
+        } else {
+          unmapped.push(line);
+        }
+      });
+      if (unmapped.length) return (msg ? msg + ' ' : '') + unmapped.join(' ');
+      return '';
     }
 
     function initCallbackForms() {
@@ -314,7 +409,6 @@
       forms.forEach(function(form) {
         const statusEl = form.querySelector('.callback-form-status');
         const submitBtn = form.querySelector('.callback-form-submit');
-        const consent = form.querySelector('input[name="consent"]');
 
         function setStatus(message, isError) {
           if (!statusEl) return;
@@ -323,20 +417,40 @@
           statusEl.classList.toggle('callback-form-status--error', Boolean(isError));
         }
 
+        CALLBACK_FIELD_NAMES.forEach(function(name) {
+          const control = form.elements.namedItem(name);
+          if (!control) return;
+          const eventName = name === 'consent' ? 'change' : 'input';
+          control.addEventListener(eventName, function() {
+            clearCallbackFieldError(form, name);
+          });
+          if (name !== 'consent') {
+            control.addEventListener('change', function() {
+              clearCallbackFieldError(form, name);
+            });
+          }
+        });
+
         form.addEventListener('submit', function(e) {
           e.preventDefault();
-          if (!form.checkValidity()) {
-            form.reportValidity();
+          setStatus('', false);
+          clearAllCallbackFieldErrors(form);
+          const validationErrors = collectCallbackValidationErrors(form);
+          if (validationErrors.length) {
+            validationErrors.forEach(function(err) {
+              setCallbackFieldError(form, err.name, err.message);
+            });
+            const firstControl = form.elements.namedItem(validationErrors[0].name);
+            if (firstControl && typeof firstControl.focus === 'function') {
+              firstControl.focus();
+            }
             return;
           }
           const hp = form.querySelector('input[name="website"]');
           if (hp && hp.value.trim()) {
             setStatus('Votre demande a bien été enregistrée.', false);
             form.reset();
-            return;
-          }
-          if (!consent || !consent.checked) {
-            setStatus('Veuillez accepter d\'être rappelé pour continuer.', true);
+            clearAllCallbackFieldErrors(form);
             return;
           }
           const placement = form.dataset.callbackPlacement || 'unknown';
@@ -372,6 +486,7 @@
               const msg = (data && data.message) || 'Votre demande de rappel a bien été enregistrée.';
               setStatus(msg, false);
               form.reset();
+              clearAllCallbackFieldErrors(form);
               if (typeof window.plausible === 'function') {
                 window.plausible('Callback Request', {
                   props: { landing: 'ads', placement: placement }
@@ -394,7 +509,21 @@
               return;
             }
             if (res.status === 422) {
-              setStatus(formatCallbackApiError(data), true);
+              const statusMsg = applyCallbackApiFieldErrors(form, data);
+              if (statusMsg) setStatus(statusMsg, true);
+              const firstInvalid = CALLBACK_FIELD_NAMES.find(function(name) {
+                const control = form.elements.namedItem(name);
+                return control && control.getAttribute('aria-invalid') === 'true';
+              });
+              if (firstInvalid) {
+                const focusEl = form.elements.namedItem(firstInvalid);
+                if (focusEl && typeof focusEl.focus === 'function') focusEl.focus();
+              }
+              return;
+            }
+            const serverMsg = data && data.error && data.error.message;
+            if (serverMsg) {
+              setStatus(serverMsg, true);
               return;
             }
             setStatus('Envoi impossible pour le moment. Appelez le ' + phoneFallback + ' ou réessayez plus tard.', true);
