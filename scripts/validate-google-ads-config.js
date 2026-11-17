@@ -90,5 +90,5 @@ if (errors.length) {
 }
 console.log("validate-google-ads-config: OK");
 console.log(
-  "  Plausible (si activé): créer les goals « Demo CTA Click », « Phone Click » et « Callback Request » dans le dashboard."
+  "  Plausible (si activé): créer les goals « Demo CTA Click » et « Callback Request » dans le dashboard."
 );

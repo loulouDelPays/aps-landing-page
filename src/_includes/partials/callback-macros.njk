@@ -60,7 +60,6 @@
     <p class="u-text-muted u-mt-2">Laissez vos coordonnées : nous vous rappelons pour fixer les 45 minutes sur un dossier réel. {{ site.phoneResponseHint }}.</p>
     <p class="hint ads-callback-objective">Sans engagement · la démo reste gratuite · on ne démarre rien sans votre accord.</p>
     {{ callbackForm('callback-form', '', 'inline', 'btn btn--primary btn--lg') }}
-    <p class="hint ads-callback-phone u-mt-3">Ou appelez le <a class="ads-phone-link js-phone-cta" href="tel:{{ site.phone }}" data-phone-placement="demo-callback">{{ site.phoneDisplay }}</a></p>
   </div>
 </article>
 {% endmacro %}
@@ -79,7 +78,6 @@
     </header>
     <div class="callback-stage__body">
       {{ callbackForm('callback-form-modal', '-modal', 'modal', 'btn btn--primary btn--lg') }}
-      <p class="hint ads-callback-phone u-mt-3">Ou appelez le <a class="ads-phone-link js-phone-cta" href="tel:{{ site.phone }}" data-phone-placement="callback-modal">{{ site.phoneDisplay }}</a></p>
     </div>
   </div>
 </dialog>

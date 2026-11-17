@@ -1356,7 +1356,6 @@
       box-shadow: var(--shadow-sm);
     }
     .page-ads .ads-callback-objective { margin-top: var(--sp-3); }
-    .page-ads .ads-callback-phone { font-size: var(--text-sm); }
     .page-ads .ads-cta-stack {
       display: flex;
       flex-direction: column;
@@ -1548,12 +1547,6 @@
       line-height: 1.45;
     }
     .page-ads .ads-founder__media { border-radius: var(--radius-xl); overflow: hidden; }
-    .page-ads .ads-phone-link {
-      color: var(--accent-500);
-      font-weight: 700;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
     .page-ads .topbar--ads {
       background: rgba(6, 6, 26, .92);
       backdrop-filter: blur(10px);

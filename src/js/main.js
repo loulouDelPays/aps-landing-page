@@ -203,18 +203,6 @@
     }
     initDemoCtaLinks();
 
-    function initPhoneCtaLinks() {
-      document.querySelectorAll('.js-phone-cta').forEach(function(link) {
-        link.addEventListener('click', function() {
-          const placement = link.dataset.phonePlacement || 'unknown';
-          if (typeof window.plausible === 'function') {
-            window.plausible('Phone Click', { props: { placement: placement } });
-          }
-        });
-      });
-    }
-    initPhoneCtaLinks();
-
     function initAdsStickyCta() {
       const bar = document.querySelector('body.page-ads .bottom-cta');
       const heroCta = document.getElementById('ads-hero-cta');
@@ -404,8 +392,6 @@
       if (!forms.length) return;
       const endpoint = (window.__APS_SITE__ && window.__APS_SITE__.callbackRequestUrl) ||
         'https://crm.aps-logiciel.fr/api/public/callback-requests';
-      const phoneFallback = (window.__APS_SITE__ && window.__APS_SITE__.phoneDisplay) || '06 58 81 67 37';
-
       forms.forEach(function(form) {
         const statusEl = form.querySelector('.callback-form-status');
         const submitBtn = form.querySelector('.callback-form-submit');
@@ -501,11 +487,11 @@
               return;
             }
             if (res.status === 403) {
-              setStatus('Envoi impossible depuis cette adresse (hors site officiel). Testez sur aps-logiciel.fr ou appelez le ' + phoneFallback + '.', true);
+              setStatus('Envoi impossible depuis cette adresse (hors site officiel). Réessayez sur aps-logiciel.fr.', true);
               return;
             }
             if (res.status === 429) {
-              setStatus('Trop de demandes depuis cette connexion. Réessayez plus tard ou appelez le ' + phoneFallback + '.', true);
+              setStatus('Trop de demandes depuis cette connexion. Réessayez plus tard.', true);
               return;
             }
             if (res.status === 422) {
@@ -526,9 +512,9 @@
               setStatus(serverMsg, true);
               return;
             }
-            setStatus('Envoi impossible pour le moment. Appelez le ' + phoneFallback + ' ou réessayez plus tard.', true);
+            setStatus('Envoi impossible pour le moment. Réessayez plus tard.', true);
           }).catch(function() {
-            setStatus('Envoi impossible pour le moment. Appelez le ' + phoneFallback + ' ou réessayez plus tard.', true);
+            setStatus('Envoi impossible pour le moment. Réessayez plus tard.', true);
           }).finally(function() {
             if (submitBtn) {
               submitBtn.disabled = false;

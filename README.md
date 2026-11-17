@@ -31,7 +31,7 @@ Pour les vidéos en local : `assets/videos/*.mp4` (gitignorés). Hors CI, Eleven
 
 Les métadonnées vidéo (`src/_data/videos.json`, généré — voir `videos.json.example`) et le JSON-LD `VideoObject` ne sont émis **que** si les MP4 sont présents dans `_site` (pipeline `build:pages`).
 
-Domaine : `CNAME` → `aps-logiciel.fr`. Analytics Plausible optionnel via `site.plausibleDomain` dans `src/_data/site.json` (vide ou retirer pour désactiver). Si Plausible est actif, créer les goals `Demo CTA Click`, `Phone Click` et `Callback Request`.
+Domaine : `CNAME` → `aps-logiciel.fr`. Analytics Plausible optionnel via `site.plausibleDomain` dans `src/_data/site.json` (vide ou retirer pour désactiver). Si Plausible est actif, créer les goals `Demo CTA Click` et `Callback Request`.
 
 Le fichier `src/_data/crmStatus.json` est régénéré au build (`write-crm-status`) : `checkedAt` ne change que si l'état CRM change réellement. Le formulaire « Être rappelé » (landing Ads) n'est testable qu'en prod (`aps-logiciel.fr`) à cause du CORS CRM.
 

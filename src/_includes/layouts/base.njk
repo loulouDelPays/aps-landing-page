@@ -26,7 +26,7 @@
     {% if adsLanding and bottomCtaGhostIsCallback %}
     <button type="button" class="btn btn--ghost js-callback-trigger" data-callback-placement="sticky">Être rappelé</button>
     {% else %}
-    <a class="btn btn--ghost{% if bottomCtaGhostPhone %} js-phone-cta{% endif %}" href="{{ ghostCtaHref }}"{% if bottomCtaGhostPhone %} data-phone-placement="sticky"{% endif %}>{{ ghostCtaLabel }}</a>
+    <a class="btn btn--ghost" href="{{ ghostCtaHref }}">{{ ghostCtaLabel }}</a>
     {% endif %}
     <a class="btn btn--primary{% if adsLanding %} js-demo-cta{% endif %}" href="{{ site.demoUrl }}"{% if adsLanding %} data-demo-placement="sticky"{% endif %}>{{ primaryCtaLabel }}</a>
   </div>
@@ -37,7 +37,6 @@
       plausibleDomain: {{ site.plausibleDomain | dump | safe }},
       demoUrl: {{ site.demoUrl | dump | safe }},
       callbackRequestUrl: {{ site.callbackRequestUrl | dump | safe }},
-      phoneDisplay: {{ site.phoneDisplay | dump | safe }},
       gtmId: {{ site.gtmId | envOr('GTM_ID') | dump | safe }},
       googleAdsId: {{ site.googleAdsId | envOr('GOOGLE_ADS_ID') | dump | safe }},
       googleAdsConversionLabel: {{ site.googleAdsConversionLabel | envOr('GOOGLE_ADS_CONVERSION_LABEL') | dump | safe }}

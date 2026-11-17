@@ -4,7 +4,7 @@
     "minQualifiedClicksBeforeScale": 300,
     "evaluationWeeks": 3,
     "primaryKpi": "demo_booked / ad_clicks",
-    "secondaryKpis": ["demo_cta_click", "phone_click", "show_rate", "qualified_lead_rate"]
+    "secondaryKpis": ["demo_cta_click", "show_rate", "qualified_lead_rate"]
   },
   "experiments": [
     {
