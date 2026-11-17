@@ -336,7 +336,7 @@ if (!fs.existsSync(callbackPartial)) {
 const indexPath = path.join(siteDir, "index.html");
 if (fs.existsSync(indexPath)) {
   const indexHtml = fs.readFileSync(indexPath, "utf8");
-  if (indexHtml.includes('class="bottom-cta"') && !indexHtml.includes("Réserver un diagnostic gratuit")) {
+  if (indexHtml.includes('class="bottom-cta"') && !indexHtml.includes("Réserver une démo")) {
     errors.push("index.html: bottom CTA should use reservation wording");
   }
 }

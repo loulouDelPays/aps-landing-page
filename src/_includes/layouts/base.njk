@@ -21,7 +21,7 @@
   {% if showBottomCta %}
   {% set ghostCtaHref = bottomCtaGhostHref | default('/#rentabilite') %}
   {% set ghostCtaLabel = bottomCtaGhostLabel | default('Rentabilité') %}
-  {% set primaryCtaLabel = bottomCtaPrimaryLabel | default('Réserver un diagnostic gratuit') %}
+  {% set primaryCtaLabel = bottomCtaPrimaryLabel | default('Réserver une démo') %}
   <div class="bottom-cta" aria-label="Actions rapides">
     {% if adsLanding and bottomCtaGhostIsCallback %}
     <button type="button" class="btn btn--ghost js-callback-trigger" data-callback-placement="sticky">Être rappelé</button>
