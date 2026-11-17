@@ -23,10 +23,10 @@
             <span class="tag-pill tag-pill--reuse">Réemploi</span>
           </div>
           <div class="hero__cta">
-            <a id="ads-hero-cta" class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="hero">Tester APS sur un de mes dossiers</a>
+            <a id="ads-hero-cta" class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="hero">Réserver ma démo gratuite</a>
             <a class="btn btn--ghost btn--lg play-hero-demo" href="#hero-player">Voir une recherche en 2 min</a>
           </div>
-          <p class="hint hero__hint">30 minutes · gratuit · sur un dossier réel de votre atelier</p>
+          <p class="hint hero__hint">45 minutes · gratuit · sur un dossier réel de votre atelier</p>
           <p class="hero__trust-line u-mt-3">Conçu par un carrossier · vos fournisseurs restent les vôtres</p>
         </div>
         <div class="hero__media-col">
@@ -268,25 +268,28 @@
     <div class="container">
       <div class="ads-section-head ads-section-head--center u-reveal">
         <p class="section-kicker">Démo gratuite</p>
-        <h2 class="section-title">30 minutes sur un dossier réel de votre atelier</h2>
+        <h2 class="section-title">45 minutes sur un dossier réel de votre atelier</h2>
         <p class="section-sub">On part de votre chiffrage pour estimer le temps économisé et la marge supplémentaire, sur vos fournisseurs.</p>
       </div>
-      <article class="card card--raised ads-demo-card u-reveal">
-        <div class="card__body">
-          <h3>Ce que vous voyez pendant la démo</h3>
-          <ul class="ads-demo-list">
-            <li>Lecture de votre PDF et recherche multi-fournisseurs</li>
-            <li>Comparatif prix, stock et délai avec vos remises</li>
-            <li>Estimation de rentabilité adaptée à votre volume</li>
-          </ul>
-          <p class="hint">Gratuit · sans engagement · 30 minutes</p>
-          <p class="ads-offer">Installation 850 € · 1<sup>er</sup> mois offert · puis 150 € HT/mois pendant 12 mois</p>
-          <div class="u-gap-actions">
-            <a class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="demo-block">Réserver ma démo gratuite</a>
-            <a class="btn btn--lg" href="#rentabilite">Calculer ma rentabilité</a>
+      <div class="ads-demo-grid u-reveal">
+        <article class="card card--raised ads-demo-card">
+          <div class="card__body">
+            <h3>Ce que vous voyez pendant la démo</h3>
+            <ul class="ads-demo-list">
+              <li>Lecture de votre PDF et recherche multi-fournisseurs</li>
+              <li>Comparatif prix, stock et délai avec vos remises</li>
+              <li>Estimation de rentabilité adaptée à votre volume</li>
+            </ul>
+            <p class="hint">Gratuit · sans engagement · 45 minutes</p>
+            <p class="ads-offer">Installation 850 € · 1<sup>er</sup> mois offert · puis 150 € HT/mois pendant 12 mois</p>
+            <div class="u-gap-actions">
+              <a class="btn btn--primary btn--lg js-demo-cta" href="{{ site.demoUrl }}" data-demo-placement="demo-block">Réserver ma démo gratuite</a>
+              <a class="btn btn--lg" href="#rentabilite">Calculer ma rentabilité</a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+        {% include "partials/callback-form.njk" %}
+      </div>
     </div>
   </section>
 

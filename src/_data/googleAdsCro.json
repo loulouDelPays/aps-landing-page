@@ -16,7 +16,7 @@
     {
       "id": "cta_wording",
       "hypothesis": "Libellé CTA démo",
-      "variants": ["Réserver ma démo gratuite", "Tester APS sur mon dossier"],
+      "variants": ["Réserver ma démo gratuite", "Réserver un diagnostic gratuit"],
       "minClicksPerVariant": 200
     },
     {

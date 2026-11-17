@@ -56,6 +56,18 @@ if (!campaign) {
       if (!g.headlines?.length || g.headlines.length < 3) {
         errors.push(`googleAdsCampaign.json: ${g.id || g.name}: headlines insuffisants pour RSA`);
       }
+      const demoText = [...(g.headlines || []), ...(g.descriptions || [])].join("\n");
+      if (/\b30\s*min(?:utes)?\b/i.test(demoText)) {
+        errors.push(
+          `googleAdsCampaign.json: ${g.id || g.name}: texte démo encore à 30 min (attendu 45 min, aligné landing)`
+        );
+      }
+    }
+    const sitelinksCallouts = [...(campaign.sitelinks || []), ...(campaign.callouts || [])]
+      .map((x) => (typeof x === "string" ? x : x.label || ""))
+      .join("\n");
+    if (/\b30\s*min(?:utes)?\b/i.test(sitelinksCallouts)) {
+      errors.push("googleAdsCampaign.json: sitelinks/callouts encore à 30 min (attendu 45 min)");
     }
   }
   if (!Array.isArray(campaign.negativeKeywords) || campaign.negativeKeywords.length < 5) {
@@ -77,4 +89,6 @@ if (errors.length) {
   process.exit(1);
 }
 console.log("validate-google-ads-config: OK");
-console.log("  Plausible (si activé): créer les goals « Demo CTA Click » et « Phone Click » dans le dashboard.");
+console.log(
+  "  Plausible (si activé): créer les goals « Demo CTA Click », « Phone Click » et « Callback Request » dans le dashboard."
+);

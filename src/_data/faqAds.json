@@ -9,7 +9,7 @@
   },
   {
     "question": "Mes fournisseurs sont-ils compatibles ?",
-    "answer": "APS se connecte aux comptes en ligne de vos distributeurs habituels. Lors du diagnostic, on vérifie avec vous que vos fournisseurs principaux remontent bien — c'est l'objectif de la démo de 30 minutes."
+    "answer": "APS se connecte aux comptes en ligne de vos distributeurs habituels. Lors du diagnostic, on vérifie avec vous que vos fournisseurs principaux remontent bien — c'est l'objectif de la démo de 45 minutes."
   },
   {
     "question": "En combien de temps suis-je opérationnel ?",
@@ -17,11 +17,11 @@
   },
   {
     "question": "Aucun créneau en ligne : que faire ?",
-    "answer": "Appelez-nous au 06 58 81 67 37 ou écrivez à contact@aps-logiciel.fr : nous fixons un créneau de 30 minutes sous 24 h ouvrées. Vous pouvez aussi réessayer la page de réservation plus tard."
+    "answer": "Appelez-nous au 06 58 81 67 37 ou écrivez à contact@aps-logiciel.fr : nous fixons un créneau de 45 minutes sous 24 h ouvrées. Vous pouvez aussi réessayer la page de réservation plus tard, ou utiliser le formulaire « Être rappelé » sur cette page."
   },
   {
-    "question": "La démo est-elle vraiment gratuite et limitée à 30 minutes ?",
-    "answer": "Oui : 30 minutes chrono, gratuit, sans engagement. On part d'un chiffrage de votre semaine et on simule le gain de temps et de marge — pas une présentation générique."
+    "question": "La démo est-elle vraiment gratuite et limitée à 45 minutes ?",
+    "answer": "Oui : 45 minutes chrono, gratuit, sans engagement. On part d'un chiffrage de votre semaine et on simule le gain de temps et de marge — pas une présentation générique."
   },
   {
     "question": "Que se passe-t-il si je veux continuer après la démo ?",

@@ -242,6 +242,154 @@
     }
     initAdsStickyCta();
 
+    function buildCallbackAcquisition() {
+      const acq = getAcqParams();
+      const payload = {
+        fromCommercialSite: true,
+        landingPath: window.location.pathname,
+        device: window.matchMedia('(max-width: 980px)').matches ? 'mobile' : 'desktop'
+      };
+      ACQ_PARAMS.forEach(function(key) {
+        if (acq[key]) payload[key] = acq[key];
+      });
+      return payload;
+    }
+
+    function getNamedFormValue(form, name) {
+      const el = form.elements.namedItem(name);
+      if (!el) return '';
+      if (typeof el.value === 'string') return el.value.trim();
+      return '';
+    }
+
+    function formatCallbackApiError(data) {
+      if (!data || !data.error) return 'Vérifiez les champs du formulaire.';
+      const msg = data.error.message || '';
+      const details = data.error.details;
+      if (!details) return msg || 'Vérifiez les champs du formulaire.';
+      if (typeof details === 'string') return details;
+      if (Array.isArray(details)) {
+        const parts = details.map(function(item) {
+          if (typeof item === 'string') return item;
+          if (item && typeof item.message === 'string') return item.message;
+          return '';
+        }).filter(Boolean);
+        if (parts.length) {
+          return (msg ? msg + ' ' : '') + parts.join(' ');
+        }
+      }
+      if (typeof details === 'object') {
+        const parts = [];
+        Object.keys(details).forEach(function(key) {
+          const v = details[key];
+          if (Array.isArray(v)) {
+            v.forEach(function(line) { if (line) parts.push(String(line)); });
+          } else if (v) {
+            parts.push(String(v));
+          }
+        });
+        if (parts.length) {
+          return (msg ? msg + ' ' : '') + parts.join(' ');
+        }
+      }
+      return msg || 'Vérifiez les champs du formulaire.';
+    }
+
+    function initCallbackForm() {
+      const form = document.querySelector('.js-callback-form');
+      if (!form) return;
+      const statusEl = document.getElementById('callback-form-status');
+      const submitBtn = form.querySelector('.callback-form-submit');
+      const endpoint = (window.__APS_SITE__ && window.__APS_SITE__.callbackRequestUrl) ||
+        'https://crm.aps-logiciel.fr/api/public/callback-requests';
+      const phoneFallback = (window.__APS_SITE__ && window.__APS_SITE__.phoneDisplay) || '06 58 81 67 37';
+
+      function setStatus(message, isError) {
+        if (!statusEl) return;
+        statusEl.textContent = message;
+        statusEl.hidden = !message;
+        statusEl.classList.toggle('callback-form-status--error', Boolean(isError));
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        const hp = form.querySelector('input[name="website"]');
+        if (hp && hp.value.trim()) {
+          setStatus('Votre demande a bien été enregistrée.', false);
+          form.reset();
+          return;
+        }
+        const consent = form.querySelector('#callback-consent');
+        if (!consent || !consent.checked) {
+          setStatus('Veuillez accepter d\'être rappelé pour continuer.', true);
+          return;
+        }
+        const body = {
+          contactFirstName: getNamedFormValue(form, 'contactFirstName'),
+          contactLastName: getNamedFormValue(form, 'contactLastName'),
+          companyName: getNamedFormValue(form, 'companyName'),
+          contactPhone: getNamedFormValue(form, 'contactPhone'),
+          contactEmail: getNamedFormValue(form, 'contactEmail'),
+          consent: true,
+          website: '',
+          acquisition: buildCallbackAcquisition()
+        };
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.setAttribute('aria-busy', 'true');
+        }
+        setStatus('', false);
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        }).then(function(res) {
+          return res.json().then(function(data) {
+            return { res: res, data: data };
+          }).catch(function() {
+            return { res: res, data: null };
+          });
+        }).then(function(_ref) {
+          const res = _ref.res;
+          const data = _ref.data;
+          if (res.status === 201) {
+            const msg = (data && data.message) || 'Votre demande de rappel a bien été enregistrée.';
+            setStatus(msg, false);
+            form.reset();
+            if (typeof window.plausible === 'function') {
+              window.plausible('Callback Request', { props: { landing: 'ads' } });
+            }
+            return;
+          }
+          if (res.status === 403) {
+            setStatus('Envoi impossible depuis cette adresse (hors site officiel). Testez sur aps-logiciel.fr ou appelez le ' + phoneFallback + '.', true);
+            return;
+          }
+          if (res.status === 429) {
+            setStatus('Trop de demandes depuis cette connexion. Réessayez plus tard ou appelez le ' + phoneFallback + '.', true);
+            return;
+          }
+          if (res.status === 422) {
+            setStatus(formatCallbackApiError(data), true);
+            return;
+          }
+          setStatus('Envoi impossible pour le moment. Appelez le ' + phoneFallback + ' ou réessayez plus tard.', true);
+        }).catch(function() {
+          setStatus('Envoi impossible pour le moment. Appelez le ' + phoneFallback + ' ou réessayez plus tard.', true);
+        }).finally(function() {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.removeAttribute('aria-busy');
+          }
+        });
+      });
+    }
+    initCallbackForm();
+
     function getFocusableElements(container){
       return Array.from(container.querySelectorAll(
         'a[href], button:not([disabled]), textarea, input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'

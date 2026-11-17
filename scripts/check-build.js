@@ -308,9 +308,26 @@ if (fs.existsSync(adsPath)) {
   }
   if (!ads.includes("ads-results-disclaimer")) errors.push(`${adsRel}: missing results disclaimer`);
   if (!ads.includes('id="resultats"')) errors.push(`${adsRel}: missing #resultats section`);
+  if (!ads.includes('id="callback-form"')) errors.push(`${adsRel}: missing callback request form`);
+  if (!ads.includes("js-callback-form")) errors.push(`${adsRel}: missing callback form JS hook`);
+  if (!ads.includes("callbackRequestUrl")) errors.push(`${adsRel}: missing callbackRequestUrl in __APS_SITE__`);
+  if (!ads.includes("45 minutes")) errors.push(`${adsRel}: demo duration should be 45 minutes on page`);
   const sitemap = fs.existsSync(sitemapPath) ? fs.readFileSync(sitemapPath, "utf8") : "";
   if (sitemap.includes("assistant-achats-pieces-carrosserie")) {
     errors.push("sitemap.xml: ads landing must not be listed");
+  }
+}
+
+const callbackPartial = path.join(root, "src/_includes/partials/callback-form.njk");
+if (!fs.existsSync(callbackPartial)) {
+  errors.push("src/_includes/partials/callback-form.njk: missing (required for ads landing)");
+}
+
+const indexPath = path.join(siteDir, "index.html");
+if (fs.existsSync(indexPath)) {
+  const indexHtml = fs.readFileSync(indexPath, "utf8");
+  if (indexHtml.includes('class="bottom-cta"') && !indexHtml.includes("Réserver un diagnostic gratuit")) {
+    errors.push("index.html: bottom CTA should use reservation wording");
   }
 }
 

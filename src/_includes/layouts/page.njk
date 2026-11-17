@@ -28,7 +28,7 @@ layout: layouts/base.njk
           <h2 class="section-title u-mb-3">{{ pageCta.title }}</h2>
           <p class="section-sub">{{ pageCta.text }}</p>
           <div class="u-gap-actions u-mt-4">
-            <a class="btn btn--primary" href="{{ site.demoUrl }}">{{ pageCta.primaryLabel | default("Tester sur un dossier") }}</a>
+            <a class="btn btn--primary" href="{{ site.demoUrl }}">{{ pageCta.primaryLabel | default("Réserver un diagnostic gratuit") }}</a>
             {% if pageCta.secondaryHref %}
             <a class="btn" href="{{ pageCta.secondaryHref }}">{{ pageCta.secondaryLabel }}</a>
             {% endif %}

@@ -8,6 +8,7 @@
   "phoneDisplay": "06 58 81 67 37",
   "locale": "fr_FR",
   "demoUrl": "https://crm.aps-logiciel.fr/demo",
+  "callbackRequestUrl": "https://crm.aps-logiciel.fr/api/public/callback-requests",
   "ogImage": "/assets/img/atelier-hero-1440.webp",
   "ogImageWidth": 1440,
   "ogImageHeight": 810,

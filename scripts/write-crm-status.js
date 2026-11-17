@@ -51,8 +51,31 @@ export async function fetchCrmStatus(demoUrl = demoBase) {
   }
 }
 
+function readExistingStatus() {
+  try {
+    return JSON.parse(fs.readFileSync(outPath, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+function statusUnchanged(a, b) {
+  if (!a || !b) return false;
+  return (
+    a.demoPageOk === b.demoPageOk &&
+    a.httpOk === b.httpOk &&
+    a.slotsAvailable === b.slotsAvailable &&
+    a.demoUrl === b.demoUrl &&
+    a.slotsDetection === b.slotsDetection
+  );
+}
+
 async function main() {
+  const existing = readExistingStatus();
   const status = await fetchCrmStatus();
+  if (statusUnchanged(existing, status)) {
+    status.checkedAt = existing.checkedAt;
+  }
   fs.writeFileSync(outPath, JSON.stringify(status, null, 2) + "\n");
   console.log(
     `write-crm-status: demoPageOk=${status.demoPageOk} slots=${status.slotsAvailable === null ? "client-side (OK)" : status.slotsAvailable} → ${path.relative(root, outPath)}`

@@ -34,7 +34,7 @@
         "Jusqu'à 4 points de marge",
         "Depuis votre chiffrage PDF",
         "Vos fournisseurs, zéro ressaisie",
-        "Démo gratuite 30 minutes",
+        "Démo gratuite 45 minutes",
         "Sur un dossier réel",
         "Stocks et prix comparés",
         "Pièces OEM, PQE, réemploi",
@@ -47,7 +47,7 @@
         "Essai 1 mois offert"
       ],
       "descriptions": [
-        "Comparez vos fournisseurs depuis le PDF. Démo gratuite de 30 min sur un dossier de votre atelier.",
+        "Comparez vos fournisseurs depuis le PDF. Démo gratuite de 45 min sur un dossier de votre atelier.",
         "Prix, stocks et délais sur un écran. Vos remises négociées. Sans changer de fournisseurs.",
         "Assistant d'achat pour carrossiers indépendants. Paramétrage et accompagnement humain.",
         "Réservez une démo : on simule le gain de temps et de marge sur votre chiffrage réel."
@@ -67,7 +67,7 @@
         "Prix et stocks côte à côte",
         "Depuis votre chiffrage PDF",
         "Vos remises appliquées",
-        "Démo gratuite 30 min",
+        "Démo gratuite 45 min",
         "Zéro ressaisie manuelle",
         "Origine, PQE, réemploi",
         "Décidez plus vite",
@@ -83,7 +83,7 @@
         "Un seul écran pour comparer vos distributeurs habituels. Démo gratuite sur votre PDF.",
         "Finissez la chasse à l'info : stocks, délais et marges visibles avant de commander.",
         "Logiciel conçu en carrosserie. Pas de centrale d'achat imposée.",
-        "30 minutes chrono pour voir APS sur un de vos dossiers en cours."
+        "45 minutes chrono pour voir APS sur un de vos dossiers en cours."
       ]
     },
     {
@@ -99,7 +99,7 @@
         "Logiciel achat carrosserie",
         "Lecture PDF automatique",
         "Multi-fournisseurs",
-        "Démo gratuite 30 min",
+        "Démo gratuite 45 min",
         "Vos comptes connectés",
         "Suivi des commandes",
         "AutoPartSelect APS",
@@ -116,7 +116,7 @@
         "Depuis le chiffrage PDF jusqu'à la commande. Démo gratuite sur un dossier réel.",
         "Connecté à vos distributeurs habituels. Vos remises, vos interlocuteurs.",
         "Installation paramétrée avec vous. Essai 1 mois d'abonnement offert.",
-        "Réservez 30 min : simulation de gain temps et marge sur votre volume."
+        "Réservez 45 min : simulation de gain temps et marge sur votre volume."
       ]
     },
     {
@@ -133,7 +133,7 @@
         "Pièces extraites auto",
         "Comparez vos fournisseurs",
         "Sans ressaisie",
-        "Démo gratuite 30 min",
+        "Démo gratuite 45 min",
         "Stocks et délais visibles",
         "AutoPartSelect",
         "Pour carrossiers",
@@ -149,13 +149,13 @@
         "Déposez le PDF de chiffrage : APS interroge vos fournisseurs et affiche le comparatif.",
         "Zéro saisie ligne par ligne. Démo gratuite sur un dossier de votre semaine.",
         "Origine, qualité équivalente et réemploi sur la même base tarifaire.",
-        "30 minutes pour voir le gain concret sur vos achats de pièces."
+        "45 minutes pour voir le gain concret sur vos achats de pièces."
       ]
     }
   ],
   "sitelinks": [
     { "label": "Preuves terrain", "path": "#resultats" },
-    { "label": "Démo 30 min", "path": "#demo" },
+    { "label": "Démo 45 min", "path": "#demo" },
     { "label": "Questions fréquentes", "path": "#faq" },
     { "label": "Rentabilité", "path": "#rentabilite" }
   ],
@@ -163,7 +163,7 @@
     "Zéro ressaisie",
     "Vos fournisseurs habituels",
     "Stocks et délais centralisés",
-    "Démo gratuite 30 min",
+    "Démo gratuite 45 min",
     "Conçu par un carrossier",
     "Pas une centrale d'achat"
   ]
