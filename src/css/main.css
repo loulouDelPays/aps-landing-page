@@ -1440,6 +1440,44 @@
     }
     .callback-consent input { flex: none; margin-top: 3px; }
     .callback-form-status--error { color: var(--danger); }
+    .callback-toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(var(--sp-5) + env(safe-area-inset-bottom, 0px));
+      z-index: 125;
+      transform: translateX(-50%) translateY(calc(100% + var(--sp-4)));
+      max-width: min(22rem, calc(100% - var(--sp-6)));
+      padding: var(--sp-3) var(--sp-4);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(101, 210, 170, .35);
+      background: var(--ink-950);
+      color: #fff;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      line-height: 1.45;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      pointer-events: none;
+      opacity: 0;
+      transition: transform .28s ease, opacity .28s ease;
+    }
+    .callback-toast.is-visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    @media (max-width: 980px) {
+      body.page-ads .callback-toast {
+        bottom: calc(var(--bottom-cta-h) + var(--sp-4) + env(safe-area-inset-bottom, 0px));
+      }
+    }
+    body.has-consent-banner .callback-toast {
+      bottom: calc(var(--sp-16) + var(--sp-4) + env(safe-area-inset-bottom, 0px));
+    }
+    @media (max-width: 980px) {
+      body.page-ads.has-consent-banner .callback-toast {
+        bottom: calc(var(--bottom-cta-h) + var(--sp-16) + env(safe-area-inset-bottom, 0px));
+      }
+    }
     .js-callback-form {
       position: relative;
       margin-top: var(--sp-4);

@@ -251,6 +251,28 @@
 
     let closeCallbackModal = null;
     let callbackModalSession = 0;
+    let callbackToastHideTimer = null;
+    const CALLBACK_TOAST_DEFAULT_MSG = 'Votre demande de rappel a bien été enregistrée.';
+    const CALLBACK_TOAST_VISIBLE_MS = 5000;
+
+    function showCallbackToast(message) {
+      const toast = document.getElementById('callback-toast');
+      if (!toast) return;
+      const text = message || CALLBACK_TOAST_DEFAULT_MSG;
+      if (callbackToastHideTimer) {
+        window.clearTimeout(callbackToastHideTimer);
+        callbackToastHideTimer = null;
+      }
+      toast.textContent = text;
+      toast.hidden = false;
+      toast.classList.add('is-visible');
+      callbackToastHideTimer = window.setTimeout(function() {
+        toast.classList.remove('is-visible');
+        toast.hidden = true;
+        toast.textContent = '';
+        callbackToastHideTimer = null;
+      }, CALLBACK_TOAST_VISIBLE_MS);
+    }
 
     const CALLBACK_FIELD_NAMES = [
       'contactFirstName',
@@ -434,9 +456,9 @@
           }
           const hp = form.querySelector('input[name="website"]');
           if (hp && hp.value.trim()) {
-            setStatus('Votre demande a bien été enregistrée.', false);
             form.reset();
             clearAllCallbackFieldErrors(form);
+            showCallbackToast('Votre demande a bien été enregistrée.');
             return;
           }
           const placement = form.dataset.callbackPlacement || 'unknown';
@@ -469,20 +491,17 @@
             const res = _ref.res;
             const data = _ref.data;
             if (res.status === 201) {
-              const msg = (data && data.message) || 'Votre demande de rappel a bien été enregistrée.';
-              setStatus(msg, false);
+              const msg = (data && data.message) || CALLBACK_TOAST_DEFAULT_MSG;
               form.reset();
               clearAllCallbackFieldErrors(form);
+              if (form.id === 'callback-form-modal' && typeof closeCallbackModal === 'function') {
+                closeCallbackModal();
+              }
+              showCallbackToast(msg);
               if (typeof window.plausible === 'function') {
                 window.plausible('Callback Request', {
                   props: { landing: 'ads', placement: placement }
                 });
-              }
-              if (form.id === 'callback-form-modal' && typeof closeCallbackModal === 'function') {
-                const sessionAtSubmit = callbackModalSession;
-                window.setTimeout(function() {
-                  if (sessionAtSubmit === callbackModalSession) closeCallbackModal();
-                }, 2400);
               }
               return;
             }
