@@ -118,9 +118,20 @@
     setBannerVisible(false);
   }
 
+  function notifyAnalyticsConsentGranted() {
+    try {
+      window.dispatchEvent(
+        new CustomEvent('aps:analytics-consent', { detail: { granted: true } }),
+      );
+    } catch (_) { /* ignore */ }
+  }
+
   function applyChoice(choice) {
     updateConsent(choice);
-    if (choice.analytics) loadPlausible();
+    if (choice.analytics) {
+      loadPlausible();
+      notifyAnalyticsConsentGranted();
+    }
     if (choice.marketing) loadGoogleAds();
     hideBanner();
   }

@@ -316,6 +316,9 @@
 
     persistAcqFromUrl();
     recordCommercialSiteVisit();
+    window.addEventListener('aps:analytics-consent', function() {
+      recordCommercialSiteVisit();
+    });
 
     function initDemoCtaLinks() {
       document.querySelectorAll('a[href]').forEach(function(link) {
