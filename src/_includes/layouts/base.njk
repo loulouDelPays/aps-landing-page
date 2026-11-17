@@ -37,6 +37,7 @@
       plausibleDomain: {{ site.plausibleDomain | dump | safe }},
       demoUrl: {{ site.demoUrl | dump | safe }},
       callbackRequestUrl: {{ site.callbackRequestUrl | dump | safe }},
+      acquisitionVisitUrl: {{ site.acquisitionVisitUrl | dump | safe }},
       gtmId: {{ site.gtmId | envOr('GTM_ID') | dump | safe }},
       googleAdsId: {{ site.googleAdsId | envOr('GOOGLE_ADS_ID') | dump | safe }},
       googleAdsConversionLabel: {{ site.googleAdsConversionLabel | envOr('GOOGLE_ADS_CONVERSION_LABEL') | dump | safe }}

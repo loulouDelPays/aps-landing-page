@@ -125,6 +125,143 @@
       return merged;
     }
 
+    const APS_ACQ_VISITOR_COOKIE = 'lunaris_acq_visitor';
+    const APS_ACQ_SESSION_KEY = 'lunaris.acqSessionId';
+
+    function analyticsConsentGranted() {
+      try {
+        var match = document.cookie.match(/(?:^|;\s*)aps_consent_v2=([^;]*)/);
+        if (match) {
+          var fromCookie = JSON.parse(decodeURIComponent(match[1]));
+          if (fromCookie && typeof fromCookie.analytics === 'boolean') {
+            return fromCookie.analytics;
+          }
+        }
+      } catch (_) { /* ignore */ }
+      try {
+        var raw = localStorage.getItem('aps_consent_v2');
+        if (!raw) return false;
+        var choice = JSON.parse(raw);
+        return !!(choice && choice.analytics);
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function randomAcquisitionUuid() {
+      if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+        return crypto.randomUUID();
+      }
+      return '00000000-0000-4000-8000-000000000000'.replace(/0/g, function() {
+        return Math.floor(Math.random() * 16).toString(16);
+      });
+    }
+
+    function canUseSharedAcquisitionCookie() {
+      if (window.location.protocol !== 'https:') return false;
+      var host = window.location.hostname;
+      return host === 'aps-logiciel.fr' || host.endsWith('.aps-logiciel.fr');
+    }
+
+    function readAcquisitionCookie(name) {
+      var prefix = name + '=';
+      var parts = document.cookie.split(';');
+      for (var i = 0; i < parts.length; i++) {
+        var trimmed = parts[i].trim();
+        if (trimmed.indexOf(prefix) === 0) {
+          return decodeURIComponent(trimmed.slice(prefix.length));
+        }
+      }
+      return null;
+    }
+
+    function writeAcquisitionCookie(name, value) {
+      if (!canUseSharedAcquisitionCookie()) return;
+      document.cookie = name + '=' + encodeURIComponent(value) +
+        '; domain=.aps-logiciel.fr; path=/; max-age=' + (60 * 60 * 24 * 400) +
+        '; SameSite=Lax; Secure';
+    }
+
+    function looksLikeUuid(value) {
+      return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+    }
+
+    var APS_ACQ_VISITOR_SESSION_KEY = 'lunaris.acqVisitorKey.session';
+
+    function ensureSharedAcquisitionVisitorKey(persist) {
+      var allowPersist = persist !== false && analyticsConsentGranted();
+      if (allowPersist) {
+        var fromCookie = readAcquisitionCookie(APS_ACQ_VISITOR_COOKIE);
+        if (fromCookie && looksLikeUuid(fromCookie)) {
+          try { localStorage.setItem('lunaris.acqVisitorKey', fromCookie); } catch (_) { /* ignore */ }
+          return fromCookie;
+        }
+        var fromLocal;
+        try {
+          fromLocal = localStorage.getItem('lunaris.acqVisitorKey');
+        } catch (_) { fromLocal = null; }
+        if (fromLocal && looksLikeUuid(fromLocal)) {
+          writeAcquisitionCookie(APS_ACQ_VISITOR_COOKIE, fromLocal);
+          return fromLocal;
+        }
+        var created = randomAcquisitionUuid();
+        writeAcquisitionCookie(APS_ACQ_VISITOR_COOKIE, created);
+        try { localStorage.setItem('lunaris.acqVisitorKey', created); } catch (_) { /* ignore */ }
+        return created;
+      }
+      var sessionVisitor;
+      try {
+        sessionVisitor = sessionStorage.getItem(APS_ACQ_VISITOR_SESSION_KEY);
+      } catch (_) { sessionVisitor = null; }
+      if (sessionVisitor && looksLikeUuid(sessionVisitor)) return sessionVisitor;
+      sessionVisitor = randomAcquisitionUuid();
+      try { sessionStorage.setItem(APS_ACQ_VISITOR_SESSION_KEY, sessionVisitor); } catch (_) { /* ignore */ }
+      return sessionVisitor;
+    }
+
+    function ensureLandingAcquisitionSessionId() {
+      var sessionId;
+      try {
+        sessionId = sessionStorage.getItem(APS_ACQ_SESSION_KEY);
+      } catch (_) { sessionId = null; }
+      if (sessionId && looksLikeUuid(sessionId)) return sessionId;
+      sessionId = randomAcquisitionUuid();
+      try { sessionStorage.setItem(APS_ACQ_SESSION_KEY, sessionId); } catch (_) { /* ignore */ }
+      return sessionId;
+    }
+
+    function buildCommercialVisitPayload() {
+      var acq = getAcqParams();
+      var payload = {
+        visitorKey: ensureSharedAcquisitionVisitorKey(),
+        sessionId: ensureLandingAcquisitionSessionId(),
+        fromCommercialSite: true,
+        landingPath: window.location.pathname,
+        device: window.matchMedia('(max-width: 980px)').matches ? 'mobile' : 'desktop',
+        visitSurface: 'commercial_site'
+      };
+      if (acq.utm_source) payload.utmSource = acq.utm_source;
+      if (acq.utm_medium) payload.utmMedium = acq.utm_medium;
+      if (acq.utm_campaign) payload.utmCampaign = acq.utm_campaign;
+      if (acq.utm_content) payload.utmContent = acq.utm_content;
+      if (acq.utm_term) payload.utmTerm = acq.utm_term;
+      if (acq.gclid) payload.gclid = acq.gclid;
+      if (acq.gbraid) payload.gbraid = acq.gbraid;
+      if (acq.wbraid) payload.wbraid = acq.wbraid;
+      return payload;
+    }
+
+    function recordCommercialSiteVisit() {
+      if (!analyticsConsentGranted()) return;
+      var endpoint = (window.__APS_SITE__ && window.__APS_SITE__.acquisitionVisitUrl) ||
+        'https://crm.aps-logiciel.fr/api/public/acquisition/visits';
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(buildCommercialVisitPayload())
+      }).catch(function() { /* best-effort */ });
+    }
+
     function getDemoBaseUrl() {
       return (window.__APS_SITE__ && window.__APS_SITE__.demoUrl) || 'https://crm.aps-logiciel.fr/demo';
     }
@@ -178,6 +315,7 @@
     }
 
     persistAcqFromUrl();
+    recordCommercialSiteVisit();
 
     function initDemoCtaLinks() {
       document.querySelectorAll('a[href]').forEach(function(link) {
@@ -235,7 +373,9 @@
       const payload = {
         fromCommercialSite: true,
         landingPath: window.location.pathname,
-        device: window.matchMedia('(max-width: 980px)').matches ? 'mobile' : 'desktop'
+        device: window.matchMedia('(max-width: 980px)').matches ? 'mobile' : 'desktop',
+        visitorKey: ensureSharedAcquisitionVisitorKey(analyticsConsentGranted()),
+        sessionId: ensureLandingAcquisitionSessionId()
       };
       ACQ_PARAMS.forEach(function(key) {
         if (acq[key]) payload[key] = acq[key];

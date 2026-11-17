@@ -315,6 +315,7 @@ if (fs.existsSync(adsPath)) {
   if (!ads.includes("js-callback-trigger")) errors.push(`${adsRel}: missing callback modal triggers`);
   if (!ads.includes("data-callback-placement")) errors.push(`${adsRel}: missing callback placement tracking`);
   if (!ads.includes("callbackRequestUrl")) errors.push(`${adsRel}: missing callbackRequestUrl in __APS_SITE__`);
+  if (!ads.includes("acquisitionVisitUrl")) errors.push(`${adsRel}: missing acquisitionVisitUrl in __APS_SITE__`);
   const callbackFormIds = [...ads.matchAll(/\bid="callback-form[^"]*"/g)].map((m) => m[0]);
   const uniqueCallbackFormIds = new Set(callbackFormIds);
   if (callbackFormIds.length !== uniqueCallbackFormIds.size) {
